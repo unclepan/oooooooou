@@ -106,7 +106,7 @@ export default {
 <style lang="scss" module>
 .page-login {
   .header {
-    border-bottom: 2px solid #409eff;
+    border-bottom: 2px solid #3c3b4a;
     min-width: 980px;
     color: #666;
     header {
@@ -126,6 +126,8 @@ export default {
       }
       .bold {
         font-style: normal;
+        color: #3c3b4a;
+        font-size: 14px;
       }
     }
   }

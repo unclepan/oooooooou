@@ -5,7 +5,7 @@
       <el-row :gutter="20">
         <el-col :span="16">
           <classification />
-          <card v-for="item in 5" :key="item" />
+          <card :cardItem="item" v-for="item in cardList" :key="item._id" />
         </el-col>
 
         <el-col :span="8">
@@ -30,20 +30,24 @@ export default {
     recommend
   },
   data() {
+    return {}
+  },
+  async asyncData(ctx) {
+    const res = await ctx.$axios({
+      method: 'get',
+      url: '/api/periodical',
+      params: {
+        page: 1,
+        per_page: 5
+      }
+    })
+    return { cardList: res.data }
+  },
+  mounted() {},
+  methods: {},
+  head() {
     return {
-      userList: []
-    }
-  },
-  mounted() {
-    this.init()
-  },
-  methods: {
-    async init() {
-      const res = await this.$axios({
-        method: 'get',
-        url: '/api/users'
-      })
-      this.userList = res.data
+      title: '首页'
     }
   }
 }

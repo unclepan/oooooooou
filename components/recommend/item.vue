@@ -46,6 +46,7 @@ export default {
 <style lang="scss" module>
 .item {
   padding: 10px 0;
+  border-bottom: 1px solid #ebeef5;
   .item-img {
     img {
       width: 100%;

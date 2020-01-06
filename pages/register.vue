@@ -42,9 +42,7 @@
           </el-button>
         </el-form-item>
         <el-form-item>
-          <a href="http://www.meituan.com/about/terms" target="_blank">
-            ANTCP网用户协议
-          </a>
+          <el-link type="info">ANTCP网用户协议</el-link>
         </el-form-item>
       </el-form>
     </section>
@@ -214,7 +212,7 @@ export default {
 <style lang="scss" module>
 .page-register {
   .header {
-    border-bottom: 2px solid #409eff;
+    border-bottom: 2px solid #3c3b4a;
     min-width: 980px;
     color: #666;
     header {
@@ -235,6 +233,8 @@ export default {
       }
       .bold {
         font-style: normal;
+        color: #3c3b4a;
+        font-size: 14px;
       }
     }
   }
