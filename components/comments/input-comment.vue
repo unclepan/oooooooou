@@ -39,17 +39,24 @@ export default {
             trigger: 'blur'
           }
         ]
-      }
+      },
+      replyDate: null
     }
   },
   methods: {
-    open() {
+    open(val) {
+      this.replyDate = val
+      this.ruleForm.textarea = ''
       this.dialogVisible = true
     },
     determine() {
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
-          this.$emit('determine', this.ruleForm)
+          const obj = { content: this.ruleForm.textarea }
+          if (this.replyDate) {
+            obj.replyDate = this.replyDate
+          }
+          this.$emit('determine', obj)
           this.dialogVisible = false
         }
       })

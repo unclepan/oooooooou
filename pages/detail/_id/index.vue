@@ -30,6 +30,7 @@
           <h1 :class="$style.title">
             {{ periodicalData.title }}
           </h1>
+          <p :class="$style.describe">{{ periodicalData.describe }}</p>
           <div :class="$style['text-box']">
             <div v-html="periodicalData.content"></div>
           </div>
@@ -46,7 +47,13 @@
         </div>
       </el-col>
     </el-row>
-    <comments v-for="(item, index) in 2" :key="index" />
+    <comments
+      @discussMore="handlerDiscussMore"
+      @reply="handlerInputComment"
+      :commentItem="item"
+      v-for="(item, index) in commentsData"
+      :key="index"
+    />
   </div>
 </template>
 
@@ -65,32 +72,78 @@ export default {
   },
   async asyncData(ctx) {
     const { params } = ctx
-    const res = await ctx.$axios({
+    const periodicalRes = await ctx.$axios({
       method: 'get',
       url: `/api/periodical/${params.id}`,
       params: {
         fields: 'topics'
       }
     })
-    return { periodicalData: res.data }
+    const commentsRes = await ctx.$axios({
+      method: 'get',
+      url: `/api/periodical/${params.id}/comments`
+    })
+    return {
+      periodicalData: periodicalRes.data,
+      commentsData: commentsRes.data
+    }
   },
   mounted() {},
   methods: {
-    handlerInputComment() {
-      this.$refs.inputComment.open()
+    handlerDiscussMore(val, cid) {
+      const rid = cid || val._id
+      this.$axios({
+        method: 'get',
+        url: `/api/periodical/${this.$route.params.id}/comments`,
+        params: {
+          rootCommentId: rid
+        }
+      }).then((res) => {
+        if (res.data.length) {
+          const arr = this.commentsData.map((item) => {
+            if (item._id === rid) {
+              return { ...item, replys: res.data }
+            } else {
+              return item
+            }
+          })
+          this.commentsData = arr
+        } else {
+          this.$message('该评论下暂无讨论')
+        }
+      })
+    },
+    handlerInputComment(val) {
+      this.$refs.inputComment.open(val)
     },
     determineInputComment(val) {
+      const data = { content: val.content }
+      if (val.replyDate) {
+        data.rootCommentId = val.replyDate.rootCommentId || val.replyDate._id
+        data.replyTo = val.replyDate.commentator._id
+      }
       this.$axios({
         method: 'post',
         url: `/api/periodical/${this.$route.params.id}/comments`,
         data: {
-          content: val.textarea
+          ...data
         }
       }).then((res) => {
         this.$message({
           message: '恭喜你，评论成功',
           type: 'success'
         })
+        if (val.replyDate) {
+          const cid = val.replyDate.rootCommentId || val.replyDate._id
+          this.handlerDiscussMore(val.replyDate, cid)
+        } else {
+          this.$axios({
+            method: 'get',
+            url: `/api/periodical/${this.$route.params.id}/comments`
+          }).then((ress) => {
+            this.commentsData = ress.data
+          })
+        }
       })
     }
   },
@@ -133,11 +186,17 @@ export default {
       margin: 0;
       line-height: 38px;
     }
+    .describe {
+      font-style: italic;
+      color: #aaaaaa;
+      font-size: 14px;
+      line-height: 21px;
+    }
     .text-box {
       font-size: 14px;
       color: #3c3b4a;
       line-height: 21px;
-      padding: 30px 0;
+      padding: 10px 0 30px;
       img {
         max-width: 100%;
       }

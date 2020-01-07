@@ -1,6 +1,13 @@
 <template>
   <div :class="$style['comments']">
-    <el-row :class="{ [$style.fa]: true, [$style['none-line']]: !test }">
+    <el-row
+      :class="{
+        [$style.fa]: true,
+        [$style['none-line']]: !(
+          commentItem.replys && commentItem.replys.length
+        )
+      }"
+    >
       <el-col :span="2">
         <el-avatar
           :size="60"
@@ -9,35 +16,83 @@
         </el-avatar>
       </el-col>
       <el-col :span="22" :class="$style['com-main']">
-        <h4>杰克苏艾伦<i class="el-icon-medal-1"></i></h4>
-        <p :class="$style.time">2019-01-08</p>
+        <div :class="$style.participant">
+          <h4>
+            {{ commentItem.commentator.name }}
+          </h4>
+          <template v-if="commentItem.replyTo">
+            <span :class="$style.r">回复</span>
+            <h4>
+              {{ commentItem.replyTo.name }}
+            </h4>
+          </template>
+        </div>
+
+        <p :class="$style.time">
+          {{ moment(commentItem.updatedAt).format('YYYY-MM-DD HH:mm') }}
+        </p>
         <div :class="$style.content">
           <span>
-            第二季来拯救我们了！每集走进一个设计师的世界，用极其生动的拍摄方式“解剖”他们的大脑，让观众在创造力爆表的脑回路中经历一次漫游。
+            {{ commentItem.content }}
           </span>
-          <el-button type="text" size="mini" icon="el-icon-more-outline">
-            展开
-          </el-button>
         </div>
         <div>
-          <el-button icon="el-icon-apple" circle size="mini"></el-button>
-          <el-button icon="el-icon-edit-outline" circle size="mini"></el-button>
+          <el-button
+            v-if="!commentItem.replyTo"
+            @click="handlerDiscussMore()"
+            icon="el-icon-document"
+            circle
+            size="mini"
+            type="info"
+          ></el-button>
+          <el-button
+            @click="handlerReply()"
+            icon="el-icon-edit-outline"
+            circle
+            size="mini"
+            type="primary"
+          ></el-button>
         </div>
       </el-col>
     </el-row>
-    <div v-if="test" :class="$style['child-item']">
-      <comments-item v-for="(item, index) in 3" :key="index" />
+    <div
+      v-if="commentItem.replys && commentItem.replys.length"
+      :class="$style['child-item']"
+    >
+      <comments-item
+        :commentItem="item"
+        v-for="(item, index) in commentItem.replys"
+        :key="index"
+        @reply="handlerReply"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import moment from 'moment'
 export default {
   name: 'CommentsItem',
   props: {
-    test: {
-      type: Boolean,
-      default: false
+    commentItem: {
+      type: Object,
+      default: () => {
+        return {}
+      }
+    }
+  },
+  data() {
+    return {
+      moment,
+      test: false
+    }
+  },
+  methods: {
+    handlerReply(val) {
+      this.$emit('reply', val || this.commentItem)
+    },
+    handlerDiscussMore() {
+      this.$emit('discussMore', this.commentItem)
     }
   }
 }
@@ -48,9 +103,20 @@ export default {
     padding: 20px 0;
     border-bottom: 1px solid #ebeef5;
     .com-main {
-      h4 {
-        margin: 0;
+      .participant {
+        display: flex;
+        justify-content: flex-start;
+        line-height: 21px;
+        h4 {
+          margin: 0;
+        }
+        .r {
+          font-size: 12px;
+          padding: 0 5px;
+          color: #aaaaaa;
+        }
       }
+
       .time {
         font-size: 12px;
         color: #aaaaaa;
