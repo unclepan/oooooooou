@@ -7,7 +7,6 @@
           <classification />
           <card :cardItem="item" v-for="item in cardList" :key="item._id" />
         </el-col>
-
         <el-col :span="8">
           <recommend />
         </el-col>

@@ -1,5 +1,6 @@
 <template>
   <div :class="$style.detail">
+    <input-comment ref="inputComment" @determine="determineInputComment" />
     <img :class="$style['head-image']" :src="periodicalData.pic" />
     <el-row :gutter="30" :class="$style.main">
       <el-col :span="6">
@@ -34,7 +35,12 @@
           </div>
           <div :class="$style.operation">
             <el-button icon="el-icon-star-off" circle type="danger"></el-button>
-            <el-button icon="el-icon-edit-outline" circle></el-button>
+            <el-button
+              @click="handlerInputComment()"
+              icon="el-icon-edit-outline"
+              circle
+            >
+            </el-button>
             <el-button icon="el-icon-apple" circle></el-button>
           </div>
         </div>
@@ -47,8 +53,10 @@
 <script>
 import calendarCard from '~/components/calendar-card'
 import comments from '~/components/comments/index'
+import inputComment from '~/components/comments/input-comment'
 export default {
   components: {
+    inputComment,
     calendarCard,
     comments
   },
@@ -67,7 +75,25 @@ export default {
     return { periodicalData: res.data }
   },
   mounted() {},
-  methods: {},
+  methods: {
+    handlerInputComment() {
+      this.$refs.inputComment.open()
+    },
+    determineInputComment(val) {
+      this.$axios({
+        method: 'post',
+        url: `/api/periodical/${this.$route.params.id}/comments`,
+        data: {
+          content: val.textarea
+        }
+      }).then((res) => {
+        this.$message({
+          message: '恭喜你，评论成功',
+          type: 'success'
+        })
+      })
+    }
+  },
   head() {
     return {
       title: '详情'

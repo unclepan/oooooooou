@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import geo from './modules/geo'
 import home from './modules/home'
-// import user from './modules/user'
 
 Vue.use(Vuex)
 
@@ -11,7 +10,6 @@ const store = () =>
     modules: {
       geo,
       home
-      // user
     },
     actions: {
       async nuxtServerInit({ commit }, { req, app }) {

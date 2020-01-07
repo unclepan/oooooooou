@@ -108,7 +108,7 @@ export default {
   .header {
     border-bottom: 2px solid #3c3b4a;
     min-width: 980px;
-    color: #666;
+    color: #666666;
     header {
       margin: 0 auto;
       padding: 10px 0;

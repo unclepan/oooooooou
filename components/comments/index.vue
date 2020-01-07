@@ -1,6 +1,6 @@
 <template>
   <el-card :class="$style.card" shadow="hover">
-    <item :test="false" />
+    <item :test="true" />
   </el-card>
 </template>
 

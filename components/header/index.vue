@@ -1,6 +1,7 @@
 <template>
   <div :class="$style.header">
     <search ref="search" />
+
     <div :class="$style.logo">
       <nuxt-link to="/">
         <img src="~/assets/images/logo.png" alt="logo" />
