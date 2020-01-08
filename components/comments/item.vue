@@ -38,20 +38,26 @@
         </div>
         <div>
           <el-button
-            v-if="!commentItem.replyTo"
-            @click="handlerDiscussMore()"
-            icon="el-icon-document"
-            circle
-            size="mini"
-            type="info"
-          ></el-button>
-          <el-button
             @click="handlerReply()"
             icon="el-icon-edit-outline"
             circle
             size="mini"
             type="primary"
-          ></el-button>
+          >
+          </el-button>
+          <el-button
+            v-if="!commentItem.replyTo"
+            @click="handlerDiscussMore()"
+            :icon="
+              commentItem.replys && commentItem.replys.length
+                ? 'el-icon-arrow-down'
+                : 'el-icon-arrow-right'
+            "
+            circle
+            size="mini"
+            type="info"
+          >
+          </el-button>
         </div>
       </el-col>
     </el-row>

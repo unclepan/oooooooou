@@ -91,26 +91,37 @@ export default {
   mounted() {},
   methods: {
     handlerDiscussMore(val) {
-      this.$axios({
-        method: 'get',
-        url: `/api/periodical/${this.$route.params.id}/comments`,
-        params: {
-          rootCommentId: val._id
-        }
-      }).then((res) => {
-        if (res.data.length) {
-          const arr = this.commentsData.map((item) => {
-            if (item._id === val._id) {
-              return { ...item, replys: res.data }
-            } else {
-              return item
-            }
-          })
-          this.commentsData = arr
-        } else {
-          this.$message('该评论下暂无讨论')
-        }
+      // 展开收起
+      const v = this.commentsData.find((item) => {
+        return item._id === val._id
       })
+      if (v.replys && v.replys.length) {
+        const arr = this.commentsData.map((item) => {
+          return { ...item, replys: [] }
+        })
+        this.commentsData = arr
+      } else {
+        this.$axios({
+          method: 'get',
+          url: `/api/periodical/${this.$route.params.id}/comments`,
+          params: {
+            rootCommentId: val._id
+          }
+        }).then((res) => {
+          if (res.data.length) {
+            const arr = this.commentsData.map((item) => {
+              if (item._id === val._id) {
+                return { ...item, replys: res.data }
+              } else {
+                return item
+              }
+            })
+            this.commentsData = arr
+          } else {
+            this.$message('该评论下暂无讨论')
+          }
+        })
+      }
     },
     handlerInputComment(val) {
       this.$refs.inputComment.open(val)
