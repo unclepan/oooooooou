@@ -34,20 +34,20 @@
           <i class="el-icon-message-solid"></i>
         </el-badge>
         <span :class="$style.problem">问题反馈</span>
-        <el-dropdown placement="bottom">
+        <el-dropdown @command="handlerDropdownMenu" placement="bottom">
           <el-avatar
             size="small"
             src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
           >
           </el-avatar>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item icon="el-icon-user">
+            <el-dropdown-item command="b" icon="el-icon-user">
               我的主页
             </el-dropdown-item>
-            <el-dropdown-item icon="el-icon-setting">
+            <el-dropdown-item command="b" icon="el-icon-setting">
               设置
             </el-dropdown-item>
-            <el-dropdown-item icon="el-icon-switch-button">
+            <el-dropdown-item command="logout" icon="el-icon-switch-button">
               登出
             </el-dropdown-item>
           </el-dropdown-menu>
@@ -75,7 +75,22 @@ export default {
   },
   computed: {},
   mounted() {},
-  methods: {}
+  methods: {
+    handlerDropdownMenu(val) {
+      if (val === 'logout') {
+        this.logout()
+      }
+    },
+    logout() {
+      this.$axios({
+        method: 'post',
+        url: '/api/users/logout'
+      }).then((res) => {
+        localStorage.removeItem('userToken')
+        this.$router.push({ path: '/login' })
+      })
+    }
+  }
 }
 </script>
 

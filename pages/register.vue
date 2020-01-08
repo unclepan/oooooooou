@@ -200,7 +200,7 @@ export default {
               code: this.ruleForm.code
             }
           }).then((res) => {
-            this.$router.push({ path: 'login' })
+            this.$router.push({ path: '/login' })
           })
         }
       })
