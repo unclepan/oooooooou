@@ -1,9 +1,5 @@
 <template>
-  <el-dialog
-    :visible.sync="dialogVisible"
-    title="请在此输入您的评论"
-    width="680px"
-  >
+  <el-dialog :visible.sync="dialogVisible" :title="title" width="680px">
     <el-form ref="ruleForm" :model="ruleForm" :rules="rules">
       <el-form-item prop="textarea">
         <el-input
@@ -41,6 +37,14 @@ export default {
         ]
       },
       replyDate: null
+    }
+  },
+  computed: {
+    title() {
+      if (this.replyDate) {
+        return `您正在回复 ${this.replyDate.commentator.name}`
+      }
+      return '请输入您的评论'
     }
   },
   methods: {

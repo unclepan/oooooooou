@@ -90,18 +90,17 @@ export default {
   },
   mounted() {},
   methods: {
-    handlerDiscussMore(val, cid) {
-      const rid = cid || val._id
+    handlerDiscussMore(val) {
       this.$axios({
         method: 'get',
         url: `/api/periodical/${this.$route.params.id}/comments`,
         params: {
-          rootCommentId: rid
+          rootCommentId: val._id
         }
       }).then((res) => {
         if (res.data.length) {
           const arr = this.commentsData.map((item) => {
-            if (item._id === rid) {
+            if (item._id === val._id) {
               return { ...item, replys: res.data }
             } else {
               return item
@@ -130,20 +129,9 @@ export default {
         }
       }).then((res) => {
         this.$message({
-          message: '恭喜你，评论成功',
+          message: '恭喜你，评论成功，请等待管理员审核！',
           type: 'success'
         })
-        if (val.replyDate) {
-          const cid = val.replyDate.rootCommentId || val.replyDate._id
-          this.handlerDiscussMore(val.replyDate, cid)
-        } else {
-          this.$axios({
-            method: 'get',
-            url: `/api/periodical/${this.$route.params.id}/comments`
-          }).then((ress) => {
-            this.commentsData = ress.data
-          })
-        }
       })
     }
   },
