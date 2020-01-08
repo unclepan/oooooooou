@@ -73,8 +73,6 @@ export default {
       ]
     }
   },
-  computed: {},
-  mounted() {},
   methods: {
     handlerDropdownMenu(val) {
       if (val === 'logout') {

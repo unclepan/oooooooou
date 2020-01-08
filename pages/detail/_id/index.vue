@@ -11,6 +11,9 @@
         <div :class="$style.info">
           <p :class="$style.author">作者：{{ periodicalData.author }}</p>
           <p :class="$style.pv">阅读：{{ periodicalData.pv }}</p>
+          <p :class="$style.voteCount">
+            收藏数：{{ periodicalData.voteCount }}
+          </p>
           <div>
             <el-tag
               :class="$style.tag"
@@ -35,14 +38,21 @@
             <div v-html="periodicalData.content"></div>
           </div>
           <div :class="$style.operation">
-            <el-button icon="el-icon-star-off" circle type="danger"></el-button>
+            <el-button
+              @click="handlerCollection()"
+              icon="el-icon-star-off"
+              circle
+              type="info"
+            >
+            </el-button>
+
             <el-button
               @click="handlerInputComment()"
               icon="el-icon-edit-outline"
               circle
+              type="primary"
             >
             </el-button>
-            <el-button icon="el-icon-apple" circle></el-button>
           </div>
         </div>
       </el-col>
@@ -144,6 +154,9 @@ export default {
           type: 'success'
         })
       })
+    },
+    handlerCollection() {
+      console.log('收藏操作')
     }
   },
   head() {
@@ -173,7 +186,8 @@ export default {
         font-size: 14px;
         color: #3c3b4a;
       }
-      .pv {
+      .pv,
+      .voteCount {
         font-size: 12px;
         color: #aaaaaa;
       }
