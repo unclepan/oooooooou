@@ -55,7 +55,7 @@
             "
             circle
             size="mini"
-            type="info"
+            type="success"
           >
           </el-button>
         </div>

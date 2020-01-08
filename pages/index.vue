@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.index">
-    <carousel />
+    <carousel :carouselList="carouselList" />
     <div :class="$style.container">
       <el-row :gutter="20">
         <el-col :span="16">
@@ -32,7 +32,7 @@ export default {
     return {}
   },
   async asyncData(ctx) {
-    const res = await ctx.$axios({
+    const cardListRes = await ctx.$axios({
       method: 'get',
       url: '/api/periodical',
       params: {
@@ -40,7 +40,18 @@ export default {
         per_page: 5
       }
     })
-    return { cardList: res.data }
+    const carouselListRes = await ctx.$axios({
+      method: 'get',
+      url: '/api/carousel',
+      params: {
+        page: 1,
+        per_page: 5
+      }
+    })
+    return {
+      cardList: cardListRes.data,
+      carouselList: carouselListRes.data
+    }
   },
   mounted() {},
   methods: {},
