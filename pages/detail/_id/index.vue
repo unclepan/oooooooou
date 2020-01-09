@@ -40,9 +40,9 @@
           <div :class="$style.operation">
             <el-button
               @click="handlerCollection()"
+              :type="likeData ? 'success' : 'info'"
               icon="el-icon-star-off"
               circle
-              type="info"
             >
             </el-button>
 
@@ -78,7 +78,9 @@ export default {
     comments
   },
   data() {
-    return {}
+    return {
+      likeData: false
+    }
   },
   async asyncData(ctx) {
     const { params } = ctx
@@ -98,8 +100,17 @@ export default {
       commentsData: commentsRes.data
     }
   },
-  mounted() {},
+  mounted() {
+    this.init()
+  },
   methods: {
+    async init() {
+      const likeRes = await this.$axios({
+        method: 'get',
+        url: `/api/users/whetherLikingPeriodical/${this.$route.params.id}`
+      })
+      this.likeData = likeRes.data.like
+    },
     handlerDiscussMore(val) {
       // 展开收起
       const v = this.commentsData.find((item) => {
@@ -156,7 +167,37 @@ export default {
       })
     },
     handlerCollection() {
-      console.log('收藏操作')
+      if (this.likeData) {
+        this.$confirm('确认取消收藏?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        })
+          .then(() => {
+            this.$axios({
+              method: 'delete',
+              url: `/api/users/likingPeriodical/${this.$route.params.id}`
+            }).then((res) => {
+              this.likeData = false
+              this.$message({
+                type: 'info',
+                message: '已取消收藏'
+              })
+            })
+          })
+          .catch(() => {})
+      } else {
+        this.$axios({
+          method: 'put',
+          url: `/api/users/likingPeriodical/${this.$route.params.id}`
+        }).then((res) => {
+          this.likeData = true
+          this.$message({
+            type: 'success',
+            message: '收藏成功!'
+          })
+        })
+      }
     }
   },
   head() {

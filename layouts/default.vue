@@ -1,5 +1,6 @@
 <template>
   <div>
+    <el-backtop></el-backtop>
     <b-header />
     <nuxt />
     <b-footer />

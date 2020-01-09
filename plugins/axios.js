@@ -1,6 +1,9 @@
 import { Message } from 'element-ui'
 
 export default function({ $axios, redirect }) {
+  // 数据访问前缀
+  // $axios.defaults.baseURL = 'http://127.0.0.1:8185/api/'
+
   // request interceptor
   $axios.interceptors.request.use(
     (config) => {
@@ -16,8 +19,11 @@ export default function({ $axios, redirect }) {
       return Promise.reject(error)
     }
   )
+
+  // request拦截器，我这里设置了一个token，当然你可以不要
   $axios.onRequest((config) => {
     // console.log('Making request to ' + config.url)
+    // config.headers.common['X-Access-Token'] = '1234'
   })
 
   // response interceptor
