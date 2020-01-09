@@ -2,22 +2,32 @@
   <div :class="$style['item']">
     <el-row :gutter="10">
       <el-col :span="6" :class="$style['item-img']">
-        <nuxt-link to="/">
-          <img :src="item.src" alt="推荐" />
+        <nuxt-link
+          :to="{ name: 'detail-id', params: { id: item.periodical._id } }"
+        >
+          <img :src="item.periodical.pic" alt="推荐" />
         </nuxt-link>
       </el-col>
       <el-col :span="18" :class="$style['list-box']">
-        <nuxt-link :class="$style.title" to="/">{{ item.title }}</nuxt-link>
+        <nuxt-link
+          :class="$style.title"
+          :to="{ name: 'detail-id', params: { id: item.periodical._id } }"
+          >{{ item.periodical.title }}</nuxt-link
+        >
         <p :class="$style.auxiliary">
-          发布：{{ item.updateAt }} 阅读：{{ item.pv }}
+          {{ moment(item.periodical.createdAt).format('YYYY-MM-DD') }}
+          阅读：{{ item.periodical.pv }}
         </p>
       </el-col>
     </el-row>
-    <p :class="[$style.auxiliary, $style.describe]">{{ item.describe }}</p>
+    <p :class="[$style.auxiliary, $style.describe]">
+      {{ item.periodical.describe }}
+    </p>
   </div>
 </template>
 
 <script>
+import moment from 'moment'
 export default {
   props: {
     item: {
@@ -25,6 +35,11 @@ export default {
       default: () => {
         return {}
       }
+    }
+  },
+  data() {
+    return {
+      moment
     }
   },
   asyncData() {

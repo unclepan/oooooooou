@@ -11,9 +11,7 @@
         <div :class="$style.info">
           <p :class="$style.author">作者：{{ periodicalData.author }}</p>
           <p :class="$style.pv">阅读：{{ periodicalData.pv }}</p>
-          <p :class="$style.voteCount">
-            收藏数：{{ periodicalData.voteCount }}
-          </p>
+          <p :class="$style.voteCount">收藏：{{ periodicalData.voteCount }}</p>
           <div>
             <el-tag
               :class="$style.tag"

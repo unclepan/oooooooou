@@ -4,7 +4,7 @@
       <slot>条形标题</slot>
     </h3>
     <div :class="$style.more">
-      <slot name="more">更多</slot>
+      <slot name="more"></slot>
     </div>
   </div>
 </template>
@@ -14,7 +14,7 @@
   margin: 20px 0 10px;
   padding: 10px;
   border-left: 3px solid #409eff;
-  background: #f8f9fe;
+  background: #ebeef5;
   display: flex;
   align-items: center;
   justify-content: space-between;

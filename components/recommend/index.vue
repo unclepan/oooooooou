@@ -2,14 +2,14 @@
   <div>
     <pan-calendar :tip="['2019-11-23']" />
     <strip-title>
-      <span slot="default">热门文章</span>
-      <span slot="more">
+      <span slot="default">热门期刊</span>
+      <!-- <span slot="more">
         <nuxt-link to="/">更多文章</nuxt-link>
-      </span>
+      </span> -->
     </strip-title>
-    <item v-for="(item, index) in list" :key="index" :item="item" />
+    <item v-for="(item, index) in popularList" :key="index" :item="item" />
     <strip-title>
-      <span slot="default">推荐话题</span>
+      <span slot="default">话题推荐</span>
       <span slot="more">
         <nuxt-link to="/">更多话题</nuxt-link>
       </span>
@@ -31,39 +31,16 @@ export default {
     item,
     stripTitle
   },
-  data() {
-    return {
-      list: [
-        {
-          src: 'http://localhost:3001/carousel/1499593583742.jpg',
-          title:
-            '每集走进一个设计师的世界，用极其生动的拍摄方式“解剖”他们的大脑。',
-          describe:
-            '第二季来拯救我们了！每集走进一个设计师的世界，用极其生动的拍摄方式“解剖”他们的大脑，让观众在创造力爆表的脑回路中经历一次漫游。',
-          updateAt: '2019-01-01',
-          author: 'UNCLE',
-          pv: '120'
-        },
-        {
-          src: 'http://localhost:3001/carousel/1499593583742.jpg',
-          title: '高分纪录片，即将拯救你无聊的大脑',
-          describe:
-            '第二季来拯救我们了！每集走进一个设计师的世界，用极其生动的拍摄方式“解剖”他们的大脑，让观众在创造力爆表的脑回路中经历一次漫游。',
-          updateAt: '2019-01-01',
-          author: 'UNCLE',
-          pv: '120'
-        },
-        {
-          src: 'http://localhost:3001/carousel/1499593583742.jpg',
-          title: '高分纪录片，即将拯救你无聊的大脑',
-          describe:
-            '第二季来拯救我们了！每集走进一个设计师的世界，用极其生动的拍摄方式“解剖”他们的大脑，让观众在创造力爆表的脑回路中经历一次漫游。',
-          updateAt: '2019-01-01',
-          author: 'UNCLE',
-          pv: '120'
-        }
-      ]
+  props: {
+    popularList: {
+      type: Array,
+      default: () => {
+        return []
+      }
     }
+  },
+  data() {
+    return {}
   },
   asyncData() {
     // console.log(window) // 服务端报错

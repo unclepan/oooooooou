@@ -89,8 +89,7 @@ export default {
   },
   data() {
     return {
-      moment,
-      test: false
+      moment
     }
   },
   methods: {

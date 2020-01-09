@@ -8,7 +8,7 @@
           <card :cardItem="item" v-for="item in cardList" :key="item._id" />
         </el-col>
         <el-col :span="8">
-          <recommend />
+          <recommend :popularList="popularList" />
         </el-col>
       </el-row>
     </div>
@@ -48,9 +48,14 @@ export default {
         per_page: 5
       }
     })
+    const popularListRes = await ctx.$axios({
+      method: 'get',
+      url: '/api/periodical/popular/index'
+    })
     return {
       cardList: cardListRes.data,
-      carouselList: carouselListRes.data
+      carouselList: carouselListRes.data,
+      popularList: popularListRes.data
     }
   },
   mounted() {},
