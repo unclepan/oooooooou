@@ -6,7 +6,7 @@
       <el-col :span="6">
         <calendar-card
           :class="$style.calendar"
-          :updatedAt="periodicalData.updatedAt"
+          :createdAt="periodicalData.createdAt"
         />
         <div :class="$style.info">
           <p :class="$style.author">作者：{{ periodicalData.author }}</p>

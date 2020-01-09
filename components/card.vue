@@ -5,7 +5,7 @@
       <div :class="$style.main">
         <el-row :gutter="20" type="flex" align="bottom">
           <el-col :span="5">
-            <calendar-card :updatedAt="cardItem.updatedAt" />
+            <calendar-card :createdAt="cardItem.createdAt" />
           </el-col>
           <el-col :span="19">
             <div :class="$style.text">
