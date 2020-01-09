@@ -15,7 +15,7 @@
     <div :class="$style['login-panel']">
       <div :class="$style.banner">
         <img
-          src="~assets/images/timg.jpeg"
+          src="~assets/images/timg.jpg"
           width="480"
           height="370"
           alt="ANTCP"

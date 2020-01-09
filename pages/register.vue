@@ -42,7 +42,10 @@
           </el-button>
         </el-form-item>
         <el-form-item>
-          <el-link type="info">ANTCP网用户协议</el-link>
+          <el-link :underline="false">
+            <i class="el-icon-view el-icon--right"></i>
+            ANTCP网用户协议
+          </el-link>
         </el-form-item>
       </el-form>
     </section>

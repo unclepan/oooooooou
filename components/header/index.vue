@@ -22,7 +22,7 @@
             :class="$style['nav-link']"
             v-for="(item, index) in navList"
             :key="index"
-            to="/"
+            :to="item.link"
           >
             {{ item.zh }}
           </nuxt-link>
@@ -41,11 +41,8 @@
           >
           </el-avatar>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="b" icon="el-icon-user">
-              我的主页
-            </el-dropdown-item>
-            <el-dropdown-item command="b" icon="el-icon-setting">
-              设置
+            <el-dropdown-item command="user" icon="el-icon-user">
+              个人中心
             </el-dropdown-item>
             <el-dropdown-item command="logout" icon="el-icon-switch-button">
               登出
@@ -67,9 +64,9 @@ export default {
     return {
       navList: [
         { zh: '首页', en: 'Home', link: '/' },
-        { zh: '话题', en: 'Topic', link: '/' },
-        { zh: '发现', en: 'Find', link: '/' },
-        { zh: '关于', en: 'About', link: '/' }
+        { zh: '话题', en: 'Topic', link: '/topic' },
+        { zh: '发现', en: 'Find', link: '/find' },
+        { zh: '关于', en: 'About', link: '/about' }
       ]
     }
   },
@@ -77,6 +74,8 @@ export default {
     handlerDropdownMenu(val) {
       if (val === 'logout') {
         this.logout()
+      } else if (val === 'user') {
+        this.handlerUser()
       }
     },
     logout() {
@@ -87,6 +86,9 @@ export default {
         localStorage.removeItem('userToken')
         this.$router.push({ path: '/login' })
       })
+    },
+    handlerUser() {
+      this.$router.push({ name: 'user-id', params: { id: '123478' } })
     }
   }
 }

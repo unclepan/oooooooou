@@ -16,10 +16,10 @@
 </template>
 
 <script>
-import carousel from '~/components/carousel'
+import carousel from '~/components/periodical/carousel'
 import classification from '~/components/classification'
-import card from '~/components/card'
-import recommend from '~/components/recommend/index'
+import card from '~/components/periodical/card'
+import recommend from '~/components/periodical/recommend/index'
 
 export default {
   components: {

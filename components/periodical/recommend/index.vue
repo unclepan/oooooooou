@@ -3,31 +3,32 @@
     <pan-calendar :tip="['2019-11-23']" />
     <strip-title>
       <span slot="default">热门期刊</span>
+    </strip-title>
+    <item
+      v-for="(item, index) in popularList"
+      :key="index"
+      :itemData="item.periodical"
+    />
+    <strip-title>
+      <span slot="default">问题推荐</span>
       <!-- <span slot="more">
-        <nuxt-link to="/">更多文章</nuxt-link>
+        <nuxt-link to="/">更多话题</nuxt-link>
       </span> -->
     </strip-title>
-    <item v-for="(item, index) in popularList" :key="index" :item="item" />
-    <strip-title>
-      <span slot="default">话题推荐</span>
-      <span slot="more">
-        <nuxt-link to="/">更多话题</nuxt-link>
-      </span>
-    </strip-title>
 
-    <r-card />
+    <recommend-card />
   </div>
 </template>
 
 <script>
-import panCalendar from '../pan-calendar'
-import stripTitle from '../strip-title'
+import panCalendar from '../../pan-calendar'
+import stripTitle from '../../strip-title'
+import recommendCard from '../../recommend-card'
 import item from './item'
-import rCard from './r-card'
 export default {
   components: {
     panCalendar,
-    rCard,
+    recommendCard,
     item,
     stripTitle
   },

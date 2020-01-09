@@ -1,11 +1,11 @@
 <template>
-  <div :class="$style.root">
-    users
+  <div :class="$style.topic">
+    发现
   </div>
 </template>
 
 <style lang="scss" module>
-.root {
+.topic {
   margin: 0 auto;
   min-height: 100vh;
   display: flex;

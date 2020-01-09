@@ -66,9 +66,9 @@
 </template>
 
 <script>
-import calendarCard from '~/components/calendar-card'
-import comments from '~/components/comments/index'
-import inputComment from '~/components/comments/input-comment'
+import calendarCard from '~/components/periodical/calendar-card'
+import comments from '~/components/periodical/comments/index'
+import inputComment from '~/components/periodical/comments/input-comment'
 export default {
   components: {
     inputComment,
