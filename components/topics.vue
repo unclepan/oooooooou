@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.classification">
+  <div :class="$style.topics">
     <el-tag
       :class="$style.tag"
       v-for="(item, index) in tagList"
@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-.classification {
+.topics {
   .tag {
     margin-right: 20px;
     margin-bottom: 12px;

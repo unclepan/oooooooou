@@ -1,6 +1,6 @@
 <template>
   <div>
-    <pan-calendar :tip="['2019-11-23']" />
+    <calendar :tip="['2019-11-23']" />
     <strip-title>
       <span slot="default">热门期刊</span>
     </strip-title>
@@ -17,13 +17,13 @@
 </template>
 
 <script>
-import panCalendar from '../../pan-calendar'
+import calendar from '../../calendar'
 import stripTitle from '../../strip-title'
-import recommendCard from '../../recommend-card'
+import recommendCard from '../../recommend/card'
 import recommendPeriodical from './recommend-periodical'
 export default {
   components: {
-    panCalendar,
+    calendar,
     recommendCard,
     recommendPeriodical,
     stripTitle

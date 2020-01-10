@@ -1,7 +1,7 @@
 <template>
   <div :class="$style['question-detail']">
     <el-card shadow="hover">
-      <classification />
+      <topics />
       <h3 :class="$style.title">
         想养只狗或者猫。智力高一点，不掉毛的。请问有哪些合适？
       </h3>
@@ -30,10 +30,10 @@
 </template>
 
 <script>
-import classification from '~/components/classification'
+import topics from '~/components/topics'
 export default {
   components: {
-    classification
+    topics
   },
   methods: {}
 }

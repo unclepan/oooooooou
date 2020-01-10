@@ -4,7 +4,7 @@
     <div :class="$style.container">
       <el-row :gutter="20">
         <el-col :span="16">
-          <classification />
+          <topics />
           <card :cardItem="item" v-for="item in cardList" :key="item._id" />
         </el-col>
         <el-col :span="8">
@@ -17,14 +17,14 @@
 
 <script>
 import carousel from '~/components/periodical/carousel'
-import classification from '~/components/classification'
+import topics from '~/components/topics'
 import card from '~/components/periodical/card'
 import recommend from '~/components/periodical/recommend/index'
 
 export default {
   components: {
     carousel,
-    classification,
+    topics,
     card,
     recommend
   },

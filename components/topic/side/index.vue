@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card shadow="hover">
-      <classification />
+      <topics />
     </el-card>
 
     <strip-title>
@@ -19,12 +19,12 @@
 
 <script>
 import stripTitle from '../../strip-title'
-import recommendCard from '../../recommend-card'
-import recommendQuestions from '../../recommend-questions'
-import classification from '~/components/classification'
+import recommendCard from '../../recommend/card'
+import recommendQuestions from '../../recommend/questions'
+import topics from '~/components/topics'
 export default {
   components: {
-    classification,
+    topics,
     stripTitle,
     recommendCard,
     recommendQuestions

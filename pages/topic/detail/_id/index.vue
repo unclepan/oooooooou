@@ -1,6 +1,13 @@
 <template>
-  <div :class="$style.topic">
-    话题详情
+  <div :class="$style['topic-detail']">
+    <el-row :gutter="20">
+      <el-col :span="16">
+        详情
+      </el-col>
+      <el-col :span="8">
+        124
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -17,12 +24,9 @@ export default {
 </script>
 
 <style lang="scss" module>
-.topic {
+.topic-detail {
+  width: 980px;
   margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  padding: 20px 0;
 }
 </style>

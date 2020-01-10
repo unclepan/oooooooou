@@ -2,7 +2,7 @@
   <div :class="$style.topic">
     <el-row :gutter="20">
       <el-col :span="16">
-        <recommend-answers v-for="(item, index) in 10" :key="index" />
+        <answers v-for="(item, index) in 10" :key="index" />
       </el-col>
       <el-col :span="8">
         <side />
@@ -11,11 +11,11 @@
   </div>
 </template>
 <script>
-import recommendAnswers from '~/components/topic/recommend-answers'
+import answers from '~/components/topic/answers'
 import side from '~/components/topic/side/index'
 export default {
   components: {
-    recommendAnswers,
+    answers,
     side
   },
   head() {
