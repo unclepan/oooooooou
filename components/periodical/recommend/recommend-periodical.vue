@@ -1,37 +1,45 @@
 <template>
-  <div :class="$style['item']">
-    <el-row :gutter="10">
-      <el-col :span="6" :class="$style['item-img']">
-        <nuxt-link :to="{ name: 'detail-id', params: { id: itemData._id } }">
-          <img :src="itemData.pic" alt="推荐" />
-        </nuxt-link>
-      </el-col>
-      <el-col :span="18" :class="$style['list-box']">
-        <nuxt-link
-          :class="$style.title"
-          :to="{ name: 'detail-id', params: { id: itemData._id } }"
-          >{{ itemData.title }}</nuxt-link
-        >
-        <p :class="$style.auxiliary">
-          {{ moment(itemData.createdAt).format('YYYY-MM-DD') }}
-          阅读：{{ itemData.pv }}
-        </p>
-      </el-col>
-    </el-row>
-    <p :class="[$style.auxiliary, $style.describe]">
-      {{ itemData.describe }}
-    </p>
-  </div>
+  <el-card shadow="hover">
+    <div
+      :class="$style['item']"
+      v-for="(itemData, index) in popularList"
+      :key="index"
+    >
+      <el-row :gutter="10">
+        <el-col :span="6" :class="$style['item-img']">
+          <nuxt-link
+            :to="{ name: 'detail-id', params: { id: itemData.periodical._id } }"
+          >
+            <img :src="itemData.periodical.pic" alt="推荐" />
+          </nuxt-link>
+        </el-col>
+        <el-col :span="18" :class="$style['list-box']">
+          <nuxt-link
+            :class="$style.title"
+            :to="{ name: 'detail-id', params: { id: itemData.periodical._id } }"
+            >{{ itemData.periodical.title }}</nuxt-link
+          >
+          <p :class="$style.auxiliary">
+            {{ moment(itemData.periodical.createdAt).format('YYYY-MM-DD') }}
+            阅读：{{ itemData.periodical.pv }}
+          </p>
+        </el-col>
+      </el-row>
+      <p :class="[$style.auxiliary, $style.describe]">
+        {{ itemData.periodical.describe }}
+      </p>
+    </div>
+  </el-card>
 </template>
 
 <script>
 import moment from 'moment'
 export default {
   props: {
-    itemData: {
-      type: Object,
+    popularList: {
+      type: Array,
       default: () => {
-        return {}
+        return []
       }
     }
   },

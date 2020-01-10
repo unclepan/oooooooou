@@ -14,7 +14,7 @@
   margin: 20px 0 10px;
   padding: 10px;
   border-left: 3px solid #409eff;
-  background: #ebeef5;
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: space-between;

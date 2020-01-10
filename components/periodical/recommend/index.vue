@@ -4,11 +4,7 @@
     <strip-title>
       <span slot="default">热门期刊</span>
     </strip-title>
-    <item
-      v-for="(item, index) in popularList"
-      :key="index"
-      :itemData="item.periodical"
-    />
+    <recommend-periodical :popularList="popularList" />
     <strip-title>
       <span slot="default">问题推荐</span>
       <!-- <span slot="more">
@@ -24,12 +20,12 @@
 import panCalendar from '../../pan-calendar'
 import stripTitle from '../../strip-title'
 import recommendCard from '../../recommend-card'
-import item from './item'
+import recommendPeriodical from './recommend-periodical'
 export default {
   components: {
     panCalendar,
     recommendCard,
-    item,
+    recommendPeriodical,
     stripTitle
   },
   props: {

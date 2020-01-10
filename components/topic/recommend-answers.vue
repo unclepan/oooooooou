@@ -21,19 +21,18 @@
       </el-row>
 
       <div :class="$style.handler">
-        <el-button-group>
-          <el-button size="small" type="primary" icon="el-icon-caret-top">
-            赞同3k
-          </el-button>
+        <el-button size="small" type="primary" icon="el-icon-caret-top">
+          赞同3k
+        </el-button>
 
-          <el-button
-            size="small"
-            type="primary"
-            icon="el-icon-caret-bottom"
-            plain
-          >
-          </el-button>
-        </el-button-group>
+        <el-button
+          size="small"
+          type="primary"
+          icon="el-icon-caret-bottom"
+          plain
+        >
+        </el-button>
+
         <div :class="$style['test-button']">
           <el-button type="text" icon="el-icon-chat-dot-square">
             231评论

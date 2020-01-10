@@ -1,7 +1,6 @@
 <template>
   <div :class="$style.header">
     <search ref="search" />
-
     <div :class="$style.logo">
       <nuxt-link to="/">
         <img src="~/assets/images/logo.png" alt="logo" />
@@ -98,6 +97,8 @@ export default {
 .header {
   padding-bottom: 20px;
   border-top: 5px solid #3c3b4a;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
   .logo {
     width: 980px;
     margin: 30px auto 28px;

@@ -73,7 +73,7 @@ export default {
   .container {
     width: 980px;
     margin: 0 auto;
-    padding: 30px 0;
+    padding: 26px 0;
   }
 }
 </style>

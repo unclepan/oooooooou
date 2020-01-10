@@ -31,7 +31,7 @@ export default {
 <style lang="scss" module>
 .footer {
   background: #3c3b4a;
-  padding: 20px 0 30px 0;
+  padding: 20px 0;
   min-width: 980px;
   .footer-main {
     width: 980px;

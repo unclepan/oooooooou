@@ -119,6 +119,7 @@ export default {
   color: #3c3b4a;
   border: 1px solid #ebeef5;
   border-radius: 5px;
+  background: #ffffff;
   &:hover {
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   }
