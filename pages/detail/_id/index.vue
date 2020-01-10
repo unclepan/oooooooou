@@ -4,7 +4,7 @@
     <img :class="$style['head-image']" :src="periodicalData.pic" />
     <el-row :gutter="30" :class="$style.main">
       <el-col :span="6">
-        <calendar-card
+        <calendar
           :class="$style.calendar"
           :createdAt="periodicalData.createdAt"
         />
@@ -66,13 +66,13 @@
 </template>
 
 <script>
-import calendarCard from '~/components/periodical/calendar-card'
+import calendar from '~/components/periodical/calendar'
 import comments from '~/components/periodical/comments/index'
 import inputComment from '~/components/periodical/comments/input-comment'
 export default {
   components: {
     inputComment,
-    calendarCard,
+    calendar,
     comments
   },
   data() {

@@ -1,20 +1,20 @@
 <template>
   <div :class="$style.card">
     <el-card shadow="hover">
-      <img :class="$style['head-diagram']" :src="cardItem.pic" />
+      <img :class="$style['head-diagram']" :src="answersData.pic" />
       <div :class="$style.main">
         <el-row :gutter="20" type="flex" align="bottom">
           <el-col :span="5">
-            <calendar-card :createdAt="cardItem.createdAt" />
+            <calendar :createdAt="answersData.createdAt" />
           </el-col>
           <el-col :span="19">
             <div :class="$style.text">
-              <h3>{{ cardItem.title }}</h3>
-              <p :class="$style['text-main']">{{ cardItem.describe }}</p>
+              <h3>{{ answersData.title }}</h3>
+              <p :class="$style['text-main']">{{ answersData.describe }}</p>
               <div :class="$style['test-footer']">
-                <p :class="$style.pv">{{ cardItem.author }}</p>
+                <p :class="$style.pv">{{ answersData.author }}</p>
                 <nuxt-link
-                  :to="{ name: 'detail-id', params: { id: cardItem._id } }"
+                  :to="{ name: 'detail-id', params: { id: answersData._id } }"
                 >
                   <el-button type="primary" icon="el-icon-plus" circle>
                   </el-button>
@@ -29,13 +29,13 @@
 </template>
 
 <script>
-import calendarCard from './calendar-card'
+import calendar from './calendar'
 export default {
   components: {
-    calendarCard
+    calendar
   },
   props: {
-    cardItem: {
+    answersData: {
       type: Object,
       default: () => {
         return {}
