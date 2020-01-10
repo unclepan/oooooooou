@@ -101,4 +101,7 @@ export default {
     color: #3c3b4a;
   }
 }
+.item:last-of-type {
+  border: none;
+}
 </style>

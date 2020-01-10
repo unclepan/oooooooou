@@ -5,6 +5,7 @@
       v-for="(item, index) in tagList"
       :key="index"
       type="info"
+      effect="plain"
     >
       {{ item }}
     </el-tag>

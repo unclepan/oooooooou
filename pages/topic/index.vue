@@ -30,6 +30,6 @@ export default {
 .topic {
   width: 980px;
   margin: 0 auto;
-  padding: 22px 0;
+  padding: 20px 0;
 }
 </style>

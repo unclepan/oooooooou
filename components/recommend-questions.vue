@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style['recommend-questions']">
+  <el-card shadow="hover">
     <div :class="$style.item" v-for="(item, index) in 5" :key="index">
       <h4 :class="$style.title">
         你看过哪些超可爱的宠物视频，可以分享一下吗？
@@ -9,7 +9,7 @@
         <span>回答：123</span>
       </div>
     </div>
-  </div>
+  </el-card>
 </template>
 
 <script>
@@ -31,25 +31,26 @@ export default {
 </script>
 
 <style lang="scss" module>
-.recommend-questions {
-  .item {
-    padding: 10px 0;
-    border-bottom: 1px solid #ebeef5;
-    .title {
-      margin: 0;
-      padding-bottom: 12px;
-      cursor: pointer;
-      &:hover {
-        color: #409eff;
-      }
-    }
-    .info {
-      font-size: 12px;
-      color: #aaaaaa;
-      span {
-        padding-right: 10px;
-      }
+.item {
+  padding: 10px 0;
+  border-bottom: 1px solid #ebeef5;
+  .title {
+    margin: 0;
+    padding-bottom: 12px;
+    cursor: pointer;
+    &:hover {
+      color: #409eff;
     }
   }
+  .info {
+    font-size: 12px;
+    color: #aaaaaa;
+    span {
+      padding-right: 10px;
+    }
+  }
+}
+.item:last-of-type {
+  border: none;
 }
 </style>
