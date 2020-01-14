@@ -106,7 +106,7 @@ export default {
 <style lang="scss" module>
 .page-login {
   .header {
-    border-bottom: 2px solid #3c3b4a;
+    border: 1px solid #ebeef5;
     min-width: 980px;
     color: #666666;
     header {

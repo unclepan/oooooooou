@@ -1,20 +1,23 @@
 <template>
   <div :class="$style.card">
     <el-card shadow="hover">
-      <img :class="$style['head-diagram']" :src="answersData.pic" />
+      <img :class="$style['head-diagram']" :src="periodicalData.pic" />
       <div :class="$style.main">
         <el-row :gutter="20" type="flex" align="bottom">
           <el-col :span="5">
-            <calendar :createdAt="answersData.createdAt" />
+            <calendar :createdAt="periodicalData.createdAt" />
           </el-col>
           <el-col :span="19">
             <div :class="$style.text">
-              <h3>{{ answersData.title }}</h3>
-              <p :class="$style['text-main']">{{ answersData.describe }}</p>
+              <h3>{{ periodicalData.title }}</h3>
+              <p :class="$style['text-main']">{{ periodicalData.describe }}</p>
               <div :class="$style['test-footer']">
-                <p :class="$style.pv">{{ answersData.author }}</p>
+                <p :class="$style.pv">{{ periodicalData.author }}</p>
                 <nuxt-link
-                  :to="{ name: 'detail-id', params: { id: answersData._id } }"
+                  :to="{
+                    name: 'detail-id',
+                    params: { id: periodicalData._id }
+                  }"
                 >
                   <el-button type="primary" icon="el-icon-plus" circle>
                   </el-button>
@@ -35,7 +38,7 @@ export default {
     calendar
   },
   props: {
-    answersData: {
+    periodicalData: {
       type: Object,
       default: () => {
         return {}
@@ -51,7 +54,7 @@ export default {
 
 <style lang="scss" module>
 .card {
-  margin: 20px 0;
+  margin-bottom: 20px;
   .head-diagram {
     width: 100%;
   }

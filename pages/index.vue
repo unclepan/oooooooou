@@ -5,9 +5,9 @@
       <el-row :gutter="20">
         <el-col :span="16">
           <topics />
-          <answers
-            :answersData="item"
-            v-for="item in answersList"
+          <block
+            :periodicalData="item"
+            v-for="item in periodicalList"
             :key="item._id"
           />
         </el-col>
@@ -22,21 +22,21 @@
 <script>
 import carousel from '~/components/carousel'
 import topics from '~/components/topics'
-import answers from '~/components/periodical/answers'
+import block from '~/components/periodical/block'
 import side from '~/components/periodical/side/index'
 
 export default {
   components: {
     carousel,
     topics,
-    answers,
+    block,
     side
   },
   data() {
     return {}
   },
   async asyncData(ctx) {
-    const answersListRes = await ctx.$axios({
+    const periodicalListRes = await ctx.$axios({
       method: 'get',
       url: '/api/periodical',
       params: {
@@ -57,7 +57,7 @@ export default {
       url: '/api/periodical/popular/index'
     })
     return {
-      answersList: answersListRes.data,
+      periodicalList: periodicalListRes.data,
       carouselList: carouselListRes.data,
       popularList: popularListRes.data
     }

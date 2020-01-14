@@ -2,18 +2,26 @@
   <div :class="$style['topic-detail']">
     <el-row :gutter="20">
       <el-col :span="16">
-        详情
+        <topic-detail-header />
+        <tabs />
       </el-col>
       <el-col :span="8">
-        124
+        <side />
       </el-col>
     </el-row>
   </div>
 </template>
 
 <script>
+import topicDetailHeader from '~/components/topic/detail/detail-header'
+import tabs from '~/components/topic/detail/tabs'
+import side from '~/components/topic/detail/side/index'
 export default {
-  components: {},
+  components: {
+    tabs,
+    topicDetailHeader,
+    side
+  },
   head() {
     return {
       title: '话题详情'

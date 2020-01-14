@@ -76,6 +76,7 @@ export default {
       .introduce {
         font-size: 12px;
         color: #666666;
+        margin: 0;
         margin-top: 8px;
         overflow: hidden;
         text-overflow: ellipsis;
