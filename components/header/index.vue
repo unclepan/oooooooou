@@ -100,7 +100,7 @@ export default {
   background: #ffffff;
   box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
   .logo {
-    width: 980px;
+    width: 1024px;
     margin: 30px auto 28px;
     img {
       display: block;
@@ -110,7 +110,7 @@ export default {
   }
 }
 .nav-box {
-  width: 980px;
+  width: 1024px;
   margin: 0 auto;
   padding: 0 10px;
   .nav {

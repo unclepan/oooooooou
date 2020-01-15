@@ -3,7 +3,7 @@
     <carousel :carouselList="carouselList" />
     <div :class="$style.container">
       <el-row :gutter="20">
-        <el-col :span="16">
+        <el-col :span="17">
           <topics />
           <block
             :periodicalData="item"
@@ -11,7 +11,7 @@
             :key="item._id"
           />
         </el-col>
-        <el-col :span="8">
+        <el-col :span="7">
           <side :popularList="popularList" />
         </el-col>
       </el-row>
@@ -75,7 +75,7 @@ export default {
 <style lang="scss" module>
 .index {
   .container {
-    width: 980px;
+    width: 1024px;
     margin: 0 auto;
     padding: 26px 0;
   }

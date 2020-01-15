@@ -8,14 +8,13 @@
         )
       }"
     >
-      <el-col :span="2">
+      <el-col :span="3">
         <el-avatar
-          :size="60"
           src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
         >
         </el-avatar>
       </el-col>
-      <el-col :span="22" :class="$style['com-main']">
+      <el-col :span="21" :class="$style['com-main']">
         <div :class="$style.participant">
           <h4>
             {{ commentItem.commentator.name }}
@@ -93,8 +92,8 @@ export default {
     }
   },
   methods: {
-    handlerReply(val) {
-      this.$emit('reply', val || this.commentItem)
+    handlerReply(val = this.commentItem) {
+      this.$emit('reply', val)
     },
     handlerDiscussMore() {
       this.$emit('discussMore', this.commentItem)

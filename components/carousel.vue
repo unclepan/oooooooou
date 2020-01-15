@@ -22,6 +22,6 @@ export default {
 </script>
 <style lang="scss" module>
 .carousel {
-  min-width: 980px;
+  min-width: 1024px;
 }
 </style>

@@ -107,12 +107,12 @@ export default {
 .page-login {
   .header {
     border: 1px solid #ebeef5;
-    min-width: 980px;
+    min-width: 1024px;
     color: #666666;
     header {
       margin: 0 auto;
       padding: 10px 0;
-      width: 980px;
+      width: 1024px;
       .site-logo {
         display: inline-block;
         width: 106px;
@@ -133,7 +133,7 @@ export default {
   }
   .login-panel {
     margin: 0 auto 70px;
-    width: 980px;
+    width: 1024px;
     display: flex;
     justify-content: space-between;
     padding-top: 30px;

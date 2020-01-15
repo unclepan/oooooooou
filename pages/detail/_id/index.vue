@@ -67,8 +67,8 @@
 
 <script>
 import calendar from '~/components/periodical/calendar'
-import comments from '~/components/periodical/comments/index'
-import inputComment from '~/components/periodical/comments/input-comment'
+import comments from '~/components/comments/index'
+import inputComment from '~/components/comments/input-comment'
 export default {
   components: {
     inputComment,
@@ -208,9 +208,9 @@ export default {
 
 <style lang="scss" module>
 .detail {
-  width: 980px;
+  width: 1024px;
   margin: 0 auto;
-  padding-bottom: 30px;
+  padding: 20px 0;
   .head-image {
     width: 100%;
   }

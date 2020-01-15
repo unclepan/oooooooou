@@ -33,7 +33,7 @@ export default {
 
 <style lang="scss" module>
 .question-detail {
-  width: 980px;
+  width: 1024px;
   margin: 0 auto;
   padding: 20px 0;
 }

@@ -216,12 +216,12 @@ export default {
 .page-register {
   .header {
     border: 1px solid #ebeef5;
-    min-width: 980px;
+    min-width: 1024px;
     color: #666666;
     header {
       margin: 0 auto;
       padding: 10px 0;
-      width: 980px;
+      width: 1024px;
 
       .site-logo {
         display: inline-block;
@@ -245,7 +245,7 @@ export default {
   > section {
     margin: 0 auto 30px;
     padding-top: 30px;
-    width: 980px;
+    width: 1024px;
     min-height: 300px;
     padding-right: 550px;
     box-sizing: border-box;

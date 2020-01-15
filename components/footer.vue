@@ -32,9 +32,9 @@ export default {
 .footer {
   background: #3c3b4a;
   padding: 20px 0;
-  min-width: 980px;
+  min-width: 1024px;
   .footer-main {
-    width: 980px;
+    width: 1024px;
 
     margin: 0 auto;
     .footer-link a {

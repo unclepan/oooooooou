@@ -56,15 +56,31 @@
           {{ blockData.isDislike ? '已踩' : '踩' }}
         </el-button>
 
+        <el-button
+          @click="addAnswerComment(blockData)"
+          plain
+          size="small"
+          type="primary"
+          icon="el-icon-edit"
+        >
+          评论
+        </el-button>
+
         <div :class="$style['test-button']">
           <el-button
+            @click="showAnswerComments(blockData)"
             :class="$style.chosen"
             type="text"
             icon="el-icon-chat-dot-square"
           >
-            231评论
+            {{
+              blockData.showComments
+                ? '收起评论'
+                : `${blockData.commentNum}个评论`
+            }}
           </el-button>
           <el-button
+            @click="collectAnswer(blockData)"
             :class="{ [$style.chosen]: !blockData.isCollect }"
             icon="el-icon-star-off"
             type="text"
@@ -73,12 +89,23 @@
           </el-button>
         </div>
       </div>
+      <comments-item
+        :class="$style.comments"
+        v-for="(item, index) in blockData.commentsListData"
+        :key="index"
+        :commentItem="item"
+        @reply="reply"
+        @discussMore="discussMore"
+      />
     </el-card>
   </div>
 </template>
 <script>
+import commentsItem from '~/components/comments/item'
 export default {
-  components: {},
+  components: {
+    commentsItem
+  },
   props: {
     blockData: {
       type: Object,
@@ -93,6 +120,21 @@ export default {
     },
     dislikingAnswer(val) {
       this.$emit('dislikingAnswer', val)
+    },
+    collectAnswer(val) {
+      this.$emit('collectAnswer', val)
+    },
+    showAnswerComments(val) {
+      this.$emit('showAnswerComments', val)
+    },
+    reply(val) {
+      this.$emit('reply', val)
+    },
+    discussMore(val) {
+      this.$emit('discussMore', { commentItem: val, blockData: this.blockData })
+    },
+    addAnswerComment(val) {
+      this.$emit('addAnswerComment', this.blockData)
     }
   }
 }
@@ -153,6 +195,9 @@ export default {
         color: #aaaaaa;
       }
     }
+  }
+  .comments {
+    border-bottom: 1px solid #ebeef5;
   }
 }
 </style>
