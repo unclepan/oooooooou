@@ -1,7 +1,22 @@
 <template>
-  <div>
+  <div :class="$style.side">
     <el-card shadow="hover">
-      <topics />
+      <el-tag
+        :class="$style.tag"
+        v-for="(item, index) in topicsPopularList"
+        :key="index"
+        type="info"
+        effect="plain"
+      >
+        <nuxt-link
+          :to="{
+            name: 'topic-detail-id',
+            params: { id: item._id }
+          }"
+        >
+          {{ item.name }}
+        </nuxt-link>
+      </el-tag>
     </el-card>
 
     <strip-title>
@@ -14,21 +29,19 @@
 <script>
 import recommendCard from '~/components/recommend/card'
 import stripTitle from '~/components/strip-title'
-import topics from '~/components/topics'
 export default {
   components: {
-    topics,
     stripTitle,
     recommendCard
   },
-  // props: {
-  //   popularList: {
-  //     type: Array,
-  //     default: () => {
-  //       return []
-  //     }
-  //   }
-  // },
+  props: {
+    topicsPopularList: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    }
+  },
   data() {
     return {}
   },
@@ -36,3 +49,12 @@ export default {
   methods: {}
 }
 </script>
+
+<style lang="scss" module>
+.side {
+  .tag {
+    margin-right: 20px;
+    margin-bottom: 12px;
+  }
+}
+</style>

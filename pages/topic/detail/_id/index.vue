@@ -6,10 +6,11 @@
         <tabs
           :topicDataInfo="topicDataInfo"
           :topicPeriodicalsDataList="topicPeriodicalsDataList"
+          :topicQuestionsDataList="topicQuestionsDataList"
         />
       </el-col>
       <el-col :span="8">
-        <side />
+        <side :topicsPopularList="topicsPopularList" />
       </el-col>
     </el-row>
   </div>
@@ -34,13 +35,31 @@ export default {
         fields: 'introduction;moreInformation'
       }
     })
+
     const topicPeriodicalsRes = await ctx.$axios({
       method: 'get',
       url: `/api/topics/${params.id}/periodicals`
     })
+
+    const topicQuestionsRes = await ctx.$axios({
+      method: 'get',
+      url: `/api/topics/${params.id}/questions`
+    })
+
+    const topicsPopularRes = await ctx.$axios({
+      method: 'get',
+      url: '/api/topics',
+      params: {
+        page: 1,
+        per_page: 100,
+        popular: true
+      }
+    })
     return {
       topicDataInfo: topicDataRes.data,
-      topicPeriodicalsDataList: topicPeriodicalsRes.data
+      topicPeriodicalsDataList: topicPeriodicalsRes.data,
+      topicQuestionsDataList: topicQuestionsRes.data,
+      topicsPopularList: topicsPopularRes.data
     }
   },
   head() {

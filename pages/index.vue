@@ -5,11 +5,14 @@
       <el-row :gutter="20">
         <el-col :span="17">
           <topics />
-          <block
-            :periodicalData="item"
+          <el-card
+            :class="$style['card-block']"
             v-for="item in periodicalList"
             :key="item._id"
-          />
+            shadow="hover"
+          >
+            <block :periodicalData="item" />
+          </el-card>
         </el-col>
         <el-col :span="7">
           <side :popularList="popularList" />
@@ -78,6 +81,9 @@ export default {
     width: 1024px;
     margin: 0 auto;
     padding: 26px 0;
+    .card-block {
+      margin-bottom: 20px;
+    }
   }
 }
 </style>

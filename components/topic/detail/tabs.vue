@@ -6,31 +6,30 @@
       </el-tab-pane>
       <el-tab-pane label="期刊" name="second">
         <periodical-block
+          :class="$style['periodical-block']"
           v-for="item in topicPeriodicalsDataList"
           :key="item._id"
           :periodicalData="item"
         />
       </el-tab-pane>
-      <el-tab-pane label="精华" name="third">
-        <!-- <block v-for="(item, index) in 10" :key="index" /> -->
-      </el-tab-pane>
       <el-tab-pane label="问题" name="fourth">
-        <question v-for="(item, index) in 10" :key="index" />
+        <question
+          v-for="(item, index) in topicQuestionsDataList"
+          :key="index"
+          :questionData="item"
+        />
       </el-tab-pane>
     </el-tabs>
   </el-card>
 </template>
 <script>
-// import block from '../block'
 import question from '../question'
 import info from './info'
 import periodicalBlock from '~/components/periodical/block'
-
 export default {
   components: {
     periodicalBlock,
     question,
-    // block,
     info
   },
   props: {
@@ -41,6 +40,12 @@ export default {
       }
     },
     topicPeriodicalsDataList: {
+      type: Array,
+      default: () => {
+        return {}
+      }
+    },
+    topicQuestionsDataList: {
       type: Array,
       default: () => {
         return {}
@@ -59,4 +64,10 @@ export default {
   }
 }
 </script>
-<style lang="scss" module></style>
+<style lang="scss" module>
+.periodical-block {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ebeef5;
+  margin-bottom: 20px;
+}
+</style>

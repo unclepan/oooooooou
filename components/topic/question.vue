@@ -1,22 +1,24 @@
 <template>
   <div :class="$style.question">
     <h3 :class="$style.title">
-      想养只狗或者猫。智力高一点，不掉毛的。请问有哪些合适？
+      {{ questionData.title }}
     </h3>
+    <p :class="$style.description">{{ questionData.description }}</p>
     <div :class="$style.handler">
-      <el-button size="small" type="primary">
-        关注问题
-      </el-button>
       <el-button size="small" type="primary" plain icon="el-icon-edit">
-        写回答
+        <nuxt-link
+          :to="{
+            name: 'question-id',
+            params: { id: questionData.id }
+          }"
+        >
+          写回答
+        </nuxt-link>
       </el-button>
 
       <div :class="$style['test-button']">
-        <el-button type="text" icon="el-icon-chat-dot-square">
-          123条评论
-        </el-button>
         <el-button type="text" icon="el-icon-document">
-          12234个回答
+          {{ questionData.answerNum }}个回答
         </el-button>
       </div>
     </div>
@@ -25,6 +27,14 @@
 <script>
 export default {
   components: {},
+  props: {
+    questionData: {
+      type: Object,
+      default: () => {
+        return {}
+      }
+    }
+  },
   data() {
     return {}
   },
@@ -41,8 +51,15 @@ export default {
     font-weight: 600;
     color: #1a1a1a;
     margin: 0;
-    padding-bottom: 20px;
+    padding-bottom: 16px;
   }
+  .description {
+    font-size: 14px;
+    color: #666666;
+    margin: 0;
+    padding-bottom: 16px;
+  }
+
   .handler {
     display: flex;
     align-items: center;

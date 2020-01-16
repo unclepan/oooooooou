@@ -16,16 +16,20 @@
       </el-row>
 
       <div :class="$style.handler">
-        <el-button size="small" type="primary">
-          关注话题
+        <el-button
+          @click="handlerFollowingTopic(informationStatistics.followingTopic)"
+          :type="informationStatistics.followingTopic ? 'info' : 'primary'"
+          size="small"
+        >
+          {{ informationStatistics.followingTopic ? '取消关注' : '关注话题' }}
         </el-button>
 
         <div :class="$style['test-button']">
           <el-button type="text" icon="el-icon-chat-dot-square">
-            关注人数：123
+            关注人数：{{ informationStatistics.followingTopicNum }}
           </el-button>
           <el-button type="text" icon="el-icon-document">
-            问题数：11234
+            问题数：{{ informationStatistics.questionsNum }}
           </el-button>
         </div>
       </div>
@@ -44,7 +48,37 @@ export default {
       }
     }
   },
-  methods: {}
+  data() {
+    return {
+      informationStatistics: {}
+    }
+  },
+  mounted() {
+    this.init()
+  },
+  methods: {
+    async init() {
+      const informationStatisticsRes = await this.$axios({
+        method: 'get',
+        url: `/api/topics/${this.$route.params.id}/information/statistics`
+      })
+      this.informationStatistics = informationStatisticsRes.data
+    },
+    async handlerFollowingTopic(val) {
+      if (val) {
+        await this.$axios({
+          method: 'delete',
+          url: `/api/users/followingTopics/${this.$route.params.id}`
+        })
+      } else {
+        await this.$axios({
+          method: 'put',
+          url: `/api/users/followingTopics/${this.$route.params.id}`
+        })
+      }
+      this.init()
+    }
+  }
 }
 </script>
 
