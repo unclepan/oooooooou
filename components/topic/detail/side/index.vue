@@ -55,6 +55,10 @@ export default {
   .tag {
     margin-right: 20px;
     margin-bottom: 12px;
+    a {
+      font-size: 12px;
+      color: #aaaaaa;
+    }
   }
 }
 </style>

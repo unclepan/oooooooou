@@ -5,9 +5,12 @@
       v-for="(item, index) in recommendQuestionsList"
       :key="index"
     >
-      <h4 :class="$style.title">
+      <nuxt-link
+        :to="{ name: 'question-id', params: { id: item.question._id } }"
+        :class="$style.title"
+      >
         {{ item.question.title }}
-      </h4>
+      </nuxt-link>
       <div :class="$style.info">
         <span>
           {{ moment(item.question.updatedAt).format('YYYY-MM-DD HH:mm') }}
@@ -43,9 +46,12 @@ export default {
   padding: 10px 0;
   border-bottom: 1px solid #ebeef5;
   .title {
-    margin: 0;
-    padding-bottom: 12px;
+    color: #3c3b4a;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 12px;
     cursor: pointer;
+    display: block;
     &:hover {
       color: #409eff;
     }

@@ -23,7 +23,7 @@
   </el-card>
 </template>
 <script>
-import question from '../question'
+import question from './question'
 import info from './info'
 import periodicalBlock from '~/components/periodical/block'
 export default {
