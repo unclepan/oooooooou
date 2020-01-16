@@ -1,29 +1,37 @@
 <template>
   <el-card shadow="hover">
-    <div :class="$style.item" v-for="(item, index) in 5" :key="index">
+    <div
+      :class="$style.item"
+      v-for="(item, index) in recommendQuestionsList"
+      :key="index"
+    >
       <h4 :class="$style.title">
-        你看过哪些超可爱的宠物视频，可以分享一下吗？
+        {{ item.question.title }}
       </h4>
       <div :class="$style.info">
-        <span>关注：123243</span>
-        <span>回答：123</span>
+        <span>
+          {{ moment(item.question.updatedAt).format('YYYY-MM-DD HH:mm') }}
+        </span>
       </div>
     </div>
   </el-card>
 </template>
 
 <script>
+import moment from 'moment'
 export default {
-  // props: {
-  //   popularList: {
-  //     type: Array,
-  //     default: () => {
-  //       return []
-  //     }
-  //   }
-  // },
+  props: {
+    recommendQuestionsList: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    }
+  },
   data() {
-    return {}
+    return {
+      moment
+    }
   },
 
   methods: {}

@@ -2,8 +2,11 @@
   <div :class="$style['topic-detail']">
     <el-row :gutter="20">
       <el-col :span="16">
-        <topic-detail-header />
-        <tabs />
+        <topic-detail-header :topicDataInfo="topicDataInfo" />
+        <tabs
+          :topicDataInfo="topicDataInfo"
+          :topicPeriodicalsDataList="topicPeriodicalsDataList"
+        />
       </el-col>
       <el-col :span="8">
         <side />
@@ -21,6 +24,24 @@ export default {
     tabs,
     topicDetailHeader,
     side
+  },
+  async asyncData(ctx) {
+    const { params } = ctx
+    const topicDataRes = await ctx.$axios({
+      method: 'get',
+      url: `/api/topics/${params.id}`,
+      params: {
+        fields: 'introduction;moreInformation'
+      }
+    })
+    const topicPeriodicalsRes = await ctx.$axios({
+      method: 'get',
+      url: `/api/topics/${params.id}/periodicals`
+    })
+    return {
+      topicDataInfo: topicDataRes.data,
+      topicPeriodicalsDataList: topicPeriodicalsRes.data
+    }
   },
   head() {
     return {

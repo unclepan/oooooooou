@@ -17,7 +17,10 @@
         />
       </el-col>
       <el-col :span="7">
-        <side />
+        <side
+          :topicsPopularList="topicsPopularList"
+          :recommendQuestionsList="recommendQuestionsList"
+        />
       </el-col>
     </el-row>
   </div>
@@ -41,6 +44,29 @@ export default {
   head() {
     return {
       title: '话题'
+    }
+  },
+  async asyncData(ctx) {
+    const topicsPopularRes = await ctx.$axios({
+      method: 'get',
+      url: '/api/topics',
+      params: {
+        page: 1,
+        per_page: 100,
+        popular: true
+      }
+    })
+    const recommendQuestionsRes = await ctx.$axios({
+      method: 'get',
+      url: '/api/questions/popular/index',
+      params: {
+        page: 1,
+        per_page: 5
+      }
+    })
+    return {
+      topicsPopularList: topicsPopularRes.data,
+      recommendQuestionsList: recommendQuestionsRes.data
     }
   },
   mounted() {
