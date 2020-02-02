@@ -5,15 +5,13 @@
     </h3>
     <p :class="$style.description">{{ questionData.description }}</p>
     <div :class="$style.handler">
-      <el-button size="small" type="primary" plain icon="el-icon-edit">
-        <nuxt-link
-          :to="{
-            name: 'question-id',
-            params: { id: questionData.id }
-          }"
-        >
-          写回答
-        </nuxt-link>
+      <el-button
+        @click="writeAnswer(questionData.id)"
+        size="small"
+        type="primary"
+        plain
+      >
+        问题详情
       </el-button>
 
       <div :class="$style['test-button']">
@@ -38,7 +36,14 @@ export default {
   data() {
     return {}
   },
-  methods: {}
+  methods: {
+    writeAnswer(id) {
+      this.$router.push({
+        name: 'question-id',
+        params: { id }
+      })
+    }
+  }
 }
 </script>
 <style lang="scss" module>

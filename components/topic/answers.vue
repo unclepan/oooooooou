@@ -12,6 +12,7 @@
       v-for="(item, index) in answersRecommendList"
       :key="index"
       :blockData="item"
+      :questionIdTitle="questionIdTitle"
     />
   </div>
 </template>
@@ -22,6 +23,20 @@ export default {
   components: {
     block,
     inputComment
+  },
+  props: {
+    reqData: {
+      type: Object,
+      default: () => {
+        return {}
+      }
+    },
+    questionIdTitle: {
+      type: Boolean,
+      default: () => {
+        return false
+      }
+    }
   },
   data() {
     return {
@@ -34,14 +49,7 @@ export default {
   },
   methods: {
     async init() {
-      const answersRecommendListRes = await this.$axios({
-        method: 'get',
-        url: '/api/answers/recommend',
-        params: {
-          page: 1,
-          per_page: 5
-        }
-      })
+      const answersRecommendListRes = await this.$axios(this.reqData)
       this.answersRecommendList = answersRecommendListRes.data
     },
     async handlerLikingAnswer(val) {

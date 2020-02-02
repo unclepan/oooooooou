@@ -6,14 +6,14 @@
       :key="index"
     >
       <nuxt-link
-        :to="{ name: 'question-id', params: { id: item.question._id } }"
+        :to="{ name: 'question-id', params: { id: item._id } }"
         :class="$style.title"
       >
-        {{ item.question.title }}
+        {{ item.title }}
       </nuxt-link>
       <div :class="$style.info">
         <span>
-          {{ moment(item.question.updatedAt).format('YYYY-MM-DD HH:mm') }}
+          {{ moment(item.updatedAt).format('YYYY-MM-DD HH:mm') }}
         </span>
       </div>
     </div>

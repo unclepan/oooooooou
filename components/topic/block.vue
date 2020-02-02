@@ -1,7 +1,7 @@
 <template>
   <div :class="$style['recommend-answers']">
     <el-card shadow="hover">
-      <nuxt-link :class="$style.title" to="/">
+      <nuxt-link v-if="questionIdTitle" :class="$style.title" to="/">
         {{ blockData.questionId.title }}
       </nuxt-link>
       <div :class="$style.answerer" v-if="blockData.answerer">
@@ -44,7 +44,7 @@
           icon="el-icon-caret-top"
         >
           {{ blockData.isLike ? '已赞同' : '赞同' }}
-          {{ blockData.likeNum || '' }}
+          {{ blockData.voteCount || '' }}
         </el-button>
         <el-button
           @click="dislikingAnswer(blockData)"
@@ -111,6 +111,12 @@ export default {
       type: Object,
       default: () => {
         return {}
+      }
+    },
+    questionIdTitle: {
+      type: Boolean,
+      default: () => {
+        return false
       }
     }
   },

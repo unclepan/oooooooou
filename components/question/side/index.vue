@@ -4,14 +4,16 @@
       <el-row>
         <el-col :span="12">
           <div :class="$style.info">
-            <p :class="$style.label">关注者</p>
-            <p :class="$style.num">1243214</p>
+            <p :class="$style.label">关注数</p>
+            <p :class="$style.num">
+              {{ informationStatistics.followingQuestionNum }}
+            </p>
           </div>
         </el-col>
         <el-col :span="12">
           <div :class="$style.info">
-            <p :class="$style.label">被浏览</p>
-            <p :class="$style.num">1243214</p>
+            <p :class="$style.label">回答数</p>
+            <p :class="$style.num">{{ informationStatistics.answersNum }}</p>
           </div>
         </el-col>
       </el-row>
@@ -20,7 +22,7 @@
     <strip-title>
       <span slot="default">问题推荐</span>
     </strip-title>
-    <recommend-questions />
+    <recommend-questions :recommendQuestionsList="recommendQuestionsList" />
 
     <strip-title>
       <span slot="default">期刊推荐</span>
@@ -39,14 +41,20 @@ export default {
     recommendCard,
     recommendQuestions
   },
-  // props: {
-  //   popularList: {
-  //     type: Array,
-  //     default: () => {
-  //       return []
-  //     }
-  //   }
-  // },
+  props: {
+    recommendQuestionsList: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    },
+    informationStatistics: {
+      type: Object,
+      default: () => {
+        return {}
+      }
+    }
+  },
   data() {
     return {}
   },

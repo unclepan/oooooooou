@@ -1,41 +1,106 @@
 <template>
   <div :class="$style['question-detail']">
+    <input-answers ref="inputAnswers" @determine="determineInputAnswers" />
     <el-card shadow="hover">
-      <topics />
+      <topics :topicsList="questionDataInfo.topics" />
       <h3 :class="$style.title">
-        想养只狗或者猫。智力高一点，不掉毛的。请问有哪些合适？
+        {{ questionDataInfo.title }}
       </h3>
       <p :class="$style.describe">
-        对于不爱护小动物这样的担心就没有必要了，本人小的时候家里养了四条大狗，只不过对于沾毛之类的事情实在是麻烦，并且找智力相对高的训练起来容易的，谢谢啦！
+        {{ questionDataInfo.description }}
       </p>
       <div :class="$style.handler">
-        <el-button size="small" type="primary">
+        <!-- <el-button size="small" type="primary">
           关注问题
         </el-button>
         <el-button size="small" type="primary" plain icon="el-icon-edit">
           写回答
+        </el-button> -->
+        <el-button
+          @click="handlerFollowing(informationStatistics.followingQuestion)"
+          :type="informationStatistics.followingQuestion ? 'info' : 'primary'"
+          size="small"
+        >
+          {{
+            informationStatistics.followingQuestion ? '取消关注' : '关注问题'
+          }}
+        </el-button>
+        <el-button
+          @click="handlerInputAnswers"
+          size="small"
+          type="primary"
+          plain
+          icon="el-icon-edit"
+        >
+          写回答
         </el-button>
 
-        <div :class="$style['test-button']">
-          <el-button type="text" icon="el-icon-chat-dot-square">
-            123条评论
-          </el-button>
+        <!-- <div :class="$style['test-button']">
           <el-button type="text" icon="el-icon-document">
             12234个回答
           </el-button>
-        </div>
+        </div> -->
       </div>
     </el-card>
   </div>
 </template>
 
 <script>
+import inputAnswers from './input-answers'
 import topics from '~/components/topics'
 export default {
   components: {
-    topics
+    topics,
+    inputAnswers
   },
-  methods: {}
+  props: {
+    questionDataInfo: {
+      type: Object,
+      default: () => {
+        return {}
+      }
+    },
+    informationStatistics: {
+      type: Object,
+      default: () => {
+        return {}
+      }
+    }
+  },
+  methods: {
+    async handlerFollowing(val) {
+      if (val) {
+        await this.$axios({
+          method: 'delete',
+          url: `/api/users/followQuestions/${this.$route.params.id}`
+        })
+      } else {
+        await this.$axios({
+          method: 'put',
+          url: `/api/users/followQuestions/${this.$route.params.id}`
+        })
+      }
+      this.$emit('follow')
+    },
+    determineInputAnswers(val) {
+      const data = { content: val.content }
+      this.$axios({
+        method: 'post',
+        url: `/api/questions/${this.$route.params.id}/answers`,
+        data: {
+          ...data
+        }
+      }).then((res) => {
+        this.$message({
+          message: '恭喜你，回答成功，请等待管理员审核！',
+          type: 'success'
+        })
+      })
+    },
+    handlerInputAnswers() {
+      this.$refs.inputAnswers.open()
+    }
+  }
 }
 </script>
 
@@ -56,12 +121,12 @@ export default {
   .handler {
     display: flex;
     align-items: center;
-    .test-button {
-      padding-left: 30px;
-      :global(.el-button--text) {
-        color: #aaaaaa;
-      }
-    }
+    // .test-button {
+    //   padding-left: 30px;
+    //   :global(.el-button--text) {
+    //     color: #aaaaaa;
+    //   }
+    // }
   }
 }
 </style>

@@ -1,15 +1,19 @@
 <template>
   <div :class="$style['topic-detail']">
     <el-row :gutter="20">
-      <el-col :span="16">
-        <topic-detail-header :topicDataInfo="topicDataInfo" />
+      <el-col :span="17">
+        <topic-detail-header
+          :topicDataInfo="topicDataInfo"
+          :informationStatistics="informationStatistics"
+          @follow="init()"
+        />
         <tabs
           :topicDataInfo="topicDataInfo"
           :topicPeriodicalsDataList="topicPeriodicalsDataList"
           :topicQuestionsDataList="topicQuestionsDataList"
         />
       </el-col>
-      <el-col :span="8">
+      <el-col :span="7">
         <side :topicsPopularList="topicsPopularList" />
       </el-col>
     </el-row>
@@ -25,6 +29,11 @@ export default {
     tabs,
     topicDetailHeader,
     side
+  },
+  data() {
+    return {
+      informationStatistics: {}
+    }
   },
   async asyncData(ctx) {
     const { params } = ctx
@@ -67,7 +76,18 @@ export default {
       title: '话题详情'
     }
   },
-  methods: {}
+  mounted() {
+    this.init()
+  },
+  methods: {
+    async init() {
+      const informationStatisticsRes = await this.$axios({
+        method: 'get',
+        url: `/api/topics/${this.$route.params.id}/information/statistics`
+      })
+      this.informationStatistics = informationStatisticsRes.data
+    }
+  }
 }
 </script>
 

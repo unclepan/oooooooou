@@ -13,7 +13,7 @@
 .strip-title {
   margin: 20px 0 10px;
   padding: 10px;
-  border-left: 3px solid #409eff;
+  border-left: 2px solid #409eff;
   background: #ffffff;
   display: flex;
   align-items: center;

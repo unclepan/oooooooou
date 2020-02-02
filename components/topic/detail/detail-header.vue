@@ -46,24 +46,15 @@ export default {
       default: () => {
         return {}
       }
+    },
+    informationStatistics: {
+      type: Object,
+      default: () => {
+        return {}
+      }
     }
-  },
-  data() {
-    return {
-      informationStatistics: {}
-    }
-  },
-  mounted() {
-    this.init()
   },
   methods: {
-    async init() {
-      const informationStatisticsRes = await this.$axios({
-        method: 'get',
-        url: `/api/topics/${this.$route.params.id}/information/statistics`
-      })
-      this.informationStatistics = informationStatisticsRes.data
-    },
     async handlerFollowingTopic(val) {
       if (val) {
         await this.$axios({
@@ -76,7 +67,7 @@ export default {
           url: `/api/users/followingTopics/${this.$route.params.id}`
         })
       }
-      this.init()
+      this.$emit('follow')
     }
   }
 }

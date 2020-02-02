@@ -4,7 +4,7 @@
     <div :class="$style.container">
       <el-row :gutter="20">
         <el-col :span="17">
-          <topics />
+          <topics :topicsList="topicsList" />
           <el-card
             :class="$style['card-block']"
             v-for="item in periodicalList"
@@ -55,14 +55,29 @@ export default {
         per_page: 5
       }
     })
-    const popularListRes = await ctx.$axios({
+    const popularPeriodicalListRes = await ctx.$axios({
       method: 'get',
-      url: '/api/periodical/popular/index'
+      url: '/api/periodical',
+      params: {
+        page: 1,
+        per_page: 5,
+        popular: true
+      }
+    })
+    const topicsListRes = await ctx.$axios({
+      method: 'get',
+      url: '/api/topics',
+      params: {
+        page: 1,
+        per_page: 100,
+        popular: true
+      }
     })
     return {
       periodicalList: periodicalListRes.data,
       carouselList: carouselListRes.data,
-      popularList: popularListRes.data
+      popularList: popularPeriodicalListRes.data,
+      topicsList: topicsListRes.data
     }
   },
   mounted() {},

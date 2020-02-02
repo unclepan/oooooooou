@@ -2,7 +2,7 @@
   <div :class="$style.topic">
     <el-row :gutter="20">
       <el-col :span="17">
-        <recommend />
+        <answers :questionIdTitle="true" :reqData="reqData" />
       </el-col>
       <el-col :span="7">
         <side
@@ -14,15 +14,24 @@
   </div>
 </template>
 <script>
-import recommend from '~/components/topic/recommend'
+import answers from '~/components/topic/answers'
 import side from '~/components/topic/side/index'
 export default {
   components: {
-    recommend,
+    answers,
     side
   },
   data() {
-    return {}
+    return {
+      reqData: {
+        method: 'get',
+        url: '/api/answers/popular',
+        params: {
+          page: 1,
+          per_page: 50
+        }
+      }
+    }
   },
   head() {
     return {
@@ -41,10 +50,12 @@ export default {
     })
     const recommendQuestionsRes = await ctx.$axios({
       method: 'get',
-      url: '/api/questions/popular/index',
+      url: '/api/questions',
       params: {
         page: 1,
-        per_page: 5
+        per_page: 5,
+        auditStatus: 1,
+        popular: true
       }
     })
     return {
