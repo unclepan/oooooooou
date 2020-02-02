@@ -64,7 +64,7 @@ export default {
       navList: [
         { zh: '首页', en: 'Home', link: '/' },
         { zh: '话题', en: 'Topic', link: '/topic' },
-        { zh: '发现', en: 'Find', link: '/find' },
+        // { zh: '发现', en: 'Find', link: '/find' },
         { zh: '关于', en: 'About', link: '/about' }
       ]
     }

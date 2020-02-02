@@ -4,7 +4,6 @@
       :class="$style.tag"
       v-for="(item, index) in topicsList"
       :key="index"
-      type="info"
       effect="plain"
     >
       <nuxt-link
@@ -39,7 +38,7 @@ export default {
     margin-bottom: 12px;
     a {
       font-size: 12px;
-      color: #aaaaaa;
+      color: #409eff;
     }
   }
 }

@@ -2,59 +2,65 @@
   <div :class="$style.detail">
     <input-comment ref="inputComment" @determine="determineInputComment" />
     <img :class="$style['head-image']" :src="periodicalData.pic" />
-    <el-row :gutter="30" :class="$style.main">
-      <el-col :span="6">
-        <calendar
-          :class="$style.calendar"
-          :createdAt="periodicalData.createdAt"
-        />
-        <div :class="$style.info">
-          <p :class="$style.author">作者：{{ periodicalData.author }}</p>
-          <p :class="$style.pv">阅读：{{ periodicalData.pv }}</p>
-          <p :class="$style.voteCount">收藏：{{ periodicalData.voteCount }}</p>
-          <div>
-            <el-tag
-              :class="$style.tag"
-              v-for="(item, index) in periodicalData.topics"
-              :key="index"
-              type="info"
-              size="mini"
-              effect="plain"
-            >
-              {{ item }}
-            </el-tag>
-          </div>
-        </div>
-      </el-col>
-      <el-col :span="18">
-        <div>
-          <h1 :class="$style.title">
-            {{ periodicalData.title }}
-          </h1>
-          <p :class="$style.describe">{{ periodicalData.describe }}</p>
-          <div :class="$style['text-box']">
-            <div v-html="periodicalData.content"></div>
-          </div>
-          <div :class="$style.operation">
-            <el-button
-              @click="handlerCollection()"
-              :type="likeData ? 'success' : 'info'"
-              icon="el-icon-star-off"
-              circle
-            >
-            </el-button>
+    <div :class="$style.main">
+      <el-card shadow="hover">
+        <el-row :gutter="30">
+          <el-col :span="6">
+            <calendar
+              :class="$style.calendar"
+              :createdAt="periodicalData.createdAt"
+            />
+            <div :class="$style.info">
+              <p :class="$style.author">作者：{{ periodicalData.author }}</p>
+              <p :class="$style.pv">阅读：{{ periodicalData.pv }}</p>
+              <p :class="$style.voteCount">
+                收藏：{{ periodicalData.voteCount }}
+              </p>
+              <div :class="$style.tag" v-if="periodicalData.topics.length">
+                所属话题：
+                <el-tag
+                  v-for="(item, index) in periodicalData.topics"
+                  :key="index"
+                  type="info"
+                  size="mini"
+                  effect="plain"
+                >
+                  {{ item.name }}
+                </el-tag>
+              </div>
+            </div>
+          </el-col>
+          <el-col :span="18">
+            <div>
+              <h1 :class="$style.title">
+                {{ periodicalData.title }}
+              </h1>
+              <p :class="$style.describe">{{ periodicalData.describe }}</p>
+              <div :class="$style['text-box']">
+                <div v-html="periodicalData.content"></div>
+              </div>
+              <div :class="$style.operation">
+                <el-button
+                  @click="handlerCollection()"
+                  :type="likeData ? 'success' : 'info'"
+                  icon="el-icon-star-off"
+                  circle
+                >
+                </el-button>
 
-            <el-button
-              @click="handlerInputComment()"
-              icon="el-icon-edit-outline"
-              circle
-              type="primary"
-            >
-            </el-button>
-          </div>
-        </div>
-      </el-col>
-    </el-row>
+                <el-button
+                  @click="handlerInputComment()"
+                  icon="el-icon-edit-outline"
+                  circle
+                  type="primary"
+                >
+                </el-button>
+              </div>
+            </div>
+          </el-col>
+        </el-row>
+      </el-card>
+    </div>
     <comments
       @discussMore="handlerDiscussMore"
       @reply="handlerInputComment"
@@ -215,7 +221,7 @@ export default {
     width: 100%;
   }
   .main {
-    padding: 30px 0;
+    margin: 20px 0;
     .calendar {
       width: 120px;
     }
@@ -226,11 +232,12 @@ export default {
         color: #3c3b4a;
       }
       .pv,
-      .voteCount {
+      .voteCount,
+      .tag {
         font-size: 12px;
         color: #aaaaaa;
       }
-      .tag {
+      :global(.el-tag) {
         margin: 0 10px 10px 0;
       }
     }

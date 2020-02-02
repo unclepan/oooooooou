@@ -34,6 +34,6 @@ export default {
 </script>
 <style lang="scss" module>
 .card {
-  margin-bottom: 30px;
+  margin-bottom: 16px;
 }
 </style>
