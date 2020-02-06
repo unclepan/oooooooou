@@ -10,23 +10,24 @@
         >
           <el-button slot="append" icon="el-icon-search"></el-button>
         </el-input>
-
-        <ul v-if="sreachList.length" :class="$style['search-info-list']">
-          <li
-            v-for="(item, index) in sreachList"
-            :key="index"
-            @click="navigation(item)"
-          >
-            <img :class="$style.pic" :src="item.pic" />
-            <div :class="$style.text">
-              <div :class="$style.title">{{ item.title }}</div>
-              <div :class="$style.describe">{{ item.describe }}</div>
-            </div>
-          </li>
-        </ul>
-        <div v-else :class="$style['search-info-list']">
-          <p :class="$style.info"><i class="el-icon-info"></i> 暂无数据</p>
-        </div>
+        <template v-if="searchShowInfo">
+          <ul v-if="sreachList.length" :class="$style['search-info-list']">
+            <li
+              v-for="(item, index) in sreachList"
+              :key="index"
+              @click="navigation(item)"
+            >
+              <img :class="$style.pic" :src="item.pic" />
+              <div :class="$style.text">
+                <div :class="$style.title">{{ item.title }}</div>
+                <div :class="$style.describe">{{ item.describe }}</div>
+              </div>
+            </li>
+          </ul>
+          <div v-else :class="$style['search-info-list']">
+            <p :class="$style.info"><i class="el-icon-info"></i> 暂无数据</p>
+          </div>
+        </template>
       </div>
     </transition>
   </div>
@@ -40,6 +41,7 @@ export default {
       search: () => {},
       searchShowBox: false,
       searchShowInner: false,
+      searchShowInfo: false,
       sreachInfo: '',
       sreachList: []
     }
@@ -53,6 +55,7 @@ export default {
       this.searchShowBox = true
       setTimeout(() => {
         this.searchShowInner = true
+        this.searchShowInfo = false
       }, 0)
     },
     close(e) {
@@ -62,6 +65,7 @@ export default {
       }
     },
     async _search() {
+      this.searchShowInfo = true
       const res = await this.$axios({
         method: 'get',
         url: '/api/periodical',

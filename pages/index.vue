@@ -4,7 +4,10 @@
     <div :class="$style.container">
       <el-row :gutter="20">
         <el-col :span="17">
-          <topics :topicsList="topicsList" />
+          <el-card shadow="hover">
+            <h3 :class="$style['topics-title']">相关话题</h3>
+            <topics :topicsList="topicsList" />
+          </el-card>
           <el-card
             :class="$style['card-block']"
             v-for="item in periodicalList"
@@ -96,8 +99,11 @@ export default {
     width: 1024px;
     margin: 0 auto;
     padding: 26px 0;
+    .topics-title {
+      margin-top: 0;
+    }
     .card-block {
-      margin-bottom: 20px;
+      margin-top: 20px;
     }
   }
 }

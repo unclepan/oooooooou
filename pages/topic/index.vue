@@ -16,6 +16,7 @@
 <script>
 import answers from '~/components/topic/answers'
 import side from '~/components/topic/side/index'
+
 export default {
   components: {
     answers,

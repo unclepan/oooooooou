@@ -34,11 +34,7 @@
         </el-badge>
         <span :class="$style.problem">问题反馈</span>
         <el-dropdown @command="handlerDropdownMenu" placement="bottom">
-          <el-avatar
-            size="small"
-            src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
-          >
-          </el-avatar>
+          <el-avatar icon="el-icon-user-solid" size="small"> </el-avatar>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="user" icon="el-icon-user">
               个人中心

@@ -1,6 +1,7 @@
 <template>
   <div>
     <input-comment ref="inputComment" @determine="determineInputComment" />
+    <skeleton v-if="!answersRecommendList.length" />
     <block
       @addAnswerComment="handlerAddAnswerComment"
       @discussMore="handlerDiscussMore"
@@ -18,11 +19,13 @@
 </template>
 <script>
 import block from './block'
+import skeleton from '~/components/skeleton'
 import inputComment from '~/components/comments/input-comment'
 export default {
   components: {
     block,
-    inputComment
+    inputComment,
+    skeleton
   },
   props: {
     reqData: {

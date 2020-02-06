@@ -21,9 +21,7 @@
                 <el-tag
                   v-for="(item, index) in periodicalData.topics"
                   :key="index"
-                  type="info"
                   size="mini"
-                  effect="plain"
                 >
                   {{ item.name }}
                 </el-tag>

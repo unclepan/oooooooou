@@ -35,7 +35,7 @@ export default {
 .topics {
   .tag {
     margin-right: 20px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     a {
       font-size: 12px;
       color: #409eff;
