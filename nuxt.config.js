@@ -54,7 +54,7 @@ module.exports = {
     proxy: true
   },
   proxy: {
-    '/api/': 'http://localhost:3001'
+    '/api/': 'http://www.antcp.com:3001'
   },
   /*
    ** Build configuration

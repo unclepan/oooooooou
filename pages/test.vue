@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     init() {
-      this.$axios.get('http://localhost:3000/api/users?page=1&per_page=10')
+      this.$axios.get('http://www.antcp.com:3000/api/users?page=1&per_page=10')
     }
   },
   head() {
