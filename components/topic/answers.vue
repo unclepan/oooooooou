@@ -1,7 +1,7 @@
 <template>
   <div>
     <input-comment ref="inputComment" @determine="determineInputComment" />
-    <skeleton v-if="!answersRecommendList.length" />
+    <skeleton v-if="!answersRecommendList" />
     <block
       @addAnswerComment="handlerAddAnswerComment"
       @discussMore="handlerDiscussMore"
@@ -43,7 +43,7 @@ export default {
   },
   data() {
     return {
-      answersRecommendList: [],
+      answersRecommendList: null,
       addAnswerComment: null
     }
   },

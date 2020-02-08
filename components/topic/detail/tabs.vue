@@ -70,4 +70,8 @@ export default {
   border-bottom: 1px solid #ebeef5;
   margin-bottom: 20px;
 }
+.periodical-block:last-of-type {
+  border: none;
+  margin: 0;
+}
 </style>

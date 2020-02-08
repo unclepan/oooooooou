@@ -20,7 +20,7 @@
 import calendar from '../../calendar'
 import stripTitle from '../../strip-title'
 import recommendCard from '../../recommend/card'
-import recommendPeriodical from './periodical'
+import recommendPeriodical from '../../recommend/periodical'
 export default {
   components: {
     calendar,

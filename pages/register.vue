@@ -2,9 +2,15 @@
   <div :class="$style['page-register']">
     <article :class="$style.header">
       <header>
-        <nuxt-link :class="$style['site-logo']" to="/" />
-        <span :class="$style.login">
-          <em :class="$style.bold">已有账号？{{ timerid }}</em>
+        <nuxt-link to="/">
+          <img
+            :class="$style['site-logo']"
+            src="~/assets/images/logo-01.png"
+            alt="logo"
+          />
+        </nuxt-link>
+        <span>
+          <em :class="$style.bold">已有账号？</em>
           <nuxt-link to="/login">
             <el-button type="primary" size="mini">登录</el-button>
           </nuxt-link>
@@ -13,41 +19,52 @@
     </article>
 
     <section>
-      <el-form
-        ref="ruleForm"
-        :model="ruleForm"
-        :rules="rules"
-        label-width="80px"
-      >
-        <el-form-item label="昵称" prop="name">
-          <el-input v-model="ruleForm.name" />
-        </el-form-item>
-        <el-form-item label="邮箱" prop="email">
-          <el-input v-model="ruleForm.email" />
-          <el-button @click="sendMsg" size="mini" round>发送验证码</el-button>
-          <span :class="$style.status">{{ statusMsg }}</span>
-        </el-form-item>
-        <el-form-item label="验证码" prop="code">
-          <el-input v-model="ruleForm.code" maxlength="4" />
-        </el-form-item>
-        <el-form-item label="密码" prop="pwd">
-          <el-input v-model="ruleForm.pwd" type="password" />
-        </el-form-item>
-        <el-form-item label="确认密码" prop="cpwd">
-          <el-input v-model="ruleForm.cpwd" type="password" />
-        </el-form-item>
-        <el-form-item>
-          <el-button @click="register" type="primary">
-            同意以下协议并注册
-          </el-button>
-        </el-form-item>
-        <el-form-item>
-          <el-link :underline="false">
-            <i class="el-icon-view el-icon--right"></i>
-            ANTCP网用户协议
-          </el-link>
-        </el-form-item>
-      </el-form>
+      <div :class="$style.main">
+        <div :class="$style.banner">
+          DO NOTHING BY HALVES
+        </div>
+        <div :class="$style.form">
+          <h3>CREATE YOUR ACCOUNT</h3>
+          <el-form
+            ref="ruleForm"
+            :model="ruleForm"
+            :rules="rules"
+            label-position="left"
+            label-width="80px"
+          >
+            <el-form-item label="昵称" prop="name">
+              <el-input v-model="ruleForm.name" />
+            </el-form-item>
+            <el-form-item label="邮箱" prop="email">
+              <el-input v-model="ruleForm.email" />
+              <el-button @click="sendMsg" size="mini" round>
+                发送验证码
+              </el-button>
+              <span :class="$style.status">{{ statusMsg }}</span>
+            </el-form-item>
+            <el-form-item label="验证码" prop="code">
+              <el-input v-model="ruleForm.code" maxlength="4" />
+            </el-form-item>
+            <el-form-item label="密码" prop="pwd">
+              <el-input v-model="ruleForm.pwd" type="password" />
+            </el-form-item>
+            <el-form-item label="确认密码" prop="cpwd">
+              <el-input v-model="ruleForm.cpwd" type="password" />
+            </el-form-item>
+            <el-form-item>
+              <el-button @click="register" type="primary">
+                同意以下协议并注册
+              </el-button>
+            </el-form-item>
+            <el-form-item>
+              <el-link :underline="false">
+                <i class="el-icon-view el-icon--right"></i>
+                ANTCP网用户协议
+              </el-link>
+            </el-form-item>
+          </el-form>
+        </div>
+      </div>
     </section>
   </div>
 </template>
@@ -97,6 +114,13 @@ export default {
             required: true,
             type: 'email',
             message: '请输入正确邮箱',
+            trigger: 'blur'
+          }
+        ],
+        code: [
+          {
+            required: true,
+            message: '请输入验证码',
             trigger: 'blur'
           }
         ],
@@ -215,24 +239,20 @@ export default {
 <style lang="scss" module>
 .page-register {
   .header {
-    border: 1px solid #ebeef5;
     min-width: 1024px;
     color: #666666;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
     header {
       margin: 0 auto;
       padding: 10px 0;
       width: 1024px;
-
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       .site-logo {
         display: inline-block;
         width: 106px;
-        height: 29px;
-        background-repeat: no-repeat;
-        background-image: url('~assets/images/logo.png');
-        background-size: 106px 29px;
-      }
-      .login {
-        float: right;
       }
       .bold {
         font-style: normal;
@@ -243,16 +263,39 @@ export default {
   }
 
   > section {
-    margin: 0 auto 30px;
-    padding-top: 30px;
+    margin: 0 auto;
+    padding-top: 20px;
     width: 1024px;
-    min-height: 300px;
-    padding-right: 550px;
-    box-sizing: border-box;
-    .status {
-      font-size: 12px;
-      margin-left: 20px;
-      color: #e6a23c;
+    .main {
+      background: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      .banner {
+        width: 50%;
+        background: #409eff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: #ffffff;
+        font-size: 30px;
+      }
+      .form {
+        width: 45%;
+        padding: 30px;
+        h3 {
+          text-align: center;
+          padding-left: 80px;
+          font-size: 24px;
+          color: #409eff;
+          margin-top: 0;
+        }
+        .status {
+          font-size: 12px;
+          margin-left: 20px;
+          color: #e6a23c;
+        }
+      }
     }
   }
 }
