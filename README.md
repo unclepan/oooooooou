@@ -8,7 +8,7 @@
 # install dependencies
 $ yarn install
 
-# serve with hot reload at www.antcp.com:3000
+# serve with hot reload at 127.0.0.1:3000
 $ yarn dev
 
 # build for production and launch server
