@@ -15,23 +15,6 @@ export default {
   components: {
     'b-header': header,
     'b-footer': footer
-  },
-  data() {
-    return {
-      userList: []
-    }
-  },
-  mounted() {
-    this.init()
-  },
-  methods: {
-    async init() {
-      const res = await this.$axios({
-        method: 'get',
-        url: '/api/users'
-      })
-      this.userList = res.data
-    }
   }
 }
 </script>

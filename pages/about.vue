@@ -27,7 +27,7 @@
       </p>
       <p>后端：node的koa</p>
       <p>数据库：mongodb，redis</p>
-      <p>服务器：阿里云香港</p>
+      <p>服务器：阿里云香港，Nginx</p>
       <p>进程管理：pm2</p>
       <p>客户端：考虑使用flutter接入</p>
     </el-card>
