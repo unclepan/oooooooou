@@ -7,7 +7,7 @@ const buryingPoint = bp({
   appId: '123849',
   appName: '流程管理',
   level: '1',
-  baseUrl: 'http://127.0.0.1:3001/api/bp',
+  baseUrl: 'http://www.antcp.com:3001/api/bp',
   sendTimeGap: 4000,
   compress: false
 })
