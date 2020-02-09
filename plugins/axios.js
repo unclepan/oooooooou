@@ -2,7 +2,7 @@ import { Message } from 'element-ui'
 
 export default function({ $axios, redirect }) {
   // 数据访问前缀
-  // $axios.defaults.baseURL = 'http://www.antcp.com:8185/api/'
+  // $axios.defaults.baseURL = 'http://localhost:8185/api/'
 
   // request interceptor
   $axios.interceptors.request.use(

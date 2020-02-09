@@ -20,9 +20,7 @@ export default {
     // console.log(window) // Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: Window, …}
   },
   methods: {
-    init() {
-      this.$axios.get('http://www.antcp.com:3000/api/users?page=1&per_page=10')
-    }
+    init() {}
   },
   head() {
     return {
