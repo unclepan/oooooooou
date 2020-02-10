@@ -54,8 +54,7 @@ export default {
       url: '/api/questions',
       params: {
         page: 1,
-        per_page: 5,
-        auditStatus: 1,
+        per_page: 6,
         popular: true
       }
     })
