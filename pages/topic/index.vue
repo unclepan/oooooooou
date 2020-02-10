@@ -29,7 +29,7 @@ export default {
         url: '/api/answers/popular',
         params: {
           page: 1,
-          per_page: 50
+          per_page: 10
         }
       }
     }
