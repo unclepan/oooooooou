@@ -108,7 +108,7 @@ export default {
 .nav-box {
   width: 1024px;
   margin: 0 auto;
-  padding: 0 10px;
+  padding: 0;
   .nav {
     display: flex;
     justify-content: center;
