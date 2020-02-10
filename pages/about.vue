@@ -4,7 +4,7 @@
       <p :class="$style.motto">从来处来，到来处去！</p>
       <h3>关于我</h3>
       <p>
-        Hi，我是杨盼，web前端，现在使用并擅长的编程语言，javascript，drat。
+        Hi，我是杨盼，web前端，现在使用并擅长的编程语言，javascript，dart。
         最近使用最多web前端框架是vue。深入了解与vue相关的技能树。
       </p>
       <h3>关于此网站</h3>
