@@ -1,5 +1,6 @@
 <template>
   <div :class="$style.header">
+    <input-feedback ref="inputFeedback" @determine="determineInputFeedback" />
     <search ref="search" />
     <div :class="$style.logo">
       <nuxt-link to="/">
@@ -32,7 +33,9 @@
         <el-badge :value="12">
           <i class="el-icon-message-solid"></i>
         </el-badge>
-        <span :class="$style.problem">问题反馈</span>
+        <span :class="$style.problem" @click="$refs.inputFeedback.open()">
+          问题反馈
+        </span>
         <el-dropdown @command="handlerDropdownMenu" placement="bottom">
           <el-avatar icon="el-icon-user-solid" size="small"> </el-avatar>
           <el-dropdown-menu slot="dropdown">
@@ -51,9 +54,11 @@
 
 <script>
 import search from './search'
+import inputFeedback from './input-feedback'
 export default {
   components: {
-    search
+    search,
+    inputFeedback
   },
   data() {
     return {
@@ -84,6 +89,21 @@ export default {
     },
     handlerUser() {
       this.$router.push({ name: 'user-id', params: { id: '123478' } })
+    },
+    determineInputFeedback(val) {
+      const data = { content: val.content }
+      this.$axios({
+        method: 'post',
+        url: '/api/feedback',
+        data: {
+          ...data
+        }
+      }).then((res) => {
+        this.$message({
+          message: '感谢您的反馈',
+          type: 'success'
+        })
+      })
     }
   }
 }
@@ -127,6 +147,7 @@ export default {
       padding: 0 20px;
       color: #3c3b4a;
       font-size: 14px;
+      cursor: pointer;
     }
   }
 }
