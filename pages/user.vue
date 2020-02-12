@@ -48,17 +48,20 @@
         </el-card>
       </el-col>
     </el-row>
+    <skeleton v-else :num="5" />
   </div>
 </template>
 
 <script>
 import moment from 'moment'
+import skeleton from '~/components/skeleton'
 import topics from '~/components/topics'
 import periodicalBlock from '~/components/periodical/block'
 export default {
   components: {
     topics,
-    periodicalBlock
+    periodicalBlock,
+    skeleton
   },
   head() {
     return {
