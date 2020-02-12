@@ -88,7 +88,7 @@ export default {
       })
     },
     handlerUser() {
-      this.$router.push({ name: 'user-id', params: { id: '123478' } })
+      this.$router.push({ name: 'user' })
     },
     determineInputFeedback(val) {
       const data = { content: val.content }

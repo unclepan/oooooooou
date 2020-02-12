@@ -6,7 +6,7 @@
           :rows="5"
           v-model="ruleForm.textarea"
           type="textarea"
-          placeholder="请输入"
+          placeholder="请输入问题"
         >
         </el-input>
       </el-form-item>
@@ -31,7 +31,7 @@ export default {
         textarea: [
           {
             required: true,
-            message: '请输入',
+            message: '请输入问题',
             trigger: 'blur'
           }
         ]
