@@ -95,6 +95,15 @@ export default {
   width: 1024px;
   margin: 0 auto;
   padding: 20px 0;
+  .periodical-block {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ebeef5;
+    margin-bottom: 20px;
+  }
+  .periodical-block:last-of-type {
+    border: none;
+    margin: 0;
+  }
   .item-questions {
     padding: 10px 0;
     border-bottom: 1px solid #ebeef5;
