@@ -19,35 +19,23 @@
       </el-row>
     </el-card>
 
-    <strip-title>
-      <span slot="default">问题推荐</span>
-    </strip-title>
-    <recommend-questions :recommendQuestionsList="recommendQuestionsList" />
-
-    <strip-title>
-      <span slot="default">期刊推荐</span>
-    </strip-title>
-    <recommend-card />
+    <recommend-questions />
+    <recommend-periodical />
+    <recommend-advertisement />
   </div>
 </template>
 
 <script>
-import stripTitle from '../../strip-title'
-import recommendCard from '../../recommend/card'
-import recommendQuestions from '../../recommend/questions'
+import recommendAdvertisement from '~/components/recommend/advertisement'
+import recommendQuestions from '~/components/recommend/questions'
+import recommendPeriodical from '~/components/recommend/periodical'
 export default {
   components: {
-    stripTitle,
-    recommendCard,
-    recommendQuestions
+    recommendAdvertisement,
+    recommendQuestions,
+    recommendPeriodical
   },
   props: {
-    recommendQuestionsList: {
-      type: Array,
-      default: () => {
-        return []
-      }
-    },
     informationStatistics: {
       type: Object,
       default: () => {

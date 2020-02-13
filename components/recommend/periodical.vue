@@ -1,49 +1,53 @@
 <template>
-  <el-card shadow="hover">
-    <div
-      :class="$style['item']"
-      v-for="(itemData, index) in popularList"
-      :key="index"
-    >
-      <el-row :gutter="10">
-        <el-col :span="6" :class="$style['item-img']">
-          <nuxt-link :to="{ name: 'detail-id', params: { id: itemData._id } }">
-            <img :src="itemData.pic" alt="推荐" />
-          </nuxt-link>
-        </el-col>
-        <el-col :span="18" :class="$style['list-box']">
-          <nuxt-link
-            :class="$style.title"
-            :to="{ name: 'detail-id', params: { id: itemData._id } }"
-            >{{ itemData.title }}</nuxt-link
-          >
-          <p :class="$style.auxiliary">
-            {{ moment(itemData.createdAt).format('YYYY-MM-DD') }}
-            阅读：{{ itemData.pv }}
-          </p>
-        </el-col>
-      </el-row>
-      <p :class="[$style.auxiliary, $style.describe]">
-        {{ itemData.describe }}
-      </p>
-    </div>
-  </el-card>
+  <div>
+    <strip-title>
+      <span slot="default">热门期刊</span>
+    </strip-title>
+    <el-card shadow="hover">
+      <div
+        :class="$style['item']"
+        v-for="(itemData, index) in popularList"
+        :key="index"
+      >
+        <el-row :gutter="10">
+          <el-col :span="6" :class="$style['item-img']">
+            <nuxt-link
+              :to="{ name: 'detail-id', params: { id: itemData._id } }"
+            >
+              <img :src="itemData.pic" alt="推荐" />
+            </nuxt-link>
+          </el-col>
+          <el-col :span="18" :class="$style['list-box']">
+            <nuxt-link
+              :class="$style.title"
+              :to="{ name: 'detail-id', params: { id: itemData._id } }"
+              >{{ itemData.title }}</nuxt-link
+            >
+            <p :class="$style.auxiliary">
+              {{ moment(itemData.createdAt).format('YYYY-MM-DD') }}
+              阅读：{{ itemData.pv }}
+            </p>
+          </el-col>
+        </el-row>
+        <p :class="[$style.auxiliary, $style.describe]">
+          {{ itemData.describe }}
+        </p>
+      </div>
+    </el-card>
+  </div>
 </template>
 
 <script>
 import moment from 'moment'
+import stripTitle from '~/components/strip-title'
 export default {
-  props: {
-    popularList: {
-      type: Array,
-      default: () => {
-        return []
-      }
-    }
+  components: {
+    stripTitle
   },
   data() {
     return {
-      moment
+      moment,
+      popularList: []
     }
   },
   asyncData() {
@@ -57,8 +61,22 @@ export default {
   },
   mounted() {
     // console.log(window) // Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: Window, …}
+    this.init()
   },
-  methods: {}
+  methods: {
+    async init() {
+      const popularListRes = await this.$axios({
+        method: 'get',
+        url: '/api/periodical',
+        params: {
+          page: 1,
+          per_page: 5,
+          popular: true
+        }
+      })
+      this.popularList = popularListRes.data
+    }
+  }
 }
 </script>
 

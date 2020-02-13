@@ -1,33 +1,22 @@
 <template>
   <div>
     <el-card shadow="hover">
-      <topics :topicsList="topicsPopularList" />
+      <topics />
     </el-card>
-
-    <strip-title>
-      <span slot="default">期刊推荐</span>
-    </strip-title>
-    <recommend-card />
+    <recommend-periodical />
+    <recommend-advertisement />
   </div>
 </template>
 
 <script>
+import recommendAdvertisement from '~/components/recommend/advertisement'
+import recommendPeriodical from '~/components/recommend/periodical'
 import topics from '~/components/topics'
-import recommendCard from '~/components/recommend/card'
-import stripTitle from '~/components/strip-title'
 export default {
   components: {
     topics,
-    stripTitle,
-    recommendCard
-  },
-  props: {
-    topicsPopularList: {
-      type: Array,
-      default: () => {
-        return []
-      }
-    }
+    recommendAdvertisement,
+    recommendPeriodical
   },
   data() {
     return {}

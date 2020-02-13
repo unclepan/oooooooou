@@ -14,7 +14,7 @@
         />
       </el-col>
       <el-col :span="7">
-        <side :topicsPopularList="topicsPopularList" />
+        <side />
       </el-col>
     </el-row>
   </div>
@@ -54,21 +54,10 @@ export default {
       method: 'get',
       url: `/api/topics/${params.id}/questions`
     })
-
-    const topicsPopularRes = await ctx.$axios({
-      method: 'get',
-      url: '/api/topics',
-      params: {
-        page: 1,
-        per_page: 100,
-        popular: true
-      }
-    })
     return {
       topicDataInfo: topicDataRes.data,
       topicPeriodicalsDataList: topicPeriodicalsRes.data,
-      topicQuestionsDataList: topicQuestionsRes.data,
-      topicsPopularList: topicsPopularRes.data
+      topicQuestionsDataList: topicQuestionsRes.data
     }
   },
   head() {

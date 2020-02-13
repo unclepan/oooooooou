@@ -6,7 +6,7 @@
         <el-col :span="17">
           <el-card shadow="hover">
             <h3 :class="$style['topics-title']">相关话题</h3>
-            <topics :topicsList="topicsList" />
+            <topics />
           </el-card>
           <el-card
             :class="$style['card-block']"
@@ -58,29 +58,9 @@ export default {
         per_page: 5
       }
     })
-    const popularPeriodicalListRes = await ctx.$axios({
-      method: 'get',
-      url: '/api/periodical',
-      params: {
-        page: 1,
-        per_page: 5,
-        popular: true
-      }
-    })
-    const topicsListRes = await ctx.$axios({
-      method: 'get',
-      url: '/api/topics',
-      params: {
-        page: 1,
-        per_page: 100,
-        popular: true
-      }
-    })
     return {
       periodicalList: periodicalListRes.data,
-      carouselList: carouselListRes.data,
-      popularList: popularPeriodicalListRes.data,
-      topicsList: topicsListRes.data
+      carouselList: carouselListRes.data
     }
   },
   mounted() {},

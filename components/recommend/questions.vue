@@ -1,43 +1,60 @@
 <template>
-  <el-card shadow="hover">
-    <div
-      :class="$style.item"
-      v-for="(item, index) in recommendQuestionsList"
-      :key="index"
-    >
-      <nuxt-link
-        :to="{ name: 'question-id', params: { id: item._id } }"
-        :class="$style.title"
+  <div>
+    <strip-title>
+      <span slot="default">问题推荐</span>
+    </strip-title>
+    <el-card shadow="hover">
+      <div
+        :class="$style.item"
+        v-for="(item, index) in recommendQuestionsList"
+        :key="index"
       >
-        {{ item.title }}
-      </nuxt-link>
-      <div :class="$style.info">
-        <span>
-          {{ moment(item.updatedAt).format('YYYY-MM-DD HH:mm') }}
-        </span>
+        <nuxt-link
+          :to="{ name: 'question-id', params: { id: item._id } }"
+          :class="$style.title"
+        >
+          {{ item.title }}
+        </nuxt-link>
+        <div :class="$style.info">
+          <span>
+            {{ moment(item.updatedAt).format('YYYY-MM-DD HH:mm') }}
+          </span>
+        </div>
       </div>
-    </div>
-  </el-card>
+    </el-card>
+  </div>
 </template>
 
 <script>
 import moment from 'moment'
+import stripTitle from '~/components/strip-title'
 export default {
-  props: {
-    recommendQuestionsList: {
-      type: Array,
-      default: () => {
-        return []
-      }
-    }
+  components: {
+    stripTitle
   },
   data() {
     return {
-      moment
+      moment,
+      recommendQuestionsList: []
     }
   },
-
-  methods: {}
+  mounted() {
+    this.init()
+  },
+  methods: {
+    async init() {
+      const recommendQuestionsListRes = await this.$axios({
+        method: 'get',
+        url: '/api/questions',
+        params: {
+          page: 1,
+          per_page: 5,
+          popular: true
+        }
+      })
+      this.recommendQuestionsList = recommendQuestionsListRes.data
+    }
+  }
 }
 </script>
 

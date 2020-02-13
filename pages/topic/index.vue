@@ -5,10 +5,7 @@
         <answers :questionIdTitle="true" :reqData="reqData" />
       </el-col>
       <el-col :span="7">
-        <side
-          :topicsPopularList="topicsPopularList"
-          :recommendQuestionsList="recommendQuestionsList"
-        />
+        <side />
       </el-col>
     </el-row>
   </div>
@@ -37,30 +34,6 @@ export default {
   head() {
     return {
       title: '话题'
-    }
-  },
-  async asyncData(ctx) {
-    const topicsPopularRes = await ctx.$axios({
-      method: 'get',
-      url: '/api/topics',
-      params: {
-        page: 1,
-        per_page: 100,
-        popular: true
-      }
-    })
-    const recommendQuestionsRes = await ctx.$axios({
-      method: 'get',
-      url: '/api/questions',
-      params: {
-        page: 1,
-        per_page: 6,
-        popular: true
-      }
-    })
-    return {
-      topicsPopularList: topicsPopularRes.data,
-      recommendQuestionsList: recommendQuestionsRes.data
     }
   }
 }
