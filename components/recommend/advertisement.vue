@@ -1,6 +1,6 @@
 <template>
   <el-card :class="$style.card" :body-style="{ padding: '0px' }" shadow="hover">
-    <a :href="advertisementData.link" target="_blank">
+    <a v-if="advertisementData" :href="advertisementData.link" target="_blank">
       <img :class="$style.image" :src="advertisementData.pic" />
       <div :class="$style.main">
         <span :class="$style.title">{{ advertisementData.title }}</span>
@@ -22,7 +22,7 @@
 export default {
   data() {
     return {
-      advertisementData: []
+      advertisementData: null
     }
   },
   mounted() {

@@ -18,7 +18,7 @@
           </el-card>
         </el-col>
         <el-col :span="7">
-          <side :popularList="popularList" />
+          <side />
         </el-col>
       </el-row>
     </div>
