@@ -15,7 +15,21 @@
         <el-card shadow="hover">
           <el-tabs v-model="activeName">
             <el-tab-pane label="关注的话题" name="1">
-              <topics :topicsList="userData.followingTopics" />
+              <el-tag
+                :class="$style.tag"
+                v-for="(item, index) in userData.followingTopics"
+                :key="index"
+                effect="plain"
+              >
+                <nuxt-link
+                  :to="{
+                    name: 'topic-detail-id',
+                    params: { id: item._id }
+                  }"
+                >
+                  {{ item.name }}
+                </nuxt-link>
+              </el-tag>
             </el-tab-pane>
             <el-tab-pane label="收藏的期刊" name="2">
               <periodical-block
@@ -55,11 +69,9 @@
 <script>
 import moment from 'moment'
 import skeleton from '~/components/skeleton'
-import topics from '~/components/topics'
 import periodicalBlock from '~/components/periodical/block'
 export default {
   components: {
-    topics,
     periodicalBlock,
     skeleton
   },
@@ -98,6 +110,14 @@ export default {
   width: 1024px;
   margin: 0 auto;
   padding: 20px 0;
+  .tag {
+    margin-right: 20px;
+    margin-bottom: 10px;
+    a {
+      font-size: 12px;
+      color: #409eff;
+    }
+  }
   .periodical-block {
     padding-bottom: 20px;
     border-bottom: 1px solid #ebeef5;
