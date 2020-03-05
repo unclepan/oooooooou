@@ -15,8 +15,7 @@
         <el-card shadow="hover">
           <el-tabs v-model="activeName">
             <el-tab-pane label="关注的话题" name="1">
-              1234
-              <!-- <el-tag
+              <el-tag
                 :class="$style.tag"
                 v-for="(item, index) in userData.followingTopics"
                 :key="index"
@@ -30,7 +29,7 @@
                 >
                   {{ item.name }}
                 </nuxt-link>
-              </el-tag> -->
+              </el-tag>
             </el-tab-pane>
             <el-tab-pane label="收藏的期刊" name="2">
               <periodical-block
