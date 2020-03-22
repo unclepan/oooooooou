@@ -39,7 +39,9 @@ export default {
     side
   },
   data() {
-    return {}
+    return {
+      page: 2
+    }
   },
   async asyncData(ctx) {
     const periodicalListRes = await ctx.$axios({
@@ -63,8 +65,40 @@ export default {
       carouselList: carouselListRes.data
     }
   },
-  mounted() {},
-  methods: {},
+  beforeDestroy() {
+    window.onscroll = null
+  },
+  mounted() {
+    this.scroll()
+  },
+  methods: {
+    scroll() {
+      let isLoading = false
+      window.onscroll = async () => {
+        const bottomOfWindow =
+          document.documentElement.offsetHeight -
+            document.documentElement.scrollTop -
+            window.innerHeight <=
+          360
+        if (bottomOfWindow && isLoading === false) {
+          isLoading = true
+          const res = await this.$axios({
+            method: 'get',
+            url: '/api/periodical',
+            params: {
+              page: this.page,
+              per_page: 5
+            }
+          })
+          this.page = this.page + 1
+          if (res.data.length) {
+            isLoading = false
+            this.periodicalList = this.periodicalList.concat(res.data)
+          }
+        }
+      }
+    }
+  },
   head() {
     return {
       title: '首页'

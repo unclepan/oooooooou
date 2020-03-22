@@ -32,7 +32,8 @@ export default {
   },
   data() {
     return {
-      informationStatistics: {}
+      informationStatistics: {},
+      page: 2
     }
   },
   async asyncData(ctx) {
@@ -47,7 +48,11 @@ export default {
 
     const topicPeriodicalsRes = await ctx.$axios({
       method: 'get',
-      url: `/api/topics/${params.id}/periodicals`
+      url: `/api/topics/${params.id}/periodicals`,
+      params: {
+        page: 1,
+        per_page: 5
+      }
     })
 
     const topicQuestionsRes = await ctx.$axios({
@@ -67,6 +72,10 @@ export default {
   },
   mounted() {
     this.init()
+    this.scroll()
+  },
+  beforeDestroy() {
+    window.onscroll = null
   },
   methods: {
     async init() {
@@ -75,6 +84,35 @@ export default {
         url: `/api/topics/${this.$route.params.id}/information/statistics`
       })
       this.informationStatistics = informationStatisticsRes.data
+    },
+    scroll() {
+      let isLoading = false
+      window.onscroll = async () => {
+        // 距离底部200px时加载一次
+        const bottomOfWindow =
+          document.documentElement.offsetHeight -
+            document.documentElement.scrollTop -
+            window.innerHeight <=
+          360
+        if (bottomOfWindow && isLoading === false) {
+          isLoading = true
+          const res = await this.$axios({
+            method: 'get',
+            url: `/api/topics/${this.$route.params.id}/periodicals`,
+            params: {
+              page: this.page,
+              per_page: 5
+            }
+          })
+          this.page = this.page + 1
+          if (res.data.length) {
+            isLoading = false
+            this.topicPeriodicalsDataList = this.topicPeriodicalsDataList.concat(
+              res.data
+            )
+          }
+        }
+      }
     }
   }
 }
