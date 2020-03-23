@@ -11,7 +11,7 @@ class Con {
     this.ua = navigator.userAgent
     this.protocol =
       window.location.protocol === 'https:' ? 'https://' : 'http://'
-    this.host = 'https://www.antcp.com/api/bp' // 上报地址，根据项目情况配置
+    this.host = 'http://121.42.13.92:3001/api/bp' // 上报地址，根据项目情况配置
     this.baseUrl = `${this.protocol}${this.host}`
     this.cookieName = cookieName // cookie名称，前后端需要协商定义
     this.year = 365
