@@ -2,14 +2,14 @@ import { Message } from 'element-ui'
 
 export default function({ $axios, redirect }) {
   // 数据访问前缀
-  $axios.defaults.baseURL = 'http://121.42.13.92:3001'
+  $axios.defaults.baseURL = 'http://127.0.0.1:3001'
 
   // request interceptor
   $axios.interceptors.request.use(
     (config) => {
       // 只在客户端执行
       if (process.client) {
-        config.headers.Authorization = localStorage.getItem('userToken')
+        // config.headers.Authorization = localStorage.getItem('userToken')
       }
       // do something before request is sent
       return config

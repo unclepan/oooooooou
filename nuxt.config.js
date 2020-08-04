@@ -51,10 +51,11 @@ module.exports = {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    proxy: true
+    proxy: true,
+    credentials: true
   },
   proxy: {
-    '/api/': 'http://121.42.13.92:3001'
+    '/api/': 'http://127.0.0.1:3001'
   },
   /*
    ** Build configuration

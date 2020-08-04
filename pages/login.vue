@@ -72,6 +72,8 @@
 <script>
 import CryptoJS from 'crypto-js'
 import sidentify from '~/components/sidentify'
+const Cookie = process.client ? require('js-cookie') : undefined
+
 export default {
   components: {
     sidentify
@@ -161,8 +163,12 @@ export default {
               password: CryptoJS.MD5(this.ruleForm.password).toString()
             }
           }).then((res) => {
-            localStorage.setItem('userToken', res.data.token)
-            this.$router.push({ path: '/' })
+            const auth = {
+              accessToken: res.data.token
+            }
+            this.$store.commit('setAuth', auth)
+            Cookie.set('auth', auth.accessToken)
+            this.$router.push('/')
           })
         }
       })

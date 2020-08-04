@@ -55,6 +55,7 @@
 <script>
 import search from './search'
 import inputFeedback from './input-feedback'
+const Cookie = process.client ? require('js-cookie') : undefined
 export default {
   components: {
     search,
@@ -83,7 +84,8 @@ export default {
         method: 'post',
         url: '/api/users/logout'
       }).then((res) => {
-        localStorage.removeItem('userToken')
+        Cookie.remove('auth')
+        this.$store.commit('setAuth', null)
         this.$router.push({ path: '/login' })
       })
     },
