@@ -44,37 +44,17 @@ export default {
   components: {
     stripTitle
   },
-  data() {
-    return {
-      moment,
-      popularList: []
+  props: {
+    popularList: {
+      type: Array,
+      default: () => {
+        return []
+      }
     }
   },
-  asyncData() {
-    // console.log(window) // 服务端报错
-  },
-  fetch() {
-    // console.log(window) // 服务端报错
-  },
-  created() {
-    // console.log(window) // undefined
-  },
-  mounted() {
-    // console.log(window) // Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: Window, …}
-    this.init()
-  },
-  methods: {
-    async init() {
-      const popularListRes = await this.$axios({
-        method: 'get',
-        url: '/api/periodical',
-        params: {
-          page: 1,
-          per_page: 5,
-          popular: true
-        }
-      })
-      this.popularList = popularListRes.data
+  data() {
+    return {
+      moment
     }
   }
 }

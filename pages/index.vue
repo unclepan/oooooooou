@@ -6,7 +6,7 @@
         <el-col :span="17">
           <el-card shadow="hover">
             <h3 :class="$style['topics-title']">相关话题</h3>
-            <topics />
+            <topics :topicsList="topicsList" />
           </el-card>
           <el-card
             :class="$style['card-block']"
@@ -16,9 +16,15 @@
           >
             <block :periodicalData="item" />
           </el-card>
+          <div :class="$style.add" @click.prevent="add()">
+            加载更多
+          </div>
         </el-col>
         <el-col :span="7">
-          <side />
+          <side
+            :popularList="popularList"
+            :advertisementData="advertisementData"
+          />
         </el-col>
       </el-row>
     </div>
@@ -40,18 +46,11 @@ export default {
   },
   data() {
     return {
-      page: 2
+      page: 2,
+      isLoading: false
     }
   },
   async asyncData(ctx) {
-    const periodicalListRes = await ctx.$axios({
-      method: 'get',
-      url: '/api/periodical',
-      params: {
-        page: 1,
-        per_page: 5
-      }
-    })
     const carouselListRes = await ctx.$axios({
       method: 'get',
       url: '/api/carousel',
@@ -60,42 +59,71 @@ export default {
         per_page: 5
       }
     })
+    const periodicalListRes = await ctx.$axios({
+      method: 'get',
+      url: '/api/periodical',
+      params: {
+        page: 1,
+        per_page: 5
+      }
+    })
+    const topicsListRes = await ctx.$axios({
+      method: 'get',
+      url: '/api/topics',
+      params: {
+        page: 1,
+        per_page: 18,
+        popular: true
+      }
+    })
+    const popularListRes = await ctx.$axios({
+      method: 'get',
+      url: '/api/periodical',
+      params: {
+        page: 1,
+        per_page: 5,
+        popular: true
+      }
+    })
+    const advertisementListRes = await ctx.$axios({
+      method: 'get',
+      url: '/api/advertisement',
+      params: {
+        page: 1,
+        per_page: 1
+      }
+    })
     return {
       periodicalList: periodicalListRes.data,
-      carouselList: carouselListRes.data
+      carouselList: carouselListRes.data,
+      topicsList: topicsListRes.data,
+      popularList: popularListRes.data,
+      advertisementData: advertisementListRes.data[0]
     }
   },
-  beforeDestroy() {
-    window.onscroll = null
-  },
-  mounted() {
-    this.scroll()
-  },
   methods: {
-    scroll() {
-      let isLoading = false
-      window.onscroll = async () => {
-        const bottomOfWindow =
-          document.documentElement.offsetHeight -
-            document.documentElement.scrollTop -
-            window.innerHeight <=
-          360
-        if (bottomOfWindow && isLoading === false) {
-          isLoading = true
-          const res = await this.$axios({
-            method: 'get',
-            url: '/api/periodical',
-            params: {
-              page: this.page,
-              per_page: 5
-            }
-          })
-          this.page = this.page + 1
-          if (res.data.length) {
-            isLoading = false
-            this.periodicalList = this.periodicalList.concat(res.data)
+    async add() {
+      if (this.isLoading === false) {
+        this.isLoading = true
+        const res = await this.$axios({
+          method: 'get',
+          url: '/api/periodical',
+          params: {
+            page: this.page,
+            per_page: 5
           }
+        })
+        this.page = this.page + 1
+        if (res.data.length) {
+          if (res.data.length === 5) {
+            this.isLoading = false
+          }
+          this.periodicalList = this.periodicalList.concat(res.data)
+        } else {
+          this.$message('没有啦，明天再来！')
         }
+      } else {
+        this.$message('没有啦，明天再来！')
       }
     }
   },
@@ -118,6 +146,16 @@ export default {
     }
     .card-block {
       margin-top: 20px;
+    }
+    .add {
+      margin: 20px auto 0;
+      padding: 10px 20px;
+      width: 30%;
+      font-size: 13px;
+      color: #3c3b4a;
+      border: 1px solid #3c3b4a;
+      cursor: pointer;
+      text-align: center;
     }
   }
 }

@@ -20,26 +20,12 @@
 
 <script>
 export default {
-  data() {
-    return {
-      topicsList: []
-    }
-  },
-  mounted() {
-    this.init()
-  },
-  methods: {
-    async init() {
-      const topicsListRes = await this.$axios({
-        method: 'get',
-        url: '/api/topics',
-        params: {
-          page: 1,
-          per_page: 100,
-          popular: true
-        }
-      })
-      this.topicsList = topicsListRes.data
+  props: {
+    topicsList: {
+      type: Array,
+      default: () => {
+        return []
+      }
     }
   }
 }

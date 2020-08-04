@@ -2,44 +2,31 @@
   <el-card :class="$style.card" :body-style="{ padding: '0px' }" shadow="hover">
     <a v-if="advertisementData" :href="advertisementData.link" target="_blank">
       <img :class="$style.image" :src="advertisementData.pic" />
-      <div :class="$style.main">
-        <span :class="$style.title">{{ advertisementData.title }}</span>
-        <div :class="$style.bottom">
-          <span :class="$style.description">
-            {{ advertisementData.description }}
-          </span>
-          <el-link type="primary">
-            广告
-            <i class="el-icon-view el-icon--right"></i>
-          </el-link>
-        </div>
-      </div>
     </a>
+
+    <div :class="$style.main">
+      <span :class="$style.title">{{ advertisementData.title }}</span>
+      <div :class="$style.bottom">
+        <span :class="$style.description">
+          {{ advertisementData.description }}
+        </span>
+        <el-link :href="advertisementData.link" target="_blank" type="primary">
+          广告
+          <i class="el-icon-view el-icon--right"></i>
+        </el-link>
+      </div>
+    </div>
   </el-card>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      advertisementData: null
-    }
-  },
-  mounted() {
-    // console.log(window) // Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: Window, …}
-    this.init()
-  },
-  methods: {
-    async init() {
-      const advertisementListRes = await this.$axios({
-        method: 'get',
-        url: '/api/advertisement',
-        params: {
-          page: 1,
-          per_page: 1
-        }
-      })
-      this.advertisementData = advertisementListRes.data[0]
+  props: {
+    advertisementData: {
+      type: Object,
+      default: () => {
+        return {}
+      }
     }
   }
 }
