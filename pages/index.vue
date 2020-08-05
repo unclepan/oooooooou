@@ -120,10 +120,10 @@ export default {
           }
           this.periodicalList = this.periodicalList.concat(res.data)
         } else {
-          this.$message('没有啦，明天再来！')
+          this.$message('没有啦，明天上新，欢迎再来！')
         }
       } else {
-        this.$message('没有啦，明天再来！')
+        this.$message('没有啦，明天上新，欢迎再来！')
       }
     }
   },
@@ -149,13 +149,17 @@ export default {
     }
     .add {
       margin: 20px auto 0;
-      padding: 10px 20px;
-      width: 30%;
-      font-size: 13px;
-      color: #3c3b4a;
-      border: 1px solid #3c3b4a;
+      padding: 14px;
+      width: 40%;
+      font-size: 14px;
+      color: #666666;
+      border: 1px solid #666666;
       cursor: pointer;
       text-align: center;
+      &:hover {
+        color: #409eff;
+        border: 1px solid #409eff;
+      }
     }
   }
 }
