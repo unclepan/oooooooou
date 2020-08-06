@@ -11,7 +11,6 @@
 <script>
 import moment from 'moment'
 export default {
-  components: {},
   props: {
     createdAt: {
       type: String,
@@ -25,9 +24,7 @@ export default {
       time: moment(new Date(this.createdAt)).format('DD'),
       year: moment(new Date(this.createdAt)).format('YYYY年MM月')
     }
-  },
-  mounted() {},
-  methods: {}
+  }
 }
 </script>
 

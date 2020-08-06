@@ -2,7 +2,7 @@
   <div :class="$style.topic">
     <el-row :gutter="20">
       <el-col :span="17">
-        <answers :questionIdTitle="true" :reqData="reqData" />
+        <answers :answersRecommendListRes="answersRecommendListRes" />
       </el-col>
       <el-col :span="7">
         <side />
@@ -19,16 +19,17 @@ export default {
     answers,
     side
   },
-  data() {
-    return {
-      reqData: {
-        method: 'get',
-        url: '/api/answers/popular',
-        params: {
-          page: 1,
-          per_page: 10
-        }
+  async asyncData(ctx) {
+    const res = await ctx.$axios({
+      method: 'get',
+      url: '/api/answers/popular',
+      params: {
+        page: 1,
+        per_page: 10
       }
+    })
+    return {
+      answersRecommendListRes: res.data
     }
   },
   head() {

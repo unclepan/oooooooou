@@ -3,7 +3,7 @@
     <input-comment ref="inputComment" @determine="determineInputComment" />
     <img :class="$style['head-image']" :src="periodicalData.pic" />
     <div :class="$style.main">
-      <el-card shadow="hover">
+      <el-card shadow="never">
         <el-row :gutter="30">
           <el-col :span="6">
             <calendar

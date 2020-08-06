@@ -1,7 +1,7 @@
 <template>
   <div :class="$style['recommend-answers']">
     <el-card shadow="hover">
-      <nuxt-link v-if="questionIdTitle" :class="$style.title" to="/">
+      <nuxt-link :class="$style.title" to="/">
         {{ blockData.questionId.title }}
       </nuxt-link>
       <div :class="$style.answerer" v-if="blockData.answerer">
@@ -111,12 +111,6 @@ export default {
       type: Object,
       default: () => {
         return {}
-      }
-    },
-    questionIdTitle: {
-      type: Boolean,
-      default: () => {
-        return false
       }
     }
   },

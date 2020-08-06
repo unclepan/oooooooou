@@ -159,6 +159,7 @@ export default {
       &:hover {
         color: #409eff;
         border: 1px solid #409eff;
+        background: #ffffff;
       }
     }
   }

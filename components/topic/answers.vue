@@ -1,7 +1,6 @@
 <template>
   <div>
     <input-comment ref="inputComment" @determine="determineInputComment" />
-    <skeleton v-if="!answersRecommendList" />
     <block
       @addAnswerComment="handlerAddAnswerComment"
       @discussMore="handlerDiscussMore"
@@ -13,48 +12,33 @@
       v-for="(item, index) in answersRecommendList"
       :key="index"
       :blockData="item"
-      :questionIdTitle="questionIdTitle"
     />
   </div>
 </template>
 <script>
+import _ from 'lodash'
 import block from './block'
-import skeleton from '~/components/skeleton'
 import inputComment from '~/components/comments/input-comment'
 export default {
   components: {
     block,
-    inputComment,
-    skeleton
+    inputComment
   },
   props: {
-    reqData: {
-      type: Object,
+    answersRecommendListRes: {
+      type: Array,
       default: () => {
-        return {}
-      }
-    },
-    questionIdTitle: {
-      type: Boolean,
-      default: () => {
-        return false
+        return []
       }
     }
   },
   data() {
     return {
-      answersRecommendList: null,
-      addAnswerComment: null
+      addAnswerComment: null,
+      answersRecommendList: _.cloneDeep(this.answersRecommendListRes)
     }
   },
-  mounted() {
-    this.init()
-  },
   methods: {
-    async init() {
-      const answersRecommendListRes = await this.$axios(this.reqData)
-      this.answersRecommendList = answersRecommendListRes.data
-    },
     async handlerLikingAnswer(val) {
       if (val.isLike) {
         // 取消赞答案
