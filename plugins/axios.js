@@ -25,5 +25,12 @@ export default function({ $axios, redirect }) {
 
   $axios.onError((error) => {
     Message.error(error.response.data.message)
+    setTimeout(() => {
+      if (error.response.status === 401) {
+        redirect('/login')
+      } else {
+        redirect('/500')
+      }
+    }, 1000)
   })
 }
