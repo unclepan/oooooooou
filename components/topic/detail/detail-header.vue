@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 export default {
   components: {},
   props: {
@@ -47,27 +48,36 @@ export default {
         return {}
       }
     },
-    informationStatistics: {
+    informationStatisticsData: {
       type: Object,
       default: () => {
         return {}
       }
     }
   },
+  data() {
+    return {
+      addAnswerComment: null,
+      informationStatistics: _.cloneDeep(this.informationStatisticsData)
+    }
+  },
   methods: {
     async handlerFollowingTopic(val) {
+      const { followingTopic } = this.informationStatistics
       if (val) {
         await this.$axios({
           method: 'delete',
           url: `/api/users/followingTopics/${this.$route.params.id}`
         })
+        this.informationStatistics.followingTopicNum -= 1
       } else {
         await this.$axios({
           method: 'put',
           url: `/api/users/followingTopics/${this.$route.params.id}`
         })
+        this.informationStatistics.followingTopicNum += 1
       }
-      this.$emit('follow')
+      this.informationStatistics.followingTopic = !followingTopic
     }
   }
 }

@@ -22,7 +22,6 @@
 </template>
 <script>
 export default {
-  components: {},
   props: {
     topicDataInfo: {
       type: Object,
@@ -30,11 +29,7 @@ export default {
         return {}
       }
     }
-  },
-  data() {
-    return {}
-  },
-  methods: {}
+  }
 }
 </script>
 <style lang="scss" module>

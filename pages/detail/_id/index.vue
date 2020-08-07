@@ -204,7 +204,7 @@ export default {
   },
   head() {
     return {
-      title: '详情'
+      title: this.periodicalData.title || '详情'
     }
   }
 }

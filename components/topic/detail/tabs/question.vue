@@ -24,7 +24,6 @@
 </template>
 <script>
 export default {
-  components: {},
   props: {
     questionData: {
       type: Object,
@@ -32,9 +31,6 @@ export default {
         return {}
       }
     }
-  },
-  data() {
-    return {}
   },
   methods: {
     writeAnswer(id) {

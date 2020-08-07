@@ -1,6 +1,6 @@
 <template>
   <el-card shadow="hover">
-    <el-tabs v-model="activeName" @tab-click="handleClick">
+    <el-tabs v-model="activeName">
       <el-tab-pane label="简介" name="first">
         <info :topicDataInfo="topicDataInfo" />
       </el-tab-pane>
@@ -55,11 +55,6 @@ export default {
   data() {
     return {
       activeName: 'second'
-    }
-  },
-  methods: {
-    handleClick(tab, event) {
-      // console.log(tab, event)
     }
   }
 }
