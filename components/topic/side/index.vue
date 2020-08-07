@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-card shadow="hover">
+    <el-card shadow="never">
       <topics :topicsList="topicsList" />
     </el-card>
     <recommend-periodical :popularList="popularList" />

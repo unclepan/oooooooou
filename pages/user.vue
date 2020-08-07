@@ -2,7 +2,7 @@
   <div :class="$style.user">
     <el-row :gutter="20" v-if="userData">
       <el-col :span="7">
-        <el-card shadow="hover">
+        <el-card shadow="never">
           <el-avatar :src="userData.avatar_url" :size="120" shape="square">
             <img src="~/assets/images/bitmap.png" alt="bitmap" />
           </el-avatar>
@@ -12,7 +12,7 @@
         </el-card>
       </el-col>
       <el-col :span="17">
-        <el-card shadow="hover">
+        <el-card shadow="never">
           <el-tabs v-model="activeName">
             <el-tab-pane label="关注的话题" name="1">
               <el-tag

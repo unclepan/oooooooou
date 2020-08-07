@@ -23,7 +23,14 @@
                   :key="index"
                   size="mini"
                 >
-                  {{ item.name }}
+                  <nuxt-link
+                    :to="{
+                      name: 'topic-detail-id',
+                      params: { id: item._id }
+                    }"
+                  >
+                    {{ item.name }}
+                  </nuxt-link>
                 </el-tag>
               </div>
             </div>

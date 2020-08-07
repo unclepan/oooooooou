@@ -1,6 +1,6 @@
 <template>
   <div :class="$style['detail-header']">
-    <el-card shadow="hover">
+    <el-card shadow="never">
       <el-row :class="$style.main" :gutter="20">
         <el-col :span="5">
           <img :class="$style.pic" :src="topicDataInfo.pic" />

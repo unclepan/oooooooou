@@ -1,6 +1,6 @@
 <template>
   <div :class="$style['recommend-answers']">
-    <el-card shadow="hover">
+    <el-card shadow="never">
       <nuxt-link :class="$style.title" to="/">
         {{ blockData.questionId.title }}
       </nuxt-link>

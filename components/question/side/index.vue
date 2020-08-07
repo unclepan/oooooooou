@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-card shadow="hover">
+    <el-card shadow="never">
       <el-row>
         <el-col :span="12">
           <div :class="$style.info">

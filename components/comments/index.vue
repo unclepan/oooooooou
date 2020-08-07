@@ -1,5 +1,5 @@
 <template>
-  <el-card :class="$style.card" shadow="hover">
+  <el-card :class="$style.card" shadow="never">
     <item
       :commentItem="commentItem"
       @reply="reply"

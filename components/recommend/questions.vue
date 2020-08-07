@@ -3,7 +3,7 @@
     <strip-title>
       <span slot="default">问题推荐</span>
     </strip-title>
-    <el-card shadow="hover">
+    <el-card shadow="never">
       <div
         :class="$style.item"
         v-for="(item, index) in recommendQuestionsList"

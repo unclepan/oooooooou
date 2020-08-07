@@ -1,5 +1,5 @@
 <template>
-  <el-card shadow="hover">
+  <el-card shadow="never">
     <el-tabs v-model="activeName">
       <el-tab-pane label="简介" name="first">
         <info :topicDataInfo="topicDataInfo" />

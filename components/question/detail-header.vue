@@ -1,7 +1,7 @@
 <template>
   <div :class="$style['question-detail']">
     <input-answers ref="inputAnswers" @determine="determineInputAnswers" />
-    <el-card shadow="hover">
+    <el-card shadow="never">
       <topics :topicsList="questionDataInfo.topics" />
       <h3 :class="$style.title">
         {{ questionDataInfo.title }}

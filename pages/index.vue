@@ -4,7 +4,7 @@
     <div :class="$style.container">
       <el-row :gutter="20">
         <el-col :span="17">
-          <el-card shadow="hover">
+          <el-card shadow="never">
             <h3 :class="$style['topics-title']">相关话题</h3>
             <topics :topicsList="topicsList" />
           </el-card>
@@ -12,7 +12,7 @@
             :class="$style['card-block']"
             v-for="item in periodicalList"
             :key="item._id"
-            shadow="hover"
+            shadow="never"
           >
             <block :periodicalData="item" />
           </el-card>

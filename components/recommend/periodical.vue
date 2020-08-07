@@ -3,7 +3,7 @@
     <strip-title>
       <span slot="default">热门期刊</span>
     </strip-title>
-    <el-card shadow="hover">
+    <el-card shadow="never">
       <div
         :class="$style['item']"
         v-for="(itemData, index) in popularList"
