@@ -10,6 +10,8 @@
           :topicDataInfo="topicDataInfo"
           :topicPeriodicalsDataList="topicPeriodicalsDataList"
           :topicQuestionsDataList="topicQuestionsDataList"
+          @perimore="perimore"
+          @quesmore="quesmore"
         />
       </el-col>
       <el-col :span="7">
@@ -31,7 +33,10 @@ export default {
   },
   data() {
     return {
-      page: 2
+      perimorePage: 2,
+      quesmorePage: 2,
+      perimoreisLoading: false,
+      quesmoreLoading: false
     }
   },
   async asyncData(ctx) {
@@ -53,7 +58,11 @@ export default {
     })
     const topicQuestionsRes = await ctx.$axios({
       method: 'get',
-      url: `/api/topics/${params.id}/questions`
+      url: `/api/topics/${params.id}/questions`,
+      params: {
+        page: 1,
+        per_page: 5
+      }
     })
     const informationStatisticsRes = await ctx.$axios({
       method: 'get',
@@ -66,48 +75,66 @@ export default {
       informationStatisticsData: informationStatisticsRes.data
     }
   },
+  methods: {
+    async perimore() {
+      const { params } = this.$route
+      if (this.perimoreisLoading === false) {
+        this.perimoreisLoading = true
+        const res = await this.$axios({
+          method: 'get',
+          url: `/api/topics/${params.id}/periodicals`,
+          params: {
+            page: this.perimorePage,
+            per_page: 5
+          }
+        })
+        this.perimorePage = this.perimorePage + 1
+        if (res.data.length) {
+          if (res.data.length === 5) {
+            this.perimoreisLoading = false
+          }
+          this.topicPeriodicalsDataList = this.topicPeriodicalsDataList.concat(
+            res.data
+          )
+        } else {
+          this.$message('我是有底线的！')
+        }
+      } else {
+        this.$message('我是有底线的！')
+      }
+    },
+    async quesmore() {
+      const { params } = this.$route
+      if (this.quesmoreLoading === false) {
+        this.quesmoreLoading = true
+        const res = await this.$axios({
+          method: 'get',
+          url: `/api/topics/${params.id}/questions`,
+          params: {
+            page: this.quesmorePage,
+            per_page: 5
+          }
+        })
+        this.quesmorePage = this.quesmorePage + 1
+        if (res.data.length) {
+          if (res.data.length === 5) {
+            this.quesmoreLoading = false
+          }
+          this.topicQuestionsDataList = this.topicQuestionsDataList.concat(
+            res.data
+          )
+        } else {
+          this.$message('我是有底线的！')
+        }
+      } else {
+        this.$message('我是有底线的！')
+      }
+    }
+  },
   head() {
     return {
       title: this.topicDataInfo.name || '话题详情'
     }
-  },
-  methods: {
-    // async init() {
-    //   const informationStatisticsRes = await this.$axios({
-    //     method: 'get',
-    //     url: `/api/topics/${this.$route.params.id}/information/statistics`
-    //   })
-    //   this.informationStatistics = informationStatisticsRes.data
-    // },
-    // scroll() {
-    //   let isLoading = false
-    //   window.onscroll = async () => {
-    //     // 距离底部200px时加载一次
-    //     const bottomOfWindow =
-    //       document.documentElement.offsetHeight -
-    //         document.documentElement.scrollTop -
-    //         window.innerHeight <=
-    //       360
-    //     if (bottomOfWindow && isLoading === false) {
-    //       isLoading = true
-    //       const res = await this.$axios({
-    //         method: 'get',
-    //         url: `/api/topics/${this.$route.params.id}/periodicals`,
-    //         params: {
-    //           page: this.page,
-    //           per_page: 5
-    //         }
-    //       })
-    //       this.page = this.page + 1
-    //       if (res.data.length) {
-    //         isLoading = false
-    //         this.topicPeriodicalsDataList = this.topicPeriodicalsDataList.concat(
-    //           res.data
-    //         )
-    //       }
-    //     }
-    //   }
-    // }
   }
 }
 </script>

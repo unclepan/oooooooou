@@ -1,23 +1,25 @@
 <template>
-  <div :class="$style.question">
-    <h3 :class="$style.title">
-      {{ questionData.title }}
-    </h3>
-    <p :class="$style.description">{{ questionData.description }}</p>
-    <div :class="$style.handler">
-      <el-button
-        @click="writeAnswer(questionData.id)"
-        size="small"
-        type="primary"
-        plain
-      >
-        问题详情
-      </el-button>
-
-      <div :class="$style['test-button']">
-        <el-button type="text" icon="el-icon-document">
-          {{ questionData.answerNum }}个回答
+  <div>
+    <div :class="$style.question" v-for="item in questionList" :key="item.id">
+      <h3 :class="$style.title">
+        {{ item.title }}
+      </h3>
+      <p :class="$style.description">{{ item.description }}</p>
+      <div :class="$style.handler">
+        <el-button
+          @click="writeAnswer(item.id)"
+          size="small"
+          type="primary"
+          plain
+        >
+          问题详情
         </el-button>
+
+        <div :class="$style['test-button']">
+          <el-button type="text" icon="el-icon-document">
+            {{ item.answerNum }}个回答
+          </el-button>
+        </div>
       </div>
     </div>
   </div>
@@ -25,10 +27,10 @@
 <script>
 export default {
   props: {
-    questionData: {
-      type: Object,
+    questionList: {
+      type: Array,
       default: () => {
-        return {}
+        return []
       }
     }
   },

@@ -16,7 +16,7 @@
           >
             <block :periodicalData="item" />
           </el-card>
-          <div :class="$style.add" @click.prevent="add()">
+          <div :class="$style.more" @click="more()">
             加载更多
           </div>
         </el-col>
@@ -102,7 +102,7 @@ export default {
     }
   },
   methods: {
-    async add() {
+    async more() {
       if (this.isLoading === false) {
         this.isLoading = true
         const res = await this.$axios({
@@ -147,9 +147,9 @@ export default {
     .card-block {
       margin-top: 20px;
     }
-    .add {
+    .more {
       margin: 20px auto 0;
-      padding: 14px;
+      padding: 10px;
       width: 40%;
       font-size: 14px;
       color: #666666;
