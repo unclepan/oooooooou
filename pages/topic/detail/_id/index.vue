@@ -15,7 +15,11 @@
         />
       </el-col>
       <el-col :span="7">
-        <side />
+        <side
+          :popularList="popularList"
+          :topicsList="topicsList"
+          :advertisementData="advertisementData"
+        />
       </el-col>
     </el-row>
   </div>
@@ -61,18 +65,47 @@ export default {
       url: `/api/topics/${params.id}/questions`,
       params: {
         page: 1,
-        per_page: 5
+        per_page: 10
       }
     })
     const informationStatisticsRes = await ctx.$axios({
       method: 'get',
       url: `/api/topics/${params.id}/information/statistics`
     })
+    const popularListRes = await ctx.$axios({
+      method: 'get',
+      url: '/api/periodical',
+      params: {
+        page: 1,
+        per_page: 5,
+        popular: true
+      }
+    })
+    const topicsListRes = await ctx.$axios({
+      method: 'get',
+      url: '/api/topics',
+      params: {
+        page: 1,
+        per_page: 18,
+        popular: true
+      }
+    })
+    const advertisementListRes = await ctx.$axios({
+      method: 'get',
+      url: '/api/advertisement',
+      params: {
+        page: 1,
+        per_page: 1
+      }
+    })
     return {
       topicDataInfo: topicDataRes.data,
       topicPeriodicalsDataList: topicPeriodicalsRes.data,
       topicQuestionsDataList: topicQuestionsRes.data,
-      informationStatisticsData: informationStatisticsRes.data
+      informationStatisticsData: informationStatisticsRes.data,
+      popularList: popularListRes.data,
+      topicsList: topicsListRes.data,
+      advertisementData: advertisementListRes.data[0]
     }
   },
   methods: {

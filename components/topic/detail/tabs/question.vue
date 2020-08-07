@@ -1,6 +1,10 @@
 <template>
   <div>
-    <div :class="$style.question" v-for="item in questionList" :key="item.id">
+    <div
+      :class="$style.question"
+      v-for="(item, index) in questionList"
+      :key="index"
+    >
       <h3 :class="$style.title">
         {{ item.title }}
       </h3>

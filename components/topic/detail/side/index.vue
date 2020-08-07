@@ -1,10 +1,10 @@
 <template>
   <div>
     <el-card shadow="hover">
-      <topics />
+      <topics :topicsList="topicsList" />
     </el-card>
-    <recommend-periodical />
-    <recommend-advertisement />
+    <recommend-periodical :popularList="popularList" />
+    <recommend-advertisement :advertisementData="advertisementData" />
   </div>
 </template>
 
@@ -18,10 +18,25 @@ export default {
     recommendAdvertisement,
     recommendPeriodical
   },
-  data() {
-    return {}
-  },
-
-  methods: {}
+  props: {
+    topicsList: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    },
+    popularList: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    },
+    advertisementData: {
+      type: Object,
+      default: () => {
+        return {}
+      }
+    }
+  }
 }
 </script>
