@@ -1,19 +1,19 @@
 <template>
   <div>
     <el-card shadow="hover">
-      <topics />
+      <topics :topicsList="topicsList" />
     </el-card>
-    <recommend-periodical />
-    <recommend-questions />
-    <recommend-advertisement />
+    <recommend-periodical :popularList="popularList" />
+    <recommend-questions :recommendQuestionsList="recommendQuestionsList" />
+    <recommend-advertisement :advertisementData="advertisementData" />
   </div>
 </template>
 
 <script>
+import topics from '~/components/topics'
 import recommendAdvertisement from '~/components/recommend/advertisement'
 import recommendQuestions from '~/components/recommend/questions'
 import recommendPeriodical from '~/components/recommend/periodical'
-import topics from '~/components/topics'
 export default {
   components: {
     topics,
@@ -21,10 +21,31 @@ export default {
     recommendQuestions,
     recommendPeriodical
   },
-  data() {
-    return {}
-  },
-
-  methods: {}
+  props: {
+    topicsList: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    },
+    recommendQuestionsList: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    },
+    popularList: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    },
+    advertisementData: {
+      type: Object,
+      default: () => {
+        return {}
+      }
+    }
+  }
 }
 </script>

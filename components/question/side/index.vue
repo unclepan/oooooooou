@@ -42,12 +42,7 @@ export default {
         return {}
       }
     }
-  },
-  data() {
-    return {}
-  },
-
-  methods: {}
+  }
 }
 </script>
 

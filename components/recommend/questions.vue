@@ -32,27 +32,17 @@ export default {
   components: {
     stripTitle
   },
-  data() {
-    return {
-      moment,
-      recommendQuestionsList: []
+  props: {
+    recommendQuestionsList: {
+      type: Array,
+      default: () => {
+        return []
+      }
     }
   },
-  mounted() {
-    this.init()
-  },
-  methods: {
-    async init() {
-      const recommendQuestionsListRes = await this.$axios({
-        method: 'get',
-        url: '/api/questions',
-        params: {
-          page: 1,
-          per_page: 5,
-          popular: true
-        }
-      })
-      this.recommendQuestionsList = recommendQuestionsListRes.data
+  data() {
+    return {
+      moment
     }
   }
 }

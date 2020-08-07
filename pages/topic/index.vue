@@ -5,7 +5,12 @@
         <answers :answersRecommendListRes="answersRecommendListRes" />
       </el-col>
       <el-col :span="7">
-        <side />
+        <side
+          :popularList="popularList"
+          :topicsList="topicsList"
+          :recommendQuestionsList="recommendQuestionsList"
+          :advertisementData="advertisementData"
+        />
       </el-col>
     </el-row>
   </div>
@@ -13,7 +18,6 @@
 <script>
 import answers from '~/components/topic/answers'
 import side from '~/components/topic/side/index'
-
 export default {
   components: {
     answers,
@@ -28,8 +32,47 @@ export default {
         per_page: 10
       }
     })
+    const topicsListRes = await ctx.$axios({
+      method: 'get',
+      url: '/api/topics',
+      params: {
+        page: 1,
+        per_page: 18,
+        popular: true
+      }
+    })
+    const popularListRes = await ctx.$axios({
+      method: 'get',
+      url: '/api/periodical',
+      params: {
+        page: 1,
+        per_page: 5,
+        popular: true
+      }
+    })
+    const recommendQuestionsListRes = await ctx.$axios({
+      method: 'get',
+      url: '/api/questions',
+      params: {
+        page: 1,
+        per_page: 5,
+        popular: true
+      }
+    })
+    const advertisementListRes = await ctx.$axios({
+      method: 'get',
+      url: '/api/advertisement',
+      params: {
+        page: 1,
+        per_page: 1
+      }
+    })
     return {
-      answersRecommendListRes: res.data
+      answersRecommendListRes: res.data,
+      topicsList: topicsListRes.data,
+      popularList: popularListRes.data,
+      recommendQuestionsList: recommendQuestionsListRes.data,
+      advertisementData: advertisementListRes.data[0]
     }
   },
   head() {
