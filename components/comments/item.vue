@@ -8,17 +8,14 @@
         )
       }"
     >
-      <el-col :span="3">
-        <el-avatar
-          src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
-        >
+      <el-col :span="2">
+        <el-avatar :src="commentItem.commentator.avatar_url">
+          {{ commentItem.commentator.name[0] }}
         </el-avatar>
       </el-col>
-      <el-col :span="21" :class="$style['com-main']">
+      <el-col :span="22" :class="$style['com-main']">
         <div :class="$style.participant">
-          <h4>
-            {{ commentItem.commentator.name }}
-          </h4>
+          <h4>{{ commentItem.commentator.name }}</h4>
           <template v-if="commentItem.replyTo">
             <span :class="$style.r">回复</span>
             <h4>
@@ -45,7 +42,7 @@
           >
           </el-button>
           <el-button
-            v-if="!commentItem.replyTo"
+            v-if="!commentItem.replyTo && commentItem.more"
             @click="handlerDiscussMore()"
             :icon="
               commentItem.replys && commentItem.replys.length

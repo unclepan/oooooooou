@@ -120,25 +120,42 @@ export default {
         })
       }
     },
+    // 查看评论或者收起评论
     async handlerShowAnswerComments(val) {
-      const answerCommentsListRes = await this.$axios({
-        method: 'get',
-        url: `/api/questions/${val.questionId._id}/answers/${val.id}/comments`
-      })
-      this.answersRecommendList = this.answersRecommendList.map((item) => {
-        if (item.id === val.id) {
-          return { ...item, commentsListData: answerCommentsListRes.data }
-        }
-        return { ...item, commentsListData: [] }
-      })
+      if (val.showComments) {
+        this.answersRecommendList = this.answersRecommendList.map((item) => {
+          return { ...item, showComments: false }
+        })
+      } else {
+        const answerCommentsListRes = await this.$axios({
+          method: 'get',
+          url: `/api/questions/${val.questionId._id}/answers/${val.id}/comments`
+        })
+        const commentsListData = answerCommentsListRes.data.map((item) => {
+          return { ...item, more: true }
+        })
+        this.answersRecommendList = this.answersRecommendList.map((item) => {
+          if (item.id === val.id) {
+            return {
+              ...item,
+              commentsListData,
+              showComments: true
+            }
+          }
+          return { ...item, commentsListData: [] }
+        })
+      }
     },
+    // 回复
     handlerInputComment(val) {
       this.$refs.inputComment.open(val)
     },
+    // 新增评论
     handlerAddAnswerComment(val) {
       this.addAnswerComment = val
       this.$refs.inputComment.open()
     },
+    // 加载该评论下的讨论
     handlerDiscussMore(val) {
       // 找到属于某一个答案的评论
       if (val.commentItem.replys && val.commentItem.replys.length) {
@@ -159,26 +176,23 @@ export default {
             rootCommentId: val.commentItem._id
           }
         }).then((res) => {
-          if (res.data.length) {
-            this.answersRecommendList = this.answersRecommendList.map(
-              (item) => {
-                if (item.id === val.blockData.id) {
-                  const com = item.commentsListData.map((ci) => {
-                    if (ci._id === val.commentItem._id) {
-                      return { ...ci, replys: res.data }
-                    } else {
-                      return { ...ci }
-                    }
-                  })
-                  return {
-                    ...item,
-                    commentsListData: com
-                  }
+          this.answersRecommendList = this.answersRecommendList.map((item) => {
+            if (item.id === val.blockData.id) {
+              const com = item.commentsListData.map((ci) => {
+                if (ci._id === val.commentItem._id) {
+                  return { ...ci, replys: res.data, more: !!res.data.length }
+                } else {
+                  return { ...ci }
                 }
-                return { ...item }
+              })
+              return {
+                ...item,
+                commentsListData: com
               }
-            )
-          } else {
+            }
+            return { ...item }
+          })
+          if (!res.data.length) {
             this.$message('该评论下暂无讨论')
           }
         })

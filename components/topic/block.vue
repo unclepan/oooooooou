@@ -6,8 +6,7 @@
       </nuxt-link>
       <div :class="$style.answerer" v-if="blockData.answerer">
         <el-avatar
-          src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-          icon="el-icon-user-solid"
+          :src="blockData.answerer.avatar_url"
           shape="square"
           size="medium"
         >
@@ -29,9 +28,6 @@
           <span :class="$style.answer">
             {{ blockData.content }}
           </span>
-          <!-- <el-button :class="$style.whole" type="text">
-            阅读全文<i class="el-icon-arrow-right el-icon--right"></i>
-          </el-button> -->
         </el-col>
       </el-row>
 
@@ -89,14 +85,17 @@
           </el-button>
         </div>
       </div>
-      <comments-item
-        :class="$style.comments"
-        v-for="(item, index) in blockData.commentsListData"
-        :key="index"
-        :commentItem="item"
-        @reply="reply"
-        @discussMore="discussMore"
-      />
+
+      <template v-if="blockData.showComments">
+        <comments-item
+          :class="$style.comments"
+          v-for="(item, index) in blockData.commentsListData"
+          :key="index"
+          :commentItem="item"
+          @reply="reply"
+          @discussMore="discussMore"
+        />
+      </template>
     </el-card>
   </div>
 </template>
