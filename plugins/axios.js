@@ -2,35 +2,20 @@ import { Message } from 'element-ui'
 const Cookie = process.client ? require('js-cookie') : undefined
 
 export default function({ $axios, redirect }) {
-  $axios.defaults.baseURL = 'http://127.0.0.1:3001'
-
-  $axios.interceptors.request.use(
-    (config) => {
+  $axios.onRequest((config) => {
+    if (process.client) {
       config.headers.Authorization = Cookie.get('auth')
-      return config
-    },
-    (error) => {
-      return Promise.reject(error)
     }
-  )
-
-  $axios.interceptors.response.use(
-    (response) => {
-      return response
-    },
-    (error) => {
-      return Promise.reject(error)
-    }
-  )
-
+  })
   $axios.onError((error) => {
-    Message.error(error.response.data.message)
-    setTimeout(() => {
-      if (error.response.status === 401) {
+    const code = parseInt(error.response && error.response.status)
+    if (code === 401) {
+      Message.error('未登录')
+      setTimeout(() => {
         redirect('/login')
-      } else {
-        redirect('/500')
-      }
-    }, 1000)
+      }, 0)
+    } else {
+      redirect('/error')
+    }
   })
 }

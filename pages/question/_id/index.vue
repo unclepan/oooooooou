@@ -21,7 +21,7 @@
 
 <script>
 import questionDetailHeader from '~/components/question/detail-header'
-import answers from '~/components/topic/answers'
+import answers from '~/components/answers/index'
 import side from '~/components/question/side/index'
 export default {
   components: {

@@ -29,8 +29,8 @@ module.exports = {
    */
   plugins: [
     '@/plugins/element-ui',
-    { src: '~/plugins/burying-point/index.js', ssr: false },
-    { src: '~/plugins/axios.js', ssr: false }
+    '~/plugins/axios.js',
+    { src: '~/plugins/burying-point/index.js', ssr: false }
   ],
   /*
    ** Nuxt.js dev-modules
@@ -51,11 +51,8 @@ module.exports = {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    proxy: true,
+    baseURL: 'http://127.0.0.1:3001',
     credentials: true
-  },
-  proxy: {
-    '/api/': 'http://127.0.0.1:3001'
   },
   /*
    ** Build configuration

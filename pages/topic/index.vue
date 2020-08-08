@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-import answers from '~/components/topic/answers/index'
+import answers from '~/components/answers/index'
 import side from '~/components/topic/side/index'
 export default {
   components: {

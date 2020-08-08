@@ -10,12 +10,6 @@
         {{ questionDataInfo.description }}
       </p>
       <div :class="$style.handler">
-        <!-- <el-button size="small" type="primary">
-          关注问题
-        </el-button>
-        <el-button size="small" type="primary" plain icon="el-icon-edit">
-          写回答
-        </el-button> -->
         <el-button
           @click="handlerFollowing(informationStatistics.followingQuestion)"
           :type="informationStatistics.followingQuestion ? 'info' : 'primary'"
@@ -34,12 +28,6 @@
         >
           写回答
         </el-button>
-
-        <!-- <div :class="$style['test-button']">
-          <el-button type="text" icon="el-icon-document">
-            12234个回答
-          </el-button>
-        </div> -->
       </div>
     </el-card>
   </div>
