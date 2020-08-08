@@ -4,16 +4,16 @@
       <el-col :span="17">
         <question-detail-header
           :questionDataInfo="questionDataInfo"
-          :informationStatistics="informationStatistics"
-          @follow="init()"
+          :informationStatisticsData="informationStatisticsData"
         />
-        <answers :reqData="reqData" />
+        <answers
+          :answersRecommendList="answersRecommendList"
+          :showLinkQuestion="false"
+        />
+        <p :class="$style.more" @click="more">加载更多</p>
       </el-col>
       <el-col :span="7">
-        <side
-          :recommendQuestionsList="recommendQuestionsList"
-          :informationStatistics="informationStatistics"
-        />
+        <side :informationStatisticsData="informationStatisticsData" />
       </el-col>
     </el-row>
   </div>
@@ -36,17 +36,8 @@ export default {
   },
   data() {
     return {
-      informationStatistics: {},
-      answersDataList: [],
-      // 此问题下的答案
-      reqData: {
-        method: 'get',
-        url: `/api/questions/${this.$route.params.id}/answers/detailed/info`,
-        params: {
-          page: 1,
-          per_page: 50
-        }
-      }
+      loading: false,
+      page: 2
     }
   },
   async asyncData(ctx) {
@@ -58,6 +49,10 @@ export default {
         fields: 'questioner;topics'
       }
     })
+    const informationStatisticsRes = await ctx.$axios({
+      method: 'get',
+      url: `/api/questions/${params.id}/information/statistics`
+    })
     const recommendQuestionsRes = await ctx.$axios({
       method: 'get',
       url: '/api/questions',
@@ -68,21 +63,46 @@ export default {
         popular: true
       }
     })
+    const answersRecommendListRes = await ctx.$axios({
+      method: 'get',
+      url: `/api/questions/${params.id}/answers/detailed/info`,
+      params: {
+        page: 1,
+        per_page: 5
+      }
+    })
     return {
       questionDataInfo: questionDataRes.data,
-      recommendQuestionsList: recommendQuestionsRes.data
+      informationStatisticsData: informationStatisticsRes.data,
+      recommendQuestionsList: recommendQuestionsRes.data,
+      answersRecommendList: answersRecommendListRes.data
     }
   },
-  mounted() {
-    this.init()
-  },
   methods: {
-    async init() {
-      const informationStatisticsRes = await this.$axios({
-        method: 'get',
-        url: `/api/questions/${this.$route.params.id}/information/statistics`
-      })
-      this.informationStatistics = informationStatisticsRes.data
+    async more() {
+      const { params } = this.$route
+      if (this.loading === false) {
+        this.loading = true
+        const res = await this.$axios({
+          method: 'get',
+          url: `/api/questions/${params.id}/answers/detailed/info`,
+          params: {
+            page: this.page,
+            per_page: 5
+          }
+        })
+        this.page = this.page + 1
+        if (res.data.length) {
+          if (res.data.length === 5) {
+            this.loading = false
+          }
+          this.answersRecommendList = this.answersRecommendList.concat(res.data)
+        } else {
+          this.$message('此问题下没有更多的答案啦，你也可以来回答一个哦！')
+        }
+      } else {
+        this.$message('此问题下没有更多的答案啦，你也可以来回答一个哦！')
+      }
     }
   }
 }
@@ -93,5 +113,20 @@ export default {
   width: 1024px;
   margin: 0 auto;
   padding: 20px 0;
+  .more {
+    margin: 20px auto 0;
+    width: 120px;
+    padding: 10px;
+    font-size: 14px;
+    color: #666666;
+    border: 1px solid #666666;
+    cursor: pointer;
+    text-align: center;
+    &:hover {
+      color: #409eff;
+      border: 1px solid #409eff;
+      background: #ffffff;
+    }
+  }
 }
 </style>

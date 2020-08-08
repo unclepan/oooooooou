@@ -2,6 +2,7 @@
   <div :class="$style['recommend-answers']">
     <el-card shadow="never">
       <nuxt-link
+        v-if="showLinkQuestion"
         :to="{ name: 'question-id', params: { id: blockData.questionId._id } }"
         :class="$style.title"
       >
@@ -113,6 +114,12 @@ export default {
       type: Object,
       default: () => {
         return {}
+      }
+    },
+    showLinkQuestion: {
+      type: Boolean,
+      default: () => {
+        return true
       }
     }
   },

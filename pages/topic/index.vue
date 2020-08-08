@@ -2,7 +2,7 @@
   <div :class="$style.topic">
     <el-row :gutter="20">
       <el-col :span="17">
-        <answers :answersRecommendListRes="answersRecommendListRes" />
+        <answers :answersRecommendList="answersRecommendList" />
       </el-col>
       <el-col :span="7">
         <side
@@ -24,7 +24,7 @@ export default {
     side
   },
   async asyncData(ctx) {
-    const res = await ctx.$axios({
+    const answersRecommendListRes = await ctx.$axios({
       method: 'get',
       url: '/api/answers/popular',
       params: {
@@ -68,7 +68,7 @@ export default {
       }
     })
     return {
-      answersRecommendListRes: res.data,
+      answersRecommendList: answersRecommendListRes.data,
       topicsList: topicsListRes.data,
       popularList: popularListRes.data,
       recommendQuestionsList: recommendQuestionsListRes.data,

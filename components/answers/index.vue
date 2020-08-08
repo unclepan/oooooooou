@@ -12,11 +12,11 @@
       v-for="(item, index) in answersRecommendList"
       :key="index"
       :blockData="item"
+      :showLinkQuestion="showLinkQuestion"
     />
   </div>
 </template>
 <script>
-import _ from 'lodash'
 import block from './block'
 import inputComment from '~/components/comments/input-comment'
 export default {
@@ -25,17 +25,22 @@ export default {
     inputComment
   },
   props: {
-    answersRecommendListRes: {
+    answersRecommendList: {
       type: Array,
       default: () => {
         return []
+      }
+    },
+    showLinkQuestion: {
+      type: Boolean,
+      default: () => {
+        return true
       }
     }
   },
   data() {
     return {
-      addAnswerComment: null,
-      answersRecommendList: _.cloneDeep(this.answersRecommendListRes)
+      addAnswerComment: null
     }
   },
   methods: {

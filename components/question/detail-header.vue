@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import inputAnswers from './input-answers'
 import topics from '~/components/topics'
 export default {
@@ -48,15 +49,21 @@ export default {
         return {}
       }
     },
-    informationStatistics: {
+    informationStatisticsData: {
       type: Object,
       default: () => {
         return {}
       }
     }
   },
+  data() {
+    return {
+      informationStatistics: _.cloneDeep(this.informationStatisticsData)
+    }
+  },
   methods: {
     async handlerFollowing(val) {
+      const { followingQuestion } = this.informationStatistics
       if (val) {
         await this.$axios({
           method: 'delete',
@@ -68,7 +75,7 @@ export default {
           url: `/api/users/followQuestions/${this.$route.params.id}`
         })
       }
-      this.$emit('follow')
+      this.informationStatistics.followingQuestion = !followingQuestion
     },
     determineInputAnswers(val) {
       const data = { content: val.content }
@@ -109,12 +116,6 @@ export default {
   .handler {
     display: flex;
     align-items: center;
-    // .test-button {
-    //   padding-left: 30px;
-    //   :global(.el-button--text) {
-    //     color: #aaaaaa;
-    //   }
-    // }
   }
 }
 </style>
