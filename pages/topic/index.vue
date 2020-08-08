@@ -2,7 +2,7 @@
   <div :class="$style.topic">
     <el-row :gutter="20">
       <el-col :span="17">
-        <answers :answersRecommendList="answersRecommendList" />
+        <answers :answersRecommendListData="answersRecommendList" />
       </el-col>
       <el-col :span="7">
         <side

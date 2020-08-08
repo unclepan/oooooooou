@@ -19,9 +19,9 @@
       </el-row>
     </el-card>
 
-    <recommend-questions />
-    <recommend-periodical />
-    <recommend-advertisement />
+    <recommend-periodical :popularList="popularList" />
+    <recommend-questions :recommendQuestionsList="recommendQuestionsList" />
+    <recommend-advertisement :advertisementData="advertisementData" />
   </div>
 </template>
 
@@ -37,6 +37,24 @@ export default {
   },
   props: {
     informationStatistics: {
+      type: Object,
+      default: () => {
+        return {}
+      }
+    },
+    recommendQuestionsList: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    },
+    popularList: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    },
+    advertisementData: {
       type: Object,
       default: () => {
         return {}

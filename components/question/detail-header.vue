@@ -34,7 +34,6 @@
 </template>
 
 <script>
-import _ from 'lodash'
 import inputAnswers from './input-answers'
 import topics from '~/components/topics'
 export default {
@@ -49,16 +48,11 @@ export default {
         return {}
       }
     },
-    informationStatisticsData: {
+    informationStatistics: {
       type: Object,
       default: () => {
         return {}
       }
-    }
-  },
-  data() {
-    return {
-      informationStatistics: _.cloneDeep(this.informationStatisticsData)
     }
   },
   methods: {
@@ -69,11 +63,13 @@ export default {
           method: 'delete',
           url: `/api/users/followQuestions/${this.$route.params.id}`
         })
+        this.informationStatistics.followingQuestionNum -= 1
       } else {
         await this.$axios({
           method: 'put',
           url: `/api/users/followQuestions/${this.$route.params.id}`
         })
+        this.informationStatistics.followingQuestionNum += 1
       }
       this.informationStatistics.followingQuestion = !followingQuestion
     },

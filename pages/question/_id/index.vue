@@ -4,16 +4,22 @@
       <el-col :span="17">
         <question-detail-header
           :questionDataInfo="questionDataInfo"
-          :informationStatisticsData="informationStatisticsData"
+          :informationStatistics="informationStatistics"
         />
         <answers
-          :answersRecommendList="answersRecommendList"
+          ref="answers"
+          :answersRecommendListData="answersRecommendListData"
           :showLinkQuestion="false"
         />
         <p :class="$style.more" @click="more">加载更多</p>
       </el-col>
       <el-col :span="7">
-        <side :informationStatisticsData="informationStatisticsData" />
+        <side
+          :popularList="popularList"
+          :recommendQuestionsList="recommendQuestionsList"
+          :advertisementData="advertisementData"
+          :informationStatistics="informationStatistics"
+        />
       </el-col>
     </el-row>
   </div>
@@ -68,14 +74,33 @@ export default {
       url: `/api/questions/${params.id}/answers/detailed/info`,
       params: {
         page: 1,
-        per_page: 5
+        per_page: 10
+      }
+    })
+    const popularListRes = await ctx.$axios({
+      method: 'get',
+      url: '/api/periodical',
+      params: {
+        page: 1,
+        per_page: 5,
+        popular: true
+      }
+    })
+    const advertisementListRes = await ctx.$axios({
+      method: 'get',
+      url: '/api/advertisement',
+      params: {
+        page: 1,
+        per_page: 1
       }
     })
     return {
       questionDataInfo: questionDataRes.data,
-      informationStatisticsData: informationStatisticsRes.data,
+      informationStatistics: informationStatisticsRes.data,
       recommendQuestionsList: recommendQuestionsRes.data,
-      answersRecommendList: answersRecommendListRes.data
+      answersRecommendListData: answersRecommendListRes.data,
+      popularList: popularListRes.data,
+      advertisementData: advertisementListRes.data[0]
     }
   },
   methods: {
@@ -88,15 +113,15 @@ export default {
           url: `/api/questions/${params.id}/answers/detailed/info`,
           params: {
             page: this.page,
-            per_page: 5
+            per_page: 10
           }
         })
         this.page = this.page + 1
         if (res.data.length) {
-          if (res.data.length === 5) {
+          if (res.data.length === 10) {
             this.loading = false
           }
-          this.answersRecommendList = this.answersRecommendList.concat(res.data)
+          this.$refs.answers.add(res.data)
         } else {
           this.$message('此问题下没有更多的答案啦，你也可以来回答一个哦！')
         }

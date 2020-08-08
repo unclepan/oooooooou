@@ -17,6 +17,7 @@
   </div>
 </template>
 <script>
+import _ from 'lodash'
 import block from './block'
 import inputComment from '~/components/comments/input-comment'
 export default {
@@ -25,7 +26,7 @@ export default {
     inputComment
   },
   props: {
-    answersRecommendList: {
+    answersRecommendListData: {
       type: Array,
       default: () => {
         return []
@@ -40,10 +41,14 @@ export default {
   },
   data() {
     return {
-      addAnswerComment: null
+      addAnswerComment: null,
+      answersRecommendList: _.cloneDeep(this.answersRecommendListData)
     }
   },
   methods: {
+    add(val) {
+      this.answersRecommendList = this.answersRecommendList.concat(val)
+    },
     async handlerLikingAnswer(val) {
       if (val.isLike) {
         // 取消赞答案
@@ -65,7 +70,11 @@ export default {
         })
         this.answersRecommendList = this.answersRecommendList.map((item) => {
           if (item.id === val.id) {
-            return { ...item, isLike: true, isDislike: false }
+            return {
+              ...item,
+              isLike: true,
+              isDislike: false
+            }
           }
           return { ...item }
         })
@@ -92,7 +101,11 @@ export default {
         })
         this.answersRecommendList = this.answersRecommendList.map((item) => {
           if (item.id === val.id) {
-            return { ...item, isDislike: true, isLike: false }
+            return {
+              ...item,
+              isDislike: true,
+              isLike: false
+            }
           }
           return { ...item }
         })

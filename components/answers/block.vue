@@ -44,7 +44,6 @@
           icon="el-icon-caret-top"
         >
           {{ blockData.isLike ? '已赞同' : '赞同' }}
-          {{ blockData.voteCount || '' }}
         </el-button>
         <el-button
           @click="dislikingAnswer(blockData)"
