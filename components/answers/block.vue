@@ -1,7 +1,10 @@
 <template>
   <div :class="$style['recommend-answers']">
     <el-card shadow="never">
-      <nuxt-link :class="$style.title" to="/">
+      <nuxt-link
+        :to="{ name: 'question-id', params: { id: blockData.questionId._id } }"
+        :class="$style.title"
+      >
         {{ blockData.questionId.title }}
       </nuxt-link>
       <div :class="$style.answerer" v-if="blockData.answerer">
