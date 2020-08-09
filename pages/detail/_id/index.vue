@@ -86,11 +86,6 @@ export default {
     calendar,
     comments
   },
-  data() {
-    return {
-      likeData: false
-    }
-  },
   async asyncData(ctx) {
     const { params } = ctx
     const periodicalRes = await ctx.$axios({
@@ -104,22 +99,20 @@ export default {
       method: 'get',
       url: `/api/periodical/${params.id}/comments`
     })
+    const commentsData = commentsRes.data.map((item) => {
+      return { ...item, more: true }
+    })
+    const likeRes = await ctx.$axios({
+      method: 'get',
+      url: `/api/users/whetherLikingPeriodical/${params.id}`
+    })
     return {
       periodicalData: periodicalRes.data,
-      commentsData: commentsRes.data
+      commentsData,
+      likeData: likeRes.data.like
     }
   },
-  mounted() {
-    this.init()
-  },
   methods: {
-    async init() {
-      const likeRes = await this.$axios({
-        method: 'get',
-        url: `/api/users/whetherLikingPeriodical/${this.$route.params.id}`
-      })
-      this.likeData = likeRes.data.like
-    },
     handlerDiscussMore(val) {
       // 展开收起
       const v = this.commentsData.find((item) => {
@@ -141,7 +134,7 @@ export default {
           if (res.data.length) {
             const arr = this.commentsData.map((item) => {
               if (item._id === val._id) {
-                return { ...item, replys: res.data }
+                return { ...item, replys: res.data, more: !!res.data.length }
               } else {
                 return item
               }
