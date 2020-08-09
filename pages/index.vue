@@ -16,9 +16,7 @@
           >
             <block :periodicalData="item" />
           </el-card>
-          <div :class="$style.more" @click="more()">
-            加载更多
-          </div>
+          <more @more="more()" />
         </el-col>
         <el-col :span="7">
           <side
@@ -36,13 +34,15 @@ import carousel from '~/components/carousel'
 import topics from '~/components/topics'
 import block from '~/components/periodical/block'
 import side from '~/components/periodical/side/index'
+import more from '~/components/button/more'
 
 export default {
   components: {
     carousel,
     topics,
     block,
-    side
+    side,
+    more
   },
   data() {
     return {
@@ -146,21 +146,6 @@ export default {
     }
     .card-block {
       margin-top: 20px;
-    }
-    .more {
-      margin: 20px auto 0;
-      padding: 10px;
-      width: 40%;
-      font-size: 14px;
-      color: #666666;
-      border: 1px solid #666666;
-      cursor: pointer;
-      text-align: center;
-      &:hover {
-        color: #409eff;
-        border: 1px solid #409eff;
-        background: #ffffff;
-      }
     }
   }
 }
