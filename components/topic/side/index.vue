@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import topics from '~/components/topics'
+import topics from '~/components/common/topics'
 import recommendAdvertisement from '~/components/recommend/advertisement'
 import recommendQuestions from '~/components/recommend/questions'
 import recommendPeriodical from '~/components/recommend/periodical'

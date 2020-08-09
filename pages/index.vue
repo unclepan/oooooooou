@@ -31,7 +31,7 @@
 
 <script>
 import carousel from '~/components/carousel'
-import topics from '~/components/topics'
+import topics from '~/components/common/topics'
 import block from '~/components/periodical/block'
 import side from '~/components/periodical/side/index'
 import more from '~/components/button/more'

@@ -35,7 +35,7 @@
 
 <script>
 import inputAnswers from './input-answers'
-import topics from '~/components/topics'
+import topics from '~/components/common/topics'
 export default {
   components: {
     topics,

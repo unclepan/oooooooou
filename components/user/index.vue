@@ -32,12 +32,7 @@
               </el-tag>
             </el-tab-pane>
             <el-tab-pane label="收藏的期刊" name="2">
-              <periodical-block
-                :class="$style['periodical-block']"
-                v-for="item in userData.likingPeriodicals"
-                :key="item._id"
-                :periodicalData="item"
-              />
+              <periodical :popularList="userData.likingPeriodicals" />
             </el-tab-pane>
             <el-tab-pane label="关注的问题" name="3">
               <div
@@ -67,10 +62,10 @@
 
 <script>
 import moment from 'moment'
-import periodicalBlock from '~/components/periodical/block'
+import periodical from '~/components/common/periodical'
 export default {
   components: {
-    periodicalBlock
+    periodical
   },
   props: {
     userData: {
@@ -100,15 +95,6 @@ export default {
       font-size: 12px;
       color: #409eff;
     }
-  }
-  .periodical-block {
-    padding-bottom: 20px;
-    border-bottom: 1px solid #ebeef5;
-    margin-bottom: 20px;
-  }
-  .periodical-block:last-of-type {
-    border: none;
-    margin: 0;
   }
   .item-questions {
     padding: 10px 0;

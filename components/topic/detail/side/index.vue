@@ -11,7 +11,7 @@
 <script>
 import recommendAdvertisement from '~/components/recommend/advertisement'
 import recommendPeriodical from '~/components/recommend/periodical'
-import topics from '~/components/topics'
+import topics from '~/components/common/topics'
 export default {
   components: {
     topics,

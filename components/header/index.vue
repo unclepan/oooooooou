@@ -90,7 +90,7 @@ export default {
       })
     },
     handlerUser() {
-      this.$router.push({ name: 'user' })
+      this.$router.push({ name: 'user-center' })
     },
     determineInputFeedback(val) {
       const data = { content: val.content }
