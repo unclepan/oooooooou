@@ -21,7 +21,7 @@
     <section>
       <div :class="$style.main">
         <div :class="$style.banner">
-          DO NOTHING BY HALVES
+          <p>DO NOTHING BY HALVES</p>
         </div>
         <div :class="$style.form">
           <h3>CREATE YOUR ACCOUNT</h3>
@@ -272,13 +272,21 @@ export default {
       justify-content: space-between;
       .banner {
         width: 50%;
-        background: #409eff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        color: #ffffff;
-        font-size: 30px;
+        background-image: url('../assets/images/register.jpg');
+        background-size: 100%;
+        p {
+          margin: 0;
+          background-color: rgba($color: #409eff, $alpha: 0.8);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 100%;
+          align-items: center;
+          text-align: center;
+          color: #ffffff;
+          font-size: 30px;
+        }
       }
       .form {
         width: 45%;

@@ -9,9 +9,13 @@
       }"
     >
       <el-col :span="2">
-        <el-avatar :src="commentItem.commentator.avatar_url">
-          {{ commentItem.commentator.name[0] }}
-        </el-avatar>
+        <nuxt-link
+          :to="{ name: 'user-id', params: { id: commentItem.commentator._id } }"
+        >
+          <el-avatar :src="commentItem.commentator.avatar_url">
+            {{ commentItem.commentator.name[0] }}
+          </el-avatar>
+        </nuxt-link>
       </el-col>
       <el-col :span="22" :class="$style['com-main']">
         <div :class="$style.participant">

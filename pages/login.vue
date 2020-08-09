@@ -21,7 +21,7 @@
     <section>
       <div :class="$style.main">
         <div :class="$style.banner">
-          MAN PROPOSES
+          <p>MAN PROPOSES</p>
         </div>
         <div :class="$style.form">
           <h3>SIGN IN TO ANTCP</h3>
@@ -213,13 +213,21 @@ export default {
       min-height: 520px;
       .banner {
         width: 50%;
-        background: #409eff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        color: #ffffff;
-        font-size: 30px;
+        background-image: url('../assets/images/login.jpg');
+        background-size: 100%;
+        p {
+          margin: 0;
+          background-color: rgba($color: #409eff, $alpha: 0.8);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 100%;
+          align-items: center;
+          text-align: center;
+          color: #ffffff;
+          font-size: 30px;
+        }
       }
       .form {
         width: 45%;
