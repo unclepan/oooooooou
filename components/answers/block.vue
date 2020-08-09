@@ -9,15 +9,23 @@
         {{ blockData.questionId.title }}
       </nuxt-link>
       <div :class="$style.answerer" v-if="blockData.answerer">
-        <el-avatar
-          :src="blockData.answerer.avatar_url"
-          shape="square"
-          size="medium"
+        <nuxt-link
+          :to="{ name: 'user-id', params: { id: blockData.answerer._id } }"
         >
-          {{ blockData.answerer.name[0] }}
-        </el-avatar>
+          <el-avatar
+            :src="blockData.answerer.avatar_url"
+            shape="square"
+            size="medium"
+          >
+            {{ blockData.answerer.name[0] }}
+          </el-avatar>
+        </nuxt-link>
         <div :class="$style.info">
-          <h5 :class="$style.name">{{ blockData.answerer.name }}</h5>
+          <nuxt-link
+            :to="{ name: 'user-id', params: { id: blockData.answerer._id } }"
+          >
+            <h5 :class="$style.name">{{ blockData.answerer.name }}</h5>
+          </nuxt-link>
           <p :class="$style.introduce">
             {{ blockData.answerer.introduce || '暂无简介' }}
           </p>
