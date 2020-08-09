@@ -21,23 +21,7 @@
               <periodical :popularList="userData.likingPeriodicals" />
             </el-tab-pane>
             <el-tab-pane label="关注的问题" name="3">
-              <div
-                :class="$style['item-questions']"
-                v-for="(item, index) in userData.followingQuestions"
-                :key="index"
-              >
-                <nuxt-link
-                  :to="{ name: 'question-id', params: { id: item._id } }"
-                  :class="$style.title"
-                >
-                  {{ item.title }}
-                </nuxt-link>
-                <div :class="$style.info">
-                  <span>
-                    {{ moment(item.updatedAt).format('YYYY-MM-DD HH:mm') }}
-                  </span>
-                </div>
-              </div>
+              <question :recommendQuestionsList="userData.followingQuestions" />
             </el-tab-pane>
           </el-tabs>
         </el-card>
@@ -50,10 +34,12 @@
 import moment from 'moment'
 import periodical from '~/components/common/periodical'
 import topics from '~/components/common/topics'
+import question from '~/components/common/question/simple'
 export default {
   components: {
     periodical,
-    topics
+    topics,
+    question
   },
   props: {
     userData: {

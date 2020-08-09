@@ -5,18 +5,19 @@
       v-for="(itemData, index) in popularList"
       :key="index"
     >
-      <el-row :gutter="10">
-        <el-col :span="6" :class="$style['item-img']">
+      <el-row :gutter="8">
+        <el-col v-if="itemData.pic" :span="5" :class="$style['item-img']">
           <nuxt-link :to="{ name: 'detail-id', params: { id: itemData._id } }">
             <img :src="itemData.pic" alt="推荐" />
           </nuxt-link>
         </el-col>
-        <el-col :span="18" :class="$style['list-box']">
+        <el-col :span="itemData.pic ? 19 : 24" :class="$style['list-box']">
           <nuxt-link
             :class="$style.title"
             :to="{ name: 'detail-id', params: { id: itemData._id } }"
-            >{{ itemData.title }}</nuxt-link
           >
+            {{ itemData.title }}
+          </nuxt-link>
           <p :class="$style.auxiliary">
             {{ moment(itemData.createdAt).format('YYYY-MM-DD') }}
             阅读：{{ itemData.pv }}
@@ -80,7 +81,7 @@ export default {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      margin: 10px 0;
+      margin: 6px 0;
     }
     .describe {
       font-size: 12px;
