@@ -17,7 +17,7 @@
 </template>
 <script>
 import info from './info'
-import question from '~/components/common/question'
+import question from '~/components/common/question/item'
 import periodical from '~/components/common/periodical'
 import more from '~/components/button/more'
 export default {
