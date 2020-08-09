@@ -51,7 +51,7 @@ module.exports = {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: 'http://127.0.0.1:3001',
+    baseURL: 'http://121.42.13.92:3001',
     credentials: true
   },
   /*
