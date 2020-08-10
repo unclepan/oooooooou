@@ -1,23 +1,11 @@
 <template>
   <div :class="$style['page-register']">
-    <article :class="$style.header">
-      <header>
-        <nuxt-link to="/">
-          <img
-            :class="$style['site-logo']"
-            src="~/assets/images/logo-01.png"
-            alt="logo"
-          />
-        </nuxt-link>
-        <span>
-          <em :class="$style.bold">已有账号？</em>
-          <nuxt-link to="/login">
-            <el-button type="primary" size="mini">登录</el-button>
-          </nuxt-link>
-        </span>
-      </header>
-    </article>
-
+    <simple-header>
+      <span :style="{ fontSize: '14px' }">已有账号？</span>
+      <nuxt-link to="/login">
+        <el-button type="primary" size="mini">登录</el-button>
+      </nuxt-link>
+    </simple-header>
     <section>
       <div :class="$style.main">
         <div :class="$style.banner">
@@ -71,7 +59,11 @@
 
 <script>
 import CryptoJS from 'crypto-js'
+import simpleHeader from '~/components/header/simple'
 export default {
+  components: {
+    simpleHeader
+  },
   data() {
     return {
       timerid: null,
@@ -238,30 +230,6 @@ export default {
 
 <style lang="scss" module>
 .page-register {
-  .header {
-    min-width: 1024px;
-    color: #666666;
-    background: #ffffff;
-    box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
-    header {
-      margin: 0 auto;
-      padding: 10px 0;
-      width: 1024px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      .site-logo {
-        display: inline-block;
-        width: 106px;
-      }
-      .bold {
-        font-style: normal;
-        color: #3c3b4a;
-        font-size: 14px;
-      }
-    }
-  }
-
   > section {
     margin: 0 auto;
     padding-top: 20px;

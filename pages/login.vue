@@ -1,22 +1,11 @@
 <template>
   <div :class="$style['page-login']">
-    <article :class="$style.header">
-      <header>
-        <nuxt-link to="/">
-          <img
-            :class="$style['site-logo']"
-            src="~/assets/images/logo-01.png"
-            alt="logo"
-          />
-        </nuxt-link>
-        <span>
-          <em :class="$style.bold">没有账号？</em>
-          <nuxt-link to="/register">
-            <el-button type="primary" size="mini">注册</el-button>
-          </nuxt-link>
-        </span>
-      </header>
-    </article>
+    <simple-header>
+      <span :style="{ fontSize: '14px' }">没有账号？</span>
+      <nuxt-link to="/register">
+        <el-button type="primary" size="mini">注册</el-button>
+      </nuxt-link>
+    </simple-header>
 
     <section>
       <div :class="$style.main">
@@ -54,7 +43,7 @@
             <el-form-item>
               <div :class="$style.foot">
                 <el-checkbox v-model="checked">7天内自动登录</el-checkbox>
-                <b>忘记密码？</b>
+                <!-- <b>忘记密码？</b> -->
               </div>
             </el-form-item>
             <el-form-item>
@@ -72,16 +61,18 @@
 <script>
 import CryptoJS from 'crypto-js'
 import sidentify from '~/components/sidentify'
+import simpleHeader from '~/components/header/simple'
 const Cookie = process.client ? require('js-cookie') : undefined
 
 export default {
   components: {
-    sidentify
+    sidentify,
+    simpleHeader
   },
   data() {
     return {
       identifyCode: '1234',
-      checked: '',
+      checked: false,
       ruleForm: {
         name: '',
         password: '',
@@ -160,7 +151,8 @@ export default {
             url: '/api/users/login',
             data: {
               name: this.ruleForm.name,
-              password: CryptoJS.MD5(this.ruleForm.password).toString()
+              password: CryptoJS.MD5(this.ruleForm.password).toString(),
+              checked: this.checked
             }
           }).then((res) => {
             const auth = {
@@ -179,29 +171,6 @@ export default {
 
 <style lang="scss" module>
 .page-login {
-  .header {
-    min-width: 1024px;
-    color: #666666;
-    background: #ffffff;
-    box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
-    header {
-      margin: 0 auto;
-      padding: 10px 0;
-      width: 1024px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      .site-logo {
-        display: inline-block;
-        width: 106px;
-      }
-      .bold {
-        font-style: normal;
-        color: #3c3b4a;
-        font-size: 14px;
-      }
-    }
-  }
   > section {
     margin: 0 auto;
     width: 1024px;
