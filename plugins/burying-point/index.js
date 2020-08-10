@@ -7,7 +7,10 @@ const buryingPoint = bp({
   appId: '123849',
   appName: '流程管理',
   level: '1',
-  baseUrl: 'http://121.42.13.92:3001/api/bp',
+  baseUrl:
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:3001/api/bp'
+      : 'http://121.42.13.92:3001/api/bp',
   sendTimeGap: 4000,
   compress: false
 })
