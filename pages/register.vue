@@ -3,7 +3,9 @@
     <simple-header>
       <span :style="{ fontSize: '14px' }">已有账号？</span>
       <nuxt-link to="/login">
-        <el-button type="primary" size="mini">登录</el-button>
+        <el-button type="primary" size="mini">
+          登录
+        </el-button>
       </nuxt-link>
     </simple-header>
     <section>
@@ -253,7 +255,7 @@ export default {
           align-items: center;
           text-align: center;
           color: #ffffff;
-          font-size: 30px;
+          font-size: 36px;
         }
       }
       .form {
