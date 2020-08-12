@@ -195,7 +195,8 @@ export default {
           align-items: center;
           text-align: center;
           color: #ffffff;
-          font-size: 30px;
+          font-size: 40px;
+          font-family: BlackItalic;
         }
       }
       .form {
@@ -207,6 +208,7 @@ export default {
           font-size: 24px;
           color: #409eff;
           margin-top: 0;
+          font-family: BlackItalic;
         }
         .sidentify {
           text-align: right;

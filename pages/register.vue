@@ -43,14 +43,17 @@
             </el-form-item>
             <el-form-item>
               <el-button @click="register" type="primary">
-                同意以下协议并注册
+                注册
               </el-button>
             </el-form-item>
             <el-form-item>
-              <el-link :underline="false">
-                <i class="el-icon-view el-icon--right"></i>
-                ANTCP网用户协议
-              </el-link>
+              注册即代表同意
+              <nuxt-link :to="{ name: 'term' }">
+                《ANTCP协议》
+              </nuxt-link>
+              <nuxt-link :to="{ name: 'privacy' }">
+                《隐私保护指引》
+              </nuxt-link>
             </el-form-item>
           </el-form>
         </div>
@@ -255,7 +258,8 @@ export default {
           align-items: center;
           text-align: center;
           color: #ffffff;
-          font-size: 36px;
+          font-size: 40px;
+          font-family: BlackItalic;
         }
       }
       .form {
@@ -267,6 +271,7 @@ export default {
           font-size: 24px;
           color: #409eff;
           margin-top: 0;
+          font-family: BlackItalic;
         }
         .status {
           font-size: 12px;

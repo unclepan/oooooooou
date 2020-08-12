@@ -78,7 +78,7 @@ pre {
 
 a {
   background-color: transparent;
-  font-size: 12px;
+  font-size: 14px;
   color: #409eff;
 }
 
@@ -356,3 +356,17 @@ template {
 a{
   text-decoration: none;
 }
+
+/**
+ * font-face
+ */
+
+@font-face {
+  font-family: 'BlackItalic';
+  src: url('./font/DIN-BlackItalic.eot');
+  src:
+    url('./font/DIN-BlackItalic.woff2') format('woff2'),
+    url('./font/DIN-BlackItalic.ttf') format('truetype'),
+    url('./font/DIN-BlackItalic.svg') format('svg');
+}
+

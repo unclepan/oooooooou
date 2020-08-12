@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.privacy">
+  <div :class="$style.term">
     <simple-header>
       <span :style="{ fontSize: '14px' }">没有账号？</span>
       <nuxt-link to="/register">
@@ -9,7 +9,7 @@
 
     <section>
       <div :class="$style.main">
-        <div v-html="privacy"></div>
+        <div v-html="term"></div>
       </div>
     </section>
   </div>
@@ -24,10 +24,10 @@ export default {
   async asyncData(ctx) {
     const res = await ctx.$axios({
       method: 'get',
-      url: '/api/privacy'
+      url: '/api/term'
     })
     return {
-      privacy: res.data[0].content
+      term: res.data[0].content
     }
   },
   layout: 'blank',
@@ -40,7 +40,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-.privacy {
+.term {
   > section {
     margin: 0 auto;
     margin-top: 20px;
