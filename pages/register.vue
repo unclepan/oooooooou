@@ -42,7 +42,7 @@
               <el-input v-model="ruleForm.cpwd" type="password" />
             </el-form-item>
             <el-form-item>
-              <el-button @click="register" type="primary">
+              <el-button @click="register" :class="$style.btn" type="primary">
                 注册
               </el-button>
             </el-form-item>
@@ -277,6 +277,9 @@ export default {
           font-size: 12px;
           margin-left: 20px;
           color: #e6a23c;
+        }
+        .btn {
+          width: 100%;
         }
       }
     }
