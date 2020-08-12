@@ -119,7 +119,14 @@ export default {
   layout: 'blank',
   head() {
     return {
-      title: '登陆'
+      title: '登陆',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'hi，我是ANTCP网站的作者杨盼，欢迎登陆ANTCP'
+        }
+      ]
     }
   },
   mounted() {

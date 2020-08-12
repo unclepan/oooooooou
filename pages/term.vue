@@ -33,7 +33,14 @@ export default {
   layout: 'blank',
   head() {
     return {
-      title: '注册'
+      title: 'ANTCP协议',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'hi，我是ANTCP网站的作者杨盼，请仔细阅读协议'
+        }
+      ]
     }
   }
 }

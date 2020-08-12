@@ -46,7 +46,14 @@
 export default {
   head() {
     return {
-      title: '关于'
+      title: '关于我',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'hi，我是ANTCP网站的作者杨盼'
+        }
+      ]
     }
   }
 }

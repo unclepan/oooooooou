@@ -10,7 +10,14 @@ export default {
   },
   head() {
     return {
-      title: '个人中心'
+      title: '个人中心',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'hi，我是ANTCP网站的作者杨盼，这是您的个人中心'
+        }
+      ]
     }
   },
   async asyncData(ctx) {

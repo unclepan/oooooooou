@@ -1,7 +1,7 @@
 {
-  "name": "blog-buxt",
+  "name": "antcp",
   "version": "1.0.0",
-  "description": "My rad Nuxt.js project",
+  "description": "这是杨盼的个人网站antcp",
   "author": "yangpan12",
   "private": true,
   "scripts": {

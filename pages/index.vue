@@ -129,7 +129,14 @@ export default {
   },
   head() {
     return {
-      title: '首页'
+      title: 'ANTCP首页',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'hi，我是ANTCP网站的作者杨盼'
+        }
+      ]
     }
   }
 }

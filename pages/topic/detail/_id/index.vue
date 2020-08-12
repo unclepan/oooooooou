@@ -166,7 +166,14 @@ export default {
   },
   head() {
     return {
-      title: this.topicDataInfo.name || '话题详情'
+      title: this.topicDataInfo.name || '话题详情',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: `hi，我是ANTCP网站的作者杨盼，您正在查看话题 - ${this.topicDataInfo.name}`
+        }
+      ]
     }
   }
 }

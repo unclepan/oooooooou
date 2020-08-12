@@ -10,7 +10,14 @@ export default {
   },
   head() {
     return {
-      title: this.userData.name || '用户详情'
+      title: this.userData.name || '用户详情',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: `hi，我是ANTCP网站的作者杨盼，您正在查看用户 - ${this.userData.name}`
+        }
+      ]
     }
   },
   async asyncData(ctx) {

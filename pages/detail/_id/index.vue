@@ -204,7 +204,14 @@ export default {
   },
   head() {
     return {
-      title: this.periodicalData.title || '详情'
+      title: this.periodicalData.title || '详情',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: `hi，我是ANTCP网站的作者杨盼，您正在查看期刊 - ${this.periodicalData.title}`
+        }
+      ]
     }
   }
 }

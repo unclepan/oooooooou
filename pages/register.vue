@@ -166,7 +166,14 @@ export default {
   layout: 'blank',
   head() {
     return {
-      title: '注册'
+      title: '注册ANTCP',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'hi，我是ANTCP网站的作者杨盼，欢迎注册ANTCP'
+        }
+      ]
     }
   },
   methods: {

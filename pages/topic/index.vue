@@ -77,7 +77,14 @@ export default {
   },
   head() {
     return {
-      title: '话题'
+      title: 'ANTCP话题',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'hi，我是ANTCP网站的作者杨盼'
+        }
+      ]
     }
   }
 }
