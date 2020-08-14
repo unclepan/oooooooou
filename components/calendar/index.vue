@@ -172,7 +172,7 @@ export default {
             border: 1px solid #cccccc;
           }
           .is-event {
-            background-color: #409eff;
+            background-color: #95a6d0;
             border: none;
             color: #ffffff;
           }

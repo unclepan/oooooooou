@@ -1,4 +1,5 @@
 import pako from 'pako'
+import atob from 'atob'
 import con from './config'
 import ajax from './ajax'
 

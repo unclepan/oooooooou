@@ -41,7 +41,7 @@ export default {
       flex-grow: 1;
     }
     div:nth-of-type(4) {
-      background: #409eff;
+      background: #95a6d0;
     }
   }
   .time {

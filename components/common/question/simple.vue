@@ -51,7 +51,7 @@ export default {
     cursor: pointer;
     display: block;
     &:hover {
-      color: #409eff;
+      color: #95a6d0;
     }
   }
   .info {

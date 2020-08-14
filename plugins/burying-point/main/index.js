@@ -172,7 +172,6 @@ export default function BuryingPoint(opt) {
       console.error('域名不在白名单内', '@burying-point')
       return
     }
-    console.log('埋点数据即将开始上报数据')
     setTimeout(() => {
       start()
     }, 20)

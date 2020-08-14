@@ -7,13 +7,14 @@
   width: 120px;
   padding: 10px;
   font-size: 14px;
-  color: #666666;
-  border: 1px solid #666666;
+  color: #95a6d0;
+  border: 1px solid #95a6d0;
+  border-radius: 3px;
   cursor: pointer;
   text-align: center;
   &:hover {
-    color: #409eff;
-    border: 1px solid #409eff;
+    color: #666666;
+    border: 1px solid #666666;
     background: #ffffff;
   }
 }

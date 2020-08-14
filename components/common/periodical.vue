@@ -71,7 +71,7 @@ export default {
         text-overflow: ellipsis;
         white-space: nowrap;
         &:hover {
-          color: #409eff;
+          color: #95a6d0;
         }
       }
     }

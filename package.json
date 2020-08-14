@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
+    "atob": "^2.1.2",
     "cookieparser": "^0.1.0",
     "cross-env": "^5.2.0",
     "crypto-js": "3.1.9-1",
@@ -35,6 +36,7 @@
     "moment": "^2.24.0",
     "node-sass": "^4.13.0",
     "nuxt": "^2.0.0",
+    "pako": "^1.0.11",
     "sass-loader": "^8.0.0",
     "ua-device": "^0.1.10",
     "uuid-js": "^0.7.5"

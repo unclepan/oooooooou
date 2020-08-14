@@ -38,7 +38,7 @@ export default {
     margin-bottom: 10px;
     a {
       font-size: 12px;
-      color: #409eff;
+      color: #95a6d0;
     }
   }
 }

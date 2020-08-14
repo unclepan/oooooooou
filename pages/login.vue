@@ -193,7 +193,7 @@ export default {
         background-size: 100%;
         p {
           margin: 0;
-          background-color: rgba($color: #409eff, $alpha: 0.8);
+          background-color: rgba($color: #95a6d0, $alpha: 0.9);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -213,7 +213,7 @@ export default {
           text-align: center;
           padding-left: 70px;
           font-size: 24px;
-          color: #409eff;
+          color: #95a6d0;
           margin-top: 0;
           font-family: BlackItalic;
         }
