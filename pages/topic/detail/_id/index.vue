@@ -76,8 +76,9 @@ export default {
       method: 'get',
       url: '/api/periodical',
       params: {
-        page: 1,
-        per_page: 5,
+        current: 1,
+        size: 5,
+        auditStatus: 1,
         popular: true
       }
     })
@@ -103,7 +104,7 @@ export default {
       topicPeriodicalsDataList: topicPeriodicalsRes.data,
       topicQuestionsDataList: topicQuestionsRes.data,
       informationStatisticsData: informationStatisticsRes.data,
-      popularList: popularListRes.data,
+      popularList: popularListRes.data.data,
       topicsList: topicsListRes.data,
       advertisementData: advertisementListRes.data[0]
     }

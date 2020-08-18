@@ -70,12 +70,13 @@ export default {
         method: 'get',
         url: '/api/periodical',
         params: {
-          page: 1,
-          per_page: 5,
-          q: this.sreachInfo
+          current: 1,
+          size: 5,
+          auditStatus: 1,
+          query: this.sreachInfo
         }
       })
-      this.sreachList = res.data
+      this.sreachList = res.data.data
     },
     navigation(item) {
       this.$router.push({ name: 'detail-id', params: { id: item._id } })

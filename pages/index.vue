@@ -63,8 +63,10 @@ export default {
       method: 'get',
       url: '/api/periodical',
       params: {
-        page: 1,
-        per_page: 5
+        current: 1,
+        size: 5,
+        auditStatus: 1,
+        popular: false
       }
     })
     const topicsListRes = await ctx.$axios({
@@ -80,8 +82,9 @@ export default {
       method: 'get',
       url: '/api/periodical',
       params: {
-        page: 1,
-        per_page: 5,
+        current: 1,
+        size: 5,
+        auditStatus: 1,
         popular: true
       }
     })
@@ -94,10 +97,10 @@ export default {
       }
     })
     return {
-      periodicalList: periodicalListRes.data,
+      periodicalList: periodicalListRes.data.data,
       carouselList: carouselListRes.data,
       topicsList: topicsListRes.data,
-      popularList: popularListRes.data,
+      popularList: popularListRes.data.data,
       advertisementData: advertisementListRes.data[0]
     }
   },
@@ -109,16 +112,18 @@ export default {
           method: 'get',
           url: '/api/periodical',
           params: {
-            page: this.page,
-            per_page: 5
+            current: this.page,
+            size: 5,
+            auditStatus: 1,
+            popular: false
           }
         })
         this.page = this.page + 1
-        if (res.data.length) {
-          if (res.data.length === 5) {
+        if (res.data.data.length) {
+          if (res.data.data.length === 5) {
             this.isLoading = false
           }
-          this.periodicalList = this.periodicalList.concat(res.data)
+          this.periodicalList = this.periodicalList.concat(res.data.data)
         } else {
           this.$message('没有啦，明天上新，欢迎再来！')
         }

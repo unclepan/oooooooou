@@ -9,7 +9,7 @@ const buryingPoint = bp({
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3001/api/bp'
       : 'http://121.42.13.92:3001/api/bp',
-  sendTimeGap: 5000,
+  sendTimeGap: 4000,
   compress: process.env.NODE_ENV !== 'development'
 })
 // 追加外部参数
