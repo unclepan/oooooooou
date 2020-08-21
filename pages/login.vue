@@ -43,7 +43,7 @@
             <el-form-item>
               <div :class="$style.foot">
                 <el-checkbox v-model="checked">7天内自动登录</el-checkbox>
-                <!-- <b>忘记密码？</b> -->
+                <b>忘记密码？</b>
               </div>
             </el-form-item>
             <el-form-item>
