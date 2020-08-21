@@ -2,7 +2,7 @@
 module.exports = {
   apps: [
     {
-      name: 'blog', // 应用名称
+      name: 'blog-nuxt', // 应用名称
       script: './server/index.js', // 启动文件地址
       cwd: './', // 当前工作路径
       watch: [
