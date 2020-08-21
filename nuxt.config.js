@@ -66,5 +66,9 @@ module.exports = {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
+  },
+  server: {
+    port: 9528, // default: 3000
+    host: 'localhost' // default: localhost
   }
 }
