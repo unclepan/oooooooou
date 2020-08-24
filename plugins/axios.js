@@ -4,7 +4,7 @@ const Cookie = process.client ? require('js-cookie') : undefined
 export default function({ $axios, redirect }) {
   $axios.onRequest((config) => {
     if (process.client) {
-      config.headers.Authorization = Cookie.get('auth')
+      config.headers.Authorization = Cookie.get('auth') || 'not cookie'
     }
   })
   $axios.onError((error) => {
