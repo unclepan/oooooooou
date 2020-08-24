@@ -9,6 +9,7 @@
           <p>姓名：{{ userData.name }}</p>
           <p>邮箱：{{ userData.email }}</p>
           <p>简介：{{ userData.introduce }}</p>
+          <p>性别：{{ userData.gender === 'male' ? '男' : '女' }}</p>
         </el-card>
       </el-col>
       <el-col :span="17">
