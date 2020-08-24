@@ -8,14 +8,17 @@ export default function({ $axios, redirect }) {
     }
   })
   $axios.onError((error) => {
-    console.log(error, 123456)
-    const code = parseInt(error.response && error.response.status)
-    if (code === 401) {
-      Message.error('未登录')
-      setTimeout(() => {
-        redirect('/login')
-      }, 0)
-    } else {
+    try {
+      const code = parseInt(error.response && error.response.status)
+      if (code === 401) {
+        Message.error('未登录')
+        setTimeout(() => {
+          redirect('/login')
+        }, 0)
+      } else {
+        redirect('/error')
+      }
+    } catch (error) {
       redirect('/error')
     }
   })
