@@ -43,36 +43,39 @@ export default {
       quesmoreLoading: false
     }
   },
-  async asyncData(ctx) {
-    const { params } = ctx
-    const topicDataRes = await ctx.$axios({
+  async asyncData({ $axios, params }) {
+    const topicDataPromise = $axios({
       method: 'get',
       url: `/api/topics/${params.id}`,
       params: {
         fields: 'introduction;moreInformation'
       }
-    })
-    const topicPeriodicalsRes = await ctx.$axios({
+    }).catch(() => Promise.resolve({ data: {} }))
+
+    const topicPeriodicalsPromise = $axios({
       method: 'get',
       url: `/api/topics/${params.id}/periodicals`,
       params: {
         page: 1,
         per_page: 5
       }
-    })
-    const topicQuestionsRes = await ctx.$axios({
+    }).catch(() => Promise.resolve({ data: [] }))
+
+    const topicQuestionsPromise = $axios({
       method: 'get',
       url: `/api/topics/${params.id}/questions`,
       params: {
         page: 1,
         per_page: 10
       }
-    })
-    const informationStatisticsRes = await ctx.$axios({
+    }).catch(() => Promise.resolve({ data: [] }))
+
+    const informationStatisticsPromise = $axios({
       method: 'get',
       url: `/api/topics/${params.id}/information/statistics`
-    })
-    const popularListRes = await ctx.$axios({
+    }).catch(() => Promise.resolve({ data: {} }))
+
+    const popularListPromise = $axios({
       method: 'get',
       url: '/api/periodical',
       params: {
@@ -81,8 +84,9 @@ export default {
         auditStatus: 1,
         popular: true
       }
-    })
-    const topicsListRes = await ctx.$axios({
+    }).catch(() => Promise.resolve({ data: { data: [] } }))
+
+    const topicsListPromise = $axios({
       method: 'get',
       url: '/api/topics',
       params: {
@@ -90,24 +94,39 @@ export default {
         per_page: 18,
         popular: true
       }
-    })
-    const advertisementListRes = await ctx.$axios({
+    }).catch(() => Promise.resolve({ data: [] }))
+
+    const advertisementListPromise = $axios({
       method: 'get',
       url: '/api/advertisement',
       params: {
         page: 1,
         per_page: 1
       }
+    }).catch(() => Promise.resolve({ data: [] }))
+
+    const apiData = await new Promise((resolve) => {
+      Promise.all([
+        topicDataPromise,
+        topicPeriodicalsPromise,
+        topicQuestionsPromise,
+        informationStatisticsPromise,
+        popularListPromise,
+        topicsListPromise,
+        advertisementListPromise
+      ]).then((dataGather) => {
+        resolve({
+          topicDataInfo: dataGather[0].data,
+          topicPeriodicalsDataList: dataGather[1].data,
+          topicQuestionsDataList: dataGather[2].data,
+          informationStatisticsData: dataGather[3].data,
+          popularList: dataGather[4].data.data,
+          topicsList: dataGather[5].data,
+          advertisementData: dataGather[6].data[0]
+        })
+      })
     })
-    return {
-      topicDataInfo: topicDataRes.data,
-      topicPeriodicalsDataList: topicPeriodicalsRes.data,
-      topicQuestionsDataList: topicQuestionsRes.data,
-      informationStatisticsData: informationStatisticsRes.data,
-      popularList: popularListRes.data.data,
-      topicsList: topicsListRes.data,
-      advertisementData: advertisementListRes.data[0]
-    }
+    return apiData
   },
   methods: {
     async perimore() {

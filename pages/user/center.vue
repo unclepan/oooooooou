@@ -20,18 +20,24 @@ export default {
       ]
     }
   },
-  async asyncData(ctx) {
-    const cuserDataRes = await ctx.$axios({
+  async asyncData({ $axios }) {
+    const cuserDataPromise = $axios({
       method: 'get',
       url: '/api/users/login/info',
       params: {
         fields:
           'locations;business;employments;educations;following;followingTopics;followingQuestions;likingAnswers;dislikingAnswers;collectingAnswers;likingPeriodicals'
       }
+    }).catch(() => Promise.resolve({ data: {} }))
+
+    const apiData = await new Promise((resolve) => {
+      Promise.all([cuserDataPromise]).then((dataGather) => {
+        resolve({
+          userData: dataGather[0].data
+        })
+      })
     })
-    return {
-      userData: cuserDataRes.data
-    }
+    return apiData
   }
 }
 </script>

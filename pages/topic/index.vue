@@ -24,60 +24,8 @@ export default {
     side
   },
   async asyncData({ $axios }) {
-    // const answersRecommendListRes = await ctx.$axios({
-    //   method: 'get',
-    //   url: '/api/answers/popular',
-    //   params: {
-    //     page: 1,
-    //     per_page: 10
-    //   }
-    // })
-    // const topicsListRes = await ctx.$axios({
-    //   method: 'get',
-    //   url: '/api/topics',
-    //   params: {
-    //     page: 1,
-    //     per_page: 18,
-    //     popular: true
-    //   }
-    // })
-    // const popularListRes = await ctx.$axios({
-    //   method: 'get',
-    //   url: '/api/periodical',
-    //   params: {
-    //     current: 1,
-    //     size: 5,
-    //     auditStatus: 1,
-    //     popular: true
-    //   }
-    // })
-    // const recommendQuestionsListRes = await ctx.$axios({
-    //   method: 'get',
-    //   url: '/api/questions',
-    //   params: {
-    //     page: 1,
-    //     per_page: 5,
-    //     popular: true
-    //   }
-    // })
-    // const advertisementListRes = await ctx.$axios({
-    //   method: 'get',
-    //   url: '/api/advertisement',
-    //   params: {
-    //     page: 1,
-    //     per_page: 1
-    //   }
-    // })
-    // return {
-    //   answersRecommendList: answersRecommendListRes.data,
-    //   topicsList: topicsListRes.data,
-    //   popularList: popularListRes.data.data,
-    //   recommendQuestionsList: recommendQuestionsListRes.data,
-    //   advertisementData: advertisementListRes.data[0]
-    // }
     // 1、增加catch处理，是为了让服务端，客户端运行时不报错，特别是防止服务端运行时不报错，不然页面就挂了
     // 2、catch函数返回一个resolve空字面量对象的Promise，表明dataPromise1的状态未来始终是resolved状态
-
     const answersRecommendListPromise = $axios({
       method: 'get',
       url: '/api/answers/popular',

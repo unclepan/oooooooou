@@ -86,31 +86,40 @@ export default {
     calendar,
     comments
   },
-  async asyncData(ctx) {
-    const { params } = ctx
-    const periodicalRes = await ctx.$axios({
+  async asyncData({ $axios, params }) {
+    const periodicalPromise = $axios({
       method: 'get',
       url: `/api/periodical/${params.id}`,
       params: {
         fields: 'topics'
       }
-    })
-    const commentsRes = await ctx.$axios({
+    }).catch(() => Promise.resolve({ data: {} }))
+
+    const commentsPromise = $axios({
       method: 'get',
       url: `/api/periodical/${params.id}/comments`
-    })
-    const commentsData = commentsRes.data.map((item) => {
-      return { ...item, more: true }
-    })
-    const likeRes = await ctx.$axios({
+    }).catch(() => Promise.resolve({ data: [] }))
+
+    const likePromise = $axios({
       method: 'get',
       url: `/api/users/whetherLikingPeriodical/${params.id}`
+    }).catch(() => Promise.resolve({ data: {} }))
+
+    const apiData = await new Promise((resolve) => {
+      Promise.all([periodicalPromise, commentsPromise, likePromise]).then(
+        (dataGather) => {
+          const commentsData = dataGather[1].data.map((item) => {
+            return { ...item, more: true }
+          })
+          resolve({
+            periodicalData: dataGather[0].data,
+            commentsData,
+            likeData: dataGather[2].data.like
+          })
+        }
+      )
     })
-    return {
-      periodicalData: periodicalRes.data,
-      commentsData,
-      likeData: likeRes.data.like
-    }
+    return apiData
   },
   methods: {
     handlerDiscussMore(val) {

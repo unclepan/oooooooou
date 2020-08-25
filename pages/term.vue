@@ -21,14 +21,20 @@ export default {
   components: {
     simpleHeader
   },
-  async asyncData(ctx) {
-    const res = await ctx.$axios({
+  async asyncData({ $axios }) {
+    const resPromise = $axios({
       method: 'get',
       url: '/api/term'
+    }).catch(() => Promise.resolve({ data: [] }))
+
+    const apiData = await new Promise((resolve) => {
+      Promise.all([resPromise]).then((dataGather) => {
+        resolve({
+          term: dataGather[0].data[0].content
+        })
+      })
     })
-    return {
-      term: res.data[0].content
-    }
+    return apiData
   },
   layout: 'blank',
   head() {

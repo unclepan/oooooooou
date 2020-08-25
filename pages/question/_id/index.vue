@@ -55,20 +55,21 @@ export default {
       page: 2
     }
   },
-  async asyncData(ctx) {
-    const { params } = ctx
-    const questionDataRes = await ctx.$axios({
+  async asyncData({ $axios, params }) {
+    const questionDataPromise = $axios({
       method: 'get',
       url: `/api/questions/${params.id}`,
       params: {
         fields: 'questioner;topics'
       }
-    })
-    const informationStatisticsRes = await ctx.$axios({
+    }).catch(() => Promise.resolve({ data: {} }))
+
+    const informationStatisticsPromise = $axios({
       method: 'get',
       url: `/api/questions/${params.id}/information/statistics`
-    })
-    const recommendQuestionsRes = await ctx.$axios({
+    }).catch(() => Promise.resolve({ data: {} }))
+
+    const recommendQuestionsPromise = $axios({
       method: 'get',
       url: '/api/questions',
       params: {
@@ -77,16 +78,18 @@ export default {
         auditStatus: 1,
         popular: true
       }
-    })
-    const answersRecommendListRes = await ctx.$axios({
+    }).catch(() => Promise.resolve({ data: [] }))
+
+    const answersRecommendListPromise = $axios({
       method: 'get',
       url: `/api/questions/${params.id}/answers/detailed/info`,
       params: {
         page: 1,
         per_page: 10
       }
-    })
-    const popularListRes = await ctx.$axios({
+    }).catch(() => Promise.resolve({ data: [] }))
+
+    const popularListPromise = $axios({
       method: 'get',
       url: '/api/periodical',
       params: {
@@ -95,23 +98,37 @@ export default {
         auditStatus: 1,
         popular: true
       }
-    })
-    const advertisementListRes = await ctx.$axios({
+    }).catch(() => Promise.resolve({ data: { data: [] } }))
+
+    const advertisementListPromise = $axios({
       method: 'get',
       url: '/api/advertisement',
       params: {
         page: 1,
         per_page: 1
       }
+    }).catch(() => Promise.resolve({ data: [] }))
+
+    const apiData = await new Promise((resolve) => {
+      Promise.all([
+        questionDataPromise,
+        informationStatisticsPromise,
+        recommendQuestionsPromise,
+        answersRecommendListPromise,
+        popularListPromise,
+        advertisementListPromise
+      ]).then((dataGather) => {
+        resolve({
+          questionDataInfo: dataGather[0].data,
+          informationStatistics: dataGather[1].data,
+          recommendQuestionsList: dataGather[2].data,
+          answersRecommendListData: dataGather[3].data,
+          popularList: dataGather[4].data.data,
+          advertisementData: dataGather[5].data[0]
+        })
+      })
     })
-    return {
-      questionDataInfo: questionDataRes.data,
-      informationStatistics: informationStatisticsRes.data,
-      recommendQuestionsList: recommendQuestionsRes.data,
-      answersRecommendListData: answersRecommendListRes.data,
-      popularList: popularListRes.data.data,
-      advertisementData: advertisementListRes.data[0]
-    }
+    return apiData
   },
   methods: {
     async more() {

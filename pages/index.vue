@@ -50,16 +50,8 @@ export default {
       isLoading: false
     }
   },
-  async asyncData(ctx) {
-    const carouselListRes = await ctx.$axios({
-      method: 'get',
-      url: '/api/carousel',
-      params: {
-        page: 1,
-        per_page: 5
-      }
-    })
-    const periodicalListRes = await ctx.$axios({
+  async asyncData({ $axios }) {
+    const periodicalListPromise = $axios({
       method: 'get',
       url: '/api/periodical',
       params: {
@@ -68,8 +60,18 @@ export default {
         auditStatus: 1,
         popular: false
       }
-    })
-    const topicsListRes = await ctx.$axios({
+    }).catch(() => Promise.resolve({ data: { data: [] } }))
+
+    const carouselListPromise = $axios({
+      method: 'get',
+      url: '/api/carousel',
+      params: {
+        page: 1,
+        per_page: 5
+      }
+    }).catch(() => Promise.resolve({ data: [] }))
+
+    const topicsListPromise = $axios({
       method: 'get',
       url: '/api/topics',
       params: {
@@ -77,8 +79,9 @@ export default {
         per_page: 18,
         popular: true
       }
-    })
-    const popularListRes = await ctx.$axios({
+    }).catch(() => Promise.resolve({ data: [] }))
+
+    const popularListPromise = $axios({
       method: 'get',
       url: '/api/periodical',
       params: {
@@ -87,22 +90,35 @@ export default {
         auditStatus: 1,
         popular: true
       }
-    })
-    const advertisementListRes = await ctx.$axios({
+    }).catch(() => Promise.resolve({ data: { data: [] } }))
+
+    const advertisementListPromise = $axios({
       method: 'get',
       url: '/api/advertisement',
       params: {
         page: 1,
         per_page: 1
       }
+    }).catch(() => Promise.resolve({ data: [] }))
+
+    const apiData = await new Promise((resolve) => {
+      Promise.all([
+        periodicalListPromise,
+        carouselListPromise,
+        topicsListPromise,
+        popularListPromise,
+        advertisementListPromise
+      ]).then((dataGather) => {
+        resolve({
+          periodicalList: dataGather[0].data.data,
+          carouselList: dataGather[1].data,
+          topicsList: dataGather[2].data,
+          popularList: dataGather[3].data.data,
+          advertisementData: dataGather[4].data[0]
+        })
+      })
     })
-    return {
-      periodicalList: periodicalListRes.data.data,
-      carouselList: carouselListRes.data,
-      topicsList: topicsListRes.data,
-      popularList: popularListRes.data.data,
-      advertisementData: advertisementListRes.data[0]
-    }
+    return apiData
   },
   methods: {
     async more() {
