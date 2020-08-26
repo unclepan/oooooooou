@@ -150,10 +150,10 @@
                 </p>
                 <p>工作内容：从0到3全程参与，调研，开发，优化，迭代。</p>
                 <p>
-                  技术栈：Javascrpt，Vue.js
-                  全家桶，Webpack，基于element-ui自定义实现的jingdata-element-ui的UI库。
-                  其他插件：code-matrix(处理代码块)，lodash，,moment
-                  ，Less预处理样式，wolfy87-eventemitter（组件通信），vue-i18n（国际化），Echarts，Go.js处理图表，定义流程交互等。
+                  技术栈：Javascrpt，Vue.js全家桶，Webpack，基于element-ui自定义实现的jingdata-element-ui的UI库。
+                </p>
+                <p>
+                  其他插件：code-matrix(处理代码块)，lodash，moment，Less预处理样式，wolfy87-eventemitter（组件通信），vue-i18n（国际化），Echarts，Go.js处理图表，定义流程交互等。
                 </p>
               </section>
 
@@ -214,7 +214,7 @@
                   </a>
                 </p>
                 <p>
-                  Js原生（前端监控包）：
+                  原生-前端监控包：
                   <a
                     href="https://github.com/unclepan/zui-monitor/"
                     target="_blank"
