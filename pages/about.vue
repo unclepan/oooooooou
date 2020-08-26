@@ -302,7 +302,7 @@ export default {
       color: #000;
     }
     section {
-      padding-bottom: 20px;
+      padding-bottom: 10px;
     }
     .subhead {
       h3 {
