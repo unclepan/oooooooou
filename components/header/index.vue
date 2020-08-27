@@ -4,7 +4,7 @@
     <search ref="search" />
     <div :class="$style.logo">
       <nuxt-link to="/">
-        <img src="~/assets/images/logo-01.png" alt="logo" />
+        <img src="~/assets/images/logo-02.png" alt="logo" />
       </nuxt-link>
     </div>
 
