@@ -2,7 +2,7 @@
   "name": "antcp",
   "version": "1.0.0",
   "description": "这是杨盼的个人网站antcp",
-  "author": "yangpan12",
+  "author": "yangpan",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
