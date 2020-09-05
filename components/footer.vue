@@ -7,13 +7,14 @@
         <a href="#" target="_blank">友情链接</a>
       </div>
       <br />
-      <p>All Rights Reserved. © 2016</p>
+      <p>All Rights Reserved. © 2020</p>
       <p>
         网站内容来自网络整理或网友投稿如有侵权行为请邮件:738912168@qq.com
         我们将在24小时内处理。
       </p>
-      <p>联系地址：北京市朝阳区东三环XXXXXXXXXXXXX</p>
-      <p>ANTCP网站前端工程师 - 鄂ICP备16005435号-1</p>
+      <p>联系地址：北京市朝阳区东三环北路19号</p>
+      <p>ANTCP-分享创意和生活的美学</p>
+      <p>京ICP备20013886号-2</p>
     </div>
   </div>
 </template>

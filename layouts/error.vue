@@ -2,23 +2,23 @@
   <div :class="$style.wrap">
     <nav :class="$style.shelf">
       <nuxt-link :class="[$style.book, $style['home-page']]" to="/">
-        Home page
+        HOME PAGE
       </nuxt-link>
       <nuxt-link :class="[$style.book, $style['about-us']]" to="/about">
-        About us
+        ABOUT US
       </nuxt-link>
       <nuxt-link :class="[$style.book, $style.contact]" to="/about">
-        Contact
+        CONTACT
       </nuxt-link>
       <nuxt-link :class="[$style.book, $style.antcp]" to="/">
-        Antcp
+        ANTCP
       </nuxt-link>
       <span :class="[$style.book, $style['not-found']]"></span>
       <span :class="[$style.door, $style.left]"></span>
       <span :class="[$style.door, $style.right]"></span>
     </nav>
     <h1 v-if="statusCode === 404">{{ message }}</h1>
-    <h1 v-else>An error occurred{{ error.statusCode }}</h1>
+    <h1 v-else>AN ERROR OCCRRED{{ error.statusCode }}</h1>
   </div>
 </template>
 
@@ -36,7 +36,7 @@ export default {
       return (this.error && this.error.statusCode) || 500
     },
     message() {
-      return this.error.message || 'Page not found'
+      return this.error.message.toUpperCase() || 'PAGE NOT FOUND'
     }
   },
   head() {
@@ -185,7 +185,7 @@ export default {
         font-family: 'Dancing Script';
         text-transform: lowercase;
         font-size: 25px;
-        content: "this page can't be found";
+        content: "THIS PAGE CAN'T BE FOUND";
         transform: rotate(90deg) translate(6rem, -1rem);
         opacity: 0.3;
       }
@@ -225,6 +225,9 @@ export default {
         rightDoorFlap 10s linear infinite forwards 8s;
       transform-origin: 100% 0 0;
     }
+  }
+  h1 {
+    font-family: BlackItalic;
   }
 }
 </style>
