@@ -2,9 +2,9 @@
   <div :class="$style.footer">
     <div :class="$style['footer-main']">
       <div :class="$style['footer-link']">
-        <a href="#" target="_blank">关于ANTCP｜</a>
-        <a href="#" target="_blank">联系我们｜</a>
-        <a href="#" target="_blank">友情链接</a>
+        <a href="http://antcp.com/about" target="_blank">关于ANTCP｜</a>
+        <a href="http://www.yangpan.work:3006/" target="_blank">联系我们｜</a>
+        <a href="http://www.yangpan.work:3005/#/" target="_blank">友情链接</a>
       </div>
       <br />
       <p>All Rights Reserved. © 2020</p>
