@@ -63,6 +63,7 @@ export default {
   width: 1024px;
   margin: 0 auto;
   padding: 20px 0;
+  min-height: 54vh;
   .item-questions {
     padding: 10px 0;
     border-bottom: 1px solid #ebeef5;
