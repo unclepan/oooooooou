@@ -165,9 +165,8 @@ export default {
             const auth = {
               accessToken: res.data.token
             }
-            this.$store.commit('setAuth', auth)
             Cookie.set('auth', auth.accessToken)
-            this.$router.push('/')
+            location.href = '/'
           })
         }
       })

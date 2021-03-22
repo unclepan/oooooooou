@@ -36,23 +36,33 @@
         <span :class="$style.problem" @click="$refs.inputFeedback.open()">
           问题反馈
         </span>
-        <el-dropdown @command="handlerDropdownMenu" placement="bottom">
-          <el-avatar icon="el-icon-user-solid" size="small"> </el-avatar>
+        <el-dropdown
+          v-if="auth"
+          @command="handlerDropdownMenu"
+          placement="bottom"
+        >
+          <el-avatar :src="auth.avatar_url" size="small">
+            {{ auth.name[0] }}
+          </el-avatar>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="user" icon="el-icon-user">
-              个人中心
+              {{ auth.name }}
             </el-dropdown-item>
             <el-dropdown-item command="logout" icon="el-icon-switch-button">
               登出
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
+        <nuxt-link v-else to="/login">
+          <el-button size="mini" type="primary">登陆</el-button>
+        </nuxt-link>
       </el-col>
     </el-row>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import search from './search'
 import inputFeedback from './input-feedback'
 const Cookie = process.client ? require('js-cookie') : undefined
@@ -71,6 +81,7 @@ export default {
       ]
     }
   },
+  computed: mapState(['auth']),
   methods: {
     handlerDropdownMenu(val) {
       if (val === 'logout') {
@@ -84,7 +95,9 @@ export default {
         method: 'post',
         url: '/api/users/logout'
       }).then((res) => {
-        Cookie.remove('auth')
+        if (Cookie) {
+          Cookie.remove('auth')
+        }
         this.$store.commit('setAuth', null)
         this.$router.push({ path: '/login' })
       })

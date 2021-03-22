@@ -48,6 +48,7 @@
                 <el-button
                   @click="handlerCollection()"
                   :type="likeData ? 'success' : 'info'"
+                  :disabled="!auth"
                   icon="el-icon-star-off"
                   circle
                 >
@@ -55,11 +56,15 @@
 
                 <el-button
                   @click="handlerInputComment()"
+                  :disabled="!auth"
                   icon="el-icon-edit-outline"
                   circle
                   type="primary"
                 >
                 </el-button>
+                <nuxt-link v-if="!auth" to="/login">
+                  <el-button type="text">去登陆</el-button>
+                </nuxt-link>
               </div>
             </div>
           </el-col>
@@ -77,6 +82,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import calendar from '~/components/periodical/calendar'
 import comments from '~/components/comments/index'
 import inputComment from '~/components/comments/input-comment'
@@ -86,6 +92,12 @@ export default {
     calendar,
     comments
   },
+  data() {
+    return {
+      likeData: false
+    }
+  },
+  computed: mapState(['auth']),
   async asyncData({ $axios, params }) {
     const periodicalPromise = $axios({
       method: 'get',
@@ -100,28 +112,33 @@ export default {
       url: `/api/periodical/${params.id}/comments`
     }).catch(() => Promise.resolve({ data: [] }))
 
-    const likePromise = $axios({
-      method: 'get',
-      url: `/api/users/whetherLikingPeriodical/${params.id}`
-    }).catch(() => Promise.resolve({ data: {} }))
-
     const apiData = await new Promise((resolve) => {
-      Promise.all([periodicalPromise, commentsPromise, likePromise]).then(
-        (dataGather) => {
-          const commentsData = dataGather[1].data.map((item) => {
-            return { ...item, more: true }
-          })
-          resolve({
-            periodicalData: dataGather[0].data,
-            commentsData,
-            likeData: dataGather[2].data.like
-          })
-        }
-      )
+      Promise.all([periodicalPromise, commentsPromise]).then((dataGather) => {
+        const commentsData = dataGather[1].data.map((item) => {
+          return { ...item, more: true }
+        })
+        resolve({
+          periodicalData: dataGather[0].data,
+          commentsData
+        })
+      })
     })
     return apiData
   },
+  created() {
+    this.init()
+  },
   methods: {
+    init() {
+      if (this.auth) {
+        this.$axios({
+          method: 'get',
+          url: `/api/users/whetherLikingPeriodical/${this.$route.params.id}`
+        }).then((res) => {
+          this.likeData = res.data.like
+        })
+      }
+    },
     handlerDiscussMore(val) {
       // 展开收起
       const v = this.commentsData.find((item) => {

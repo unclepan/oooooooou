@@ -10,10 +10,10 @@ export default function({ $axios, redirect }) {
   $axios.onError((error) => {
     const code = parseInt(error.response && error.response.status)
     if (code === 401) {
-      Message.error('未登录')
-      setTimeout(() => {
-        redirect('/login')
-      }, 0)
+      if (process.client) {
+        Message.error('登录失败，请重新登陆')
+      }
+      redirect('/login')
     } else {
       redirect('/error')
     }
