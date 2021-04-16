@@ -15,7 +15,7 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: 'hi，我是ANTCP网站的作者杨盼，这是您的个人中心'
+          content: 'hi，我是UOOOOOOOO网站的作者杨盼，这是您的个人中心'
         }
       ]
     }

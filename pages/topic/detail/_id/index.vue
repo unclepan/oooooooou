@@ -191,7 +191,7 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: `hi，我是ANTCP网站的作者杨盼，您正在查看话题 - ${this.topicDataInfo.name}`
+          content: `hi，我是UOOOOOOOO网站的作者杨盼，您正在查看话题 - ${this.topicDataInfo.name}`
         }
       ]
     }

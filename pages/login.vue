@@ -13,7 +13,7 @@
           <p>MAN PROPOSES</p>
         </div>
         <div :class="$style.form">
-          <h3>SIGN IN TO ANTCP</h3>
+          <h3>SIGN IN TO UOOOOOOOO</h3>
           <el-form
             ref="ruleForm"
             :model="ruleForm"
@@ -124,7 +124,7 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: 'hi，我是ANTCP网站的作者杨盼，欢迎登陆ANTCP'
+          content: 'hi，我是UOOOOOOOO网站的作者杨盼，欢迎登陆UOOOOOOOO'
         }
       ]
     }

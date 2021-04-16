@@ -2,7 +2,7 @@
   <div :class="$style.footer">
     <div :class="$style['footer-main']">
       <div :class="$style['footer-link']">
-        <a href="http://antcp.com/about" target="_blank">关于ANTCP｜</a>
+        <a href="http://uoooooooo.com/about" target="_blank">关于UOOOOOOOO｜</a>
         <a href="http://www.yangpan.work:3006/" target="_blank">联系我们｜</a>
         <a href="http://www.yangpan.work:3005/#/" target="_blank">友情链接</a>
       </div>
@@ -13,7 +13,7 @@
         我们将在24小时内处理。
       </p>
       <p>联系地址：北京市朝阳区东三环北路19号</p>
-      <p>ANTCP分享创意和生活的美学 - 京ICP备20013886号-2</p>
+      <p>UOOOOOOOO分享创意和生活的美学 - 京ICP备20013886号-2</p>
       <p></p>
     </div>
   </div>

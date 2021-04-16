@@ -49,7 +49,7 @@
             <el-form-item>
               注册即代表同意
               <nuxt-link :to="{ name: 'term' }">
-                《ANTCP协议》
+                《UOOOOOOOO协议》
               </nuxt-link>
               <nuxt-link :to="{ name: 'privacy' }">
                 《隐私保护指引》
@@ -166,12 +166,12 @@ export default {
   layout: 'blank',
   head() {
     return {
-      title: '注册ANTCP',
+      title: '注册UOOOOOOOO',
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: 'hi，我是ANTCP网站的作者杨盼，欢迎注册ANTCP'
+          content: 'hi，我是UOOOOOOOO网站的作者杨盼，欢迎注册UOOOOOOOO'
         }
       ]
     }

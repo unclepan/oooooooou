@@ -150,12 +150,12 @@ export default {
   },
   head() {
     return {
-      title: 'ANTCP首页',
+      title: 'UOOOOOOOO首页',
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: 'hi，我是ANTCP网站的作者杨盼'
+          content: 'hi，我是UOOOOOOOO网站的作者杨盼'
         }
       ]
     }

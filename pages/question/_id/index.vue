@@ -44,7 +44,7 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: `hi，我是ANTCP网站的作者杨盼，您正在查看问题 - ${this.questionDataInfo.title}`
+          content: `hi，我是UOOOOOOOO网站的作者杨盼，您正在查看问题 - ${this.questionDataInfo.title}`
         }
       ]
     }

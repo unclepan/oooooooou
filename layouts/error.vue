@@ -10,8 +10,8 @@
       <nuxt-link :class="[$style.book, $style.contact]" to="/about">
         CONTACT
       </nuxt-link>
-      <nuxt-link :class="[$style.book, $style.antcp]" to="/">
-        ANTCP
+      <nuxt-link :class="[$style.book, $style.uoooooooo]" to="/">
+        UOOOOOOOO
       </nuxt-link>
       <span :class="[$style.book, $style['not-found']]"></span>
       <span :class="[$style.door, $style.left]"></span>
@@ -159,7 +159,7 @@ export default {
         bottom: 0.2rem;
         border-radius: 0.3rem 0 0 0.3rem;
       }
-      &.antcp {
+      &.uoooooooo {
         right: 0.8rem;
         bottom: 3.3rem;
         border-radius: 0.3rem 0 0 0.3rem;

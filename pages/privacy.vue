@@ -39,12 +39,12 @@ export default {
   layout: 'blank',
   head() {
     return {
-      title: 'ANTCP隐私保护指引',
+      title: 'UOOOOOOOO隐私保护指引',
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: 'hi，我是ANTCP网站的作者杨盼，请仔细阅读ANTCP隐私保护指引'
+          content: '请仔细阅读UOOOOOOOO隐私保护指引'
         }
       ]
     }
