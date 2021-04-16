@@ -94,7 +94,7 @@ export default {
               }
               const isUser = await this.$axios({
                 method: 'get',
-                url: '/api/users/fund/name',
+                url: '/api/users/whether/name',
                 params: {
                   name: value
                 }

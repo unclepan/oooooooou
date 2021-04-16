@@ -15,7 +15,7 @@ export default function({ $axios, redirect }) {
       }
       redirect('/login')
     } else {
-      redirect('/error')
+      // redirect('/error')
     }
   })
 }
