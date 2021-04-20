@@ -54,7 +54,7 @@ module.exports = {
     baseURL:
       process.env.NODE_ENV === 'development'
         ? 'http://localhost:3001'
-        : 'http://81.70.240.23:3001',
+        : 'http://43.129.75.108:3001',
     credentials: true
   },
   /*
